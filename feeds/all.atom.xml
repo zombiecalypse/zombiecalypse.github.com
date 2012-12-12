@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Zombiecalypse the Blog</title><link href="http://zombiecalypse.github.com/Blog/" rel="alternate"></link><link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" rel="self"></link><id>http://zombiecalypse.github.com/Blog/</id><updated>2012-10-04T00:00:00+02:00</updated><entry><title>Handling Files</title><link href="http://zombiecalypse.github.com/Blog/handling-files.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:handling-files.html</id><summary type="html">&lt;p&gt;This is not necessarily Sinatra or Ruby or HAML related, but the question of
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zombiecalypse the Blog</title><link href="http://zombiecalypse.github.com/Blog/" rel="alternate"></link><link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" rel="self"></link><id>http://zombiecalypse.github.com/Blog/</id><updated>2012-10-04T00:00:00+02:00</updated><entry><title>Handling Files</title><link href="http://zombiecalypse.github.com/Blog/handling-files.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:handling-files.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This is not necessarily Sinatra or Ruby or HAML related, but the question of
 how to handle file upload pops up sooner or later.&lt;/p&gt;
 &lt;p&gt;So our texts might profit from illustrations, that set the mood and act as
 the cover from which the texts will be judged. Brainstorming:&lt;/p&gt;
@@ -133,7 +134,8 @@ matter, people wont usually see this), create these folders.&lt;/p&gt;
   &lt;code&gt;:filename&lt;/code&gt; and a temp file in &lt;code&gt;:tempfile&lt;/code&gt;. You can copy the file by the
   path or use the data directly.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;send_file&lt;/code&gt; sends back a (binary) file.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Installing Ruby and Sinatra</title><link href="http://zombiecalypse.github.com/Blog/installing-ruby-and-sinatra.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:installing-ruby-and-sinatra.html</id><summary type="html">&lt;p&gt;Hi there, so before we can get started with the Sinatra framework, we need to
+&lt;/ul&gt;</summary></entry><entry><title>Installing Ruby and Sinatra</title><link href="http://zombiecalypse.github.com/Blog/installing-ruby-and-sinatra.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:installing-ruby-and-sinatra.html</id><summary type="html">&lt;p&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/p&gt;
+&lt;p&gt;Hi there, so before we can get started with the Sinatra framework, we need to
 get it to run in the first place, so here is how you get ruby and Sinatra.&lt;/p&gt;
 &lt;h2&gt;Getting Ruby&lt;/h2&gt;
 &lt;ul&gt;
@@ -187,7 +189,8 @@ Now you can try the Hello World from &lt;a href="http://www.sinatrarb.com/"&gt;S
 
 
 &lt;p&gt;then run &lt;code&gt;ruby hello.rb&lt;/code&gt;. If there are no errors, sinatra is installed just
-fine. You can exit the server with &lt;code&gt;Ctrl+C&lt;/code&gt;.&lt;/p&gt;</summary></entry><entry><title>Modularity</title><link href="http://zombiecalypse.github.com/Blog/modularity.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:modularity.html</id><summary type="html">&lt;p&gt;Look at &lt;a href="https://github.com/zombiecalypse/SinatraStory/tree/master/iteration05"&gt;the code of the last iteration&lt;/a&gt;.&lt;/p&gt;
+fine. You can exit the server with &lt;code&gt;Ctrl+C&lt;/code&gt;.&lt;/p&gt;</summary></entry><entry><title>Modularity</title><link href="http://zombiecalypse.github.com/Blog/modularity.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:modularity.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Look at &lt;a href="https://github.com/zombiecalypse/SinatraStory/tree/master/iteration05"&gt;the code of the last iteration&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Up to this point, we just threw new classes, new models, new tests, and new
 routes into a few files. This works for small projects, but in a team it is
 &lt;em&gt;very&lt;/em&gt; problematic if everybody works on the same files. So lets change that!&lt;/p&gt;
@@ -385,7 +388,8 @@ Finally, you run that class.&lt;/p&gt;
 &lt;p&gt;Try it, fix the errors, repeat, but this should allow you to make modular
 Sinatra applications. You should also consider to move views for different
 controllers into different folders, you can do that with &lt;code&gt;:'path/to/view'&lt;/code&gt; in
-the controller. Have fun!&lt;/p&gt;</summary></entry><entry><title>Putting, Modifying and the REST</title><link href="http://zombiecalypse.github.com/Blog/putting-modifying-and-the-rest.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:putting-modifying-and-the-rest.html</id><summary type="html">&lt;p&gt;Until now, the texts had to be hard coded into the fixture. That of course is
+the controller. Have fun!&lt;/p&gt;</summary></entry><entry><title>Putting, Modifying and the REST</title><link href="http://zombiecalypse.github.com/Blog/putting-modifying-and-the-rest.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:putting-modifying-and-the-rest.html</id><summary type="html">&lt;p&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/p&gt;
+&lt;p&gt;Until now, the texts had to be hard coded into the fixture. That of course is
 just ridiculous for a webapp. The whole point of an application like this is
 that it is interactive, so that I can publish my own texts, modify my old ones
 and delete the garbage.&lt;/p&gt;
@@ -543,7 +547,8 @@ spider might delete all your posts.&lt;/p&gt;
 &lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/testing.html"&gt;Testing&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/modularity.html"&gt;Modularity&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/handling-files.html"&gt;File Handling&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>SinatraStory</title><link href="http://zombiecalypse.github.com/Blog/sinatrastory.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:sinatrastory.html</id><summary type="html">&lt;p&gt;Hi there! In this tutorial, I'll show you how you can build web apps in the
+&lt;/ol&gt;</summary></entry><entry><title>SinatraStory</title><link href="http://zombiecalypse.github.com/Blog/sinatrastory.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:sinatrastory.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Hi there! In this tutorial, I'll show you how you can build web apps in the
 ruby &lt;a href="http://www.sinatrarb.com/"&gt;Sinatra&lt;/a&gt; framework. As web frameworks go,
 Sinatra is a very simplistic one, as opposed to for example &lt;a href="http://rubyonrails.org/"&gt;Rails&lt;/a&gt;
 which is huge, does everything for you and leaves you with a feeling of not
@@ -674,7 +679,8 @@ straight forward what is happening.&lt;/p&gt;
 form, and if you enter "Tim" into the form field, the greeting will be "Hello
 Tim" instead of "Hello World".&lt;/p&gt;
 &lt;p&gt;That is enough for the first iteration, the &lt;a href="http://zombiecalypse.github.com/Blog/the-story-of-how-i-built-a-model.html"&gt;next time&lt;/a&gt;, I'll show you, how you
-can use a model too. Hint: It is just plain ruby.&lt;/p&gt;</summary></entry><entry><title>Testing</title><link href="http://zombiecalypse.github.com/Blog/testing.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:testing.html</id><summary type="html">&lt;p&gt;Up to this point, I always felt kinda bad, because I always had to start up the
+can use a model too. Hint: It is just plain ruby.&lt;/p&gt;</summary></entry><entry><title>Testing</title><link href="http://zombiecalypse.github.com/Blog/testing.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:testing.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Up to this point, I always felt kinda bad, because I always had to start up the
 server and go through all the pages in order to catch errors (there always are).
 The solution to that is of course to automate that. Since I don't have a
 clicking robot, I'll fake this by sending requests directly. This is possible
@@ -842,7 +848,8 @@ Sinatra app.&lt;/p&gt;
     should be among the titles of texts".&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;With these building blocks, you probably can figure out 90% of your testing
-needs.&lt;/p&gt;</summary></entry><entry><title>The Story of how I built a Model</title><link href="http://zombiecalypse.github.com/Blog/the-story-of-how-i-built-a-model.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:the-story-of-how-i-built-a-model.html</id><summary type="html">&lt;p&gt;So in this text, I will actually build a very simple Webapp including data
+needs.&lt;/p&gt;</summary></entry><entry><title>The Story of how I built a Model</title><link href="http://zombiecalypse.github.com/Blog/the-story-of-how-i-built-a-model.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:the-story-of-how-i-built-a-model.html</id><summary type="html">&lt;p&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/p&gt;
+&lt;p&gt;So in this text, I will actually build a very simple Webapp including data
 that is stored on the server. I will not use a database, so as not to
 complicate things. &lt;/p&gt;
 &lt;p&gt;The project is the following: I like to write stories in my free time, but
@@ -1068,7 +1075,8 @@ in-memory database. The rest should be a breeze, right?&lt;/p&gt;
 &lt;p&gt;Next time, I'll show you, how to make the application understand request like
 "add this text" and "this text sucks, change it" and also "this text sucks so
 much, forget it ever existed". You will see, that the designers of the HTTP
-protocol had something like that in mind.&lt;/p&gt;</summary></entry><entry><title>User Sessions and Layouts</title><link href="http://zombiecalypse.github.com/Blog/user-sessions-and-layouts.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:user-sessions-and-layouts.html</id><summary type="html">&lt;p&gt;The SinatraStory project now has a single model class, that is very simple and
+protocol had something like that in mind.&lt;/p&gt;</summary></entry><entry><title>User Sessions and Layouts</title><link href="http://zombiecalypse.github.com/Blog/user-sessions-and-layouts.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:user-sessions-and-layouts.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The SinatraStory project now has a single model class, that is very simple and
 allows everybody that can connect to the server to create and delete
 everything. It seemed like a good idea at the time, but now it seems like an
 even better idea would be to restrict access on a user basis. A user should
