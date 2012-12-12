@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>User Sessions and Layouts</title>
+        <title>User Sessions and Layouts</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+        <link rel="stylesheet" href="../../theme/css/main.css" type="text/css" />
                 <link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zombiecalypse the Blog Atom Feed" />
                 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
         <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
-                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../../css/ie.css"/>
+                <script src="../../js/IE8.js" type="text/javascript"></script><![endif]-->
 
         <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../../css/ie6.css"/><![endif]-->
 
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="./">Zombiecalypse the Blog </a></h1>
+                <h1><a href="../../">Zombiecalypse the Blog </a></h1>
                 <nav><ul>
-                                                                    <li><a href="./pages/about-me.html">About me</a></li>
-                                                                    <li class="active"><a href="./category/programming.html">programming</a></li>
+                                                                    <li><a href="../../pages/about-me.html">About&nbsp;me</a></li>
+                                                                    <li class="active"><a href="../../category/programming.html">programming</a></li>
                                 </ul></nav>
         </header><!-- /#banner -->
         <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="./user-sessions-and-layouts.html" rel="bookmark"
-           title="Permalink to User Sessions and Layouts">User Sessions and Layouts</a></h1>
+        <a href="../../2012/Oct/user-sessions-and-layouts.html" rel="bookmark"
+           title="Permalink to User Sessions and Layouts">User Sessions and&nbsp;Layouts</a></h1>
           </header>
 
     <div class="entry-content">
@@ -41,21 +41,21 @@
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/zombiecalypse.html">Zombiecalypse</a>
+                By <a class="url fn" href="../../author/zombiecalypse.html">Zombiecalypse</a>
         </address>
-        <p>In <a href="./category/programming.html">programming</a>. </p>
+        <p>In <a href="../../category/programming.html">programming</a>. </p>
 
-</footer><!-- /.post-info -->      <p><em>This article is part of the <a href="./sinatra-story.html">Sinatra Story</a> series.</em></p>
+</footer><!-- /.post-info -->      <p><em>This article is part of the <a href="../../2012/Oct/sinatra-story.html">Sinatra Story</a>&nbsp;series.</em></p>
 <p>The SinatraStory project now has a single model class, that is very simple and
 allows everybody that can connect to the server to create and delete
 everything. It seemed like a good idea at the time, but now it seems like an
 even better idea would be to restrict access on a user basis. A user should
-only be able to edit and delete their own texts.</p>
+only be able to edit and delete their own&nbsp;texts.</p>
 <p>This implementation is blatantly ripped off <a href="http://www.128bitstudios.com/2011/11/21/authentication-with-sinatra/">Authentication with Sinatra</a>.</p>
 <p>First of all, we need a model for the user. Lets ignore the relation between
 the user and the texts for the moment and focus on the login procedure. We
 want the ability to sign up, to log in, and to log out. For this, we need some
-new routes:</p>
+new&nbsp;routes:</p>
 <div class="codehilite"><pre><span class="n">get</span> <span class="s2">&quot;/signup&quot;</span> <span class="k">do</span>
   <span class="n">haml</span> <span class="ss">:signup</span>
 <span class="k">end</span>
@@ -77,8 +77,8 @@ new routes:</p>
 <p>Now the thing is, to save a login, we need something called a <em>session</em>. A
 session is a piece of information stored on the server that relates to the
 user, as such the user can not edit it. You might notice, that this is in
-conflict to the REST principles, but still commonly done. To acknowledge that
-this is not pure, we need to enable it:</p>
+conflict to the <span class="caps">REST</span> principles, but still commonly done. To acknowledge that
+this is not pure, we need to enable&nbsp;it:</p>
 <div class="codehilite"><pre><span class="c1"># controller.rb</span>
 
 <span class="c1"># ...</span>
@@ -89,7 +89,7 @@ this is not pure, we need to enable it:</p>
 </pre></div>
 
 
-<p>Next we can imagine how a login and logout procedures would look like:</p>
+<p>Next we can imagine how a login and logout procedures would look&nbsp;like:</p>
 <div class="codehilite"><pre><span class="n">post</span> <span class="s2">&quot;/login&quot;</span> <span class="k">do</span>
   <span class="nb">fail</span> <span class="s2">&quot;No such login&quot;</span> <span class="k">unless</span> <span class="no">User</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:username</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span><span class="p">)</span> 
 
@@ -106,14 +106,14 @@ this is not pure, we need to enable it:</p>
 
 
 <ul>
-<li>Failing is an option and gives an error page.</li>
-<li>The session looks like a dictionary.</li>
-<li>You can redirect to the last page visited.</li>
+<li>Failing is an option and gives an error&nbsp;page.</li>
+<li>The session looks like a&nbsp;dictionary.</li>
+<li>You can redirect to the last page&nbsp;visited.</li>
 <li>We store only the username in the session, because it takes
-  less space.</li>
+  less&nbsp;space.</li>
 </ul>
 <p>Similiarly, on signup you should create an account if the name is available.
-Normally, we should also send the password twice, if the user misstyped.</p>
+Normally, we should also send the password twice, if the user&nbsp;misstyped.</p>
 <div class="codehilite"><pre><span class="n">post</span> <span class="s2">&quot;/signup&quot;</span> <span class="k">do</span>
   <span class="n">username</span><span class="p">,</span> <span class="n">pw</span><span class="p">,</span> <span class="n">pw2</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:username</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:password</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:password2</span><span class="o">]</span>
 
@@ -129,13 +129,13 @@ Normally, we should also send the password twice, if the user misstyped.</p>
 </pre></div>
 
 
-<p>The HAML file for this is left up as an exercise to the reader.</p>
+<p>The <span class="caps">HAML</span> file for this is left up as an exercise to the&nbsp;reader.</p>
 <p>Now it would be nice to have a layout around every of our pages that could
-include the login. Unfortunately, that's not how it works, we need to edit it
-into every view file separately....</p>
+include the login. Unfortunately, that&#8217;s not how it works, we need to edit it
+into every view file&nbsp;separately&#8230;.</p>
 <p>Just kidding. There is the <code>layout.haml</code> file, which is rendered around every
-HAML file (partials not included). You can decide, where to put the inner page
-by placing <code>= yield</code> at the respective point. </p>
+<span class="caps">HAML</span> file (partials not included). You can decide, where to put the inner page
+by placing <code>= yield</code> at the respective&nbsp;point. </p>
 <p>This of course assumes, that there is exactly one point, which is filled in -
 not very realistic: Typically, depending on the page, you would display
 another page title or a slightly different sidebar. Sure, you could configure
@@ -144,8 +144,8 @@ that does that called <code>sinatra-outputbuffer</code> - accept no substitutes!
 Seriously, I tried 3 gems that offered this and that was the only one that
 seemed to work. If you <code>require 'sinatra/outputbuffer'</code> it, you can use the
 commands <code>content_for :some_name</code> to fill a part and 
-<code>yield_content :some_name</code> to leave the gap open to be filled in.</p>
-<p>With this, we can write a layout file:</p>
+<code>yield_content :some_name</code> to leave the gap open to be filled&nbsp;in.</p>
+<p>With this, we can write a layout&nbsp;file:</p>
 <div class="codehilite"><pre><span class="nn">!!! 5</span>
 <span class="nt">%head</span>
   <span class="nt">%title</span>
@@ -158,7 +158,7 @@ commands <code>content_for :some_name</code> to fill a part and
         <span class="nt">%b</span><span class="p">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span>
         <span class="nt">%a</span>(<span class="na">href =</span> <span class="s">&quot;/logout&quot;</span>) logout
       <span class="p">-</span> <span class="k">else</span>
-        <span class="nt">%form</span>(<span class="na">action=</span><span class="s">&quot;/login&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span>)
+        <span class="nt">%form</span>(<span class="na">action=</span><span class="s">&quot;/login&quot;</span> <span class="na">method=</span><span class="s">&quot;<span class="caps">POST</span>&quot;</span>)
           <span class="nt">%label</span>
             Username
             <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&quot;text&quot;</span> <span class="na">name=</span><span class="s">&quot;username&quot;</span>) 
@@ -172,13 +172,13 @@ commands <code>content_for :some_name</code> to fill a part and
 
 
 <ul>
-<li><code>!!! 5</code> means it is converted to HTML 5.</li>
-<li>The title is set to "SinatraStory - <subpage title>"</li>
-<li>If <code>@user</code> is not nil, show the name and a logout link.</li>
-<li>If it is, show the signup link and a login field.</li>
+<li><code>!!! 5</code> means it is converted to <span class="caps">HTML</span>&nbsp;5.</li>
+<li>The title is set to &#8220;SinatraStory - <subpage title>&#8220;</li>
+<li>If <code>@user</code> is not nil, show the name and a logout&nbsp;link.</li>
+<li>If it is, show the signup link and a login&nbsp;field.</li>
 <li>Insert the bulk of the inner page into an <code>&lt;article&gt;</code>.</li>
 </ul>
-<p>Now there's the user information on every page!</p>
+<p>Now there&#8217;s the user information on every&nbsp;page!</p>
 <p>Or it were, if there was a <code>User</code> class.</p>
 <p>At the moment that class should store the user name and the password
 information. Hopefully, the recent news about all kind of password leaks
@@ -188,11 +188,10 @@ project, but if anybody copied this, it should at least be somewhat secure.
 Always store passwords using a <a href="http://en.wikipedia.org/wiki/Hash_function">hash function</a>.</p>
 <p>In the following I will use BCrypt, not because it is fast, but because it is
 slow. A slow hash function ensures, that a brute force cracking attempt with a
-known hash takes long enough.</p>
+known hash takes long&nbsp;enough.</p>
 <p>Anyway, include the <code>bcrypt-ruby</code> gem and <code>require 'bcrypt'</code> in your
-<code>models.rb</code> file. We don't want anyone to touch any of the attributes, so they
-are read only. Besides the hash, we also generate a salt (a random value
-basically).</p>
+<code>models.rb</code> file. We don&#8217;t want anyone to touch any of the attributes, so they
+are read only. Besides the hash, we also generate a salt (a random value&nbsp;basically).</p>
 <div class="codehilite"><pre><span class="k">class</span> <span class="nc">User</span>
   <span class="kp">attr_reader</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:password_hash</span><span class="p">,</span> <span class="ss">:password_salt</span>
 
@@ -223,7 +222,7 @@ basically).</p>
 
 <ul>
 <li>This is similar to the Text class and should only be a problem in that it
-    uses a dictionary instead of a list.</li>
+    uses a dictionary instead of a&nbsp;list.</li>
 </ul>
 <p>However, it does not address the <code>initialize(name, password)</code> and the
 <code>User.login(name, password)</code> methods.</p>
@@ -231,7 +230,7 @@ basically).</p>
 creation, we will take the password and generate a hash for it and only store
 that in the model. When we <code>login</code>, we check that the passwords hash is the
 same as the stored hash. Additionally, we add a random salt, so that two users
-with the same password still have different hashes.</p>
+with the same password still have different&nbsp;hashes.</p>
 <div class="codehilite"><pre><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
   <span class="n">pw_salt</span> <span class="o">=</span> <span class="no">BCrypt</span><span class="o">::</span><span class="no">Engine</span><span class="o">.</span><span class="n">generate_salt</span>
   <span class="n">pw_hash</span> <span class="o">=</span> <span class="no">BCrypt</span><span class="o">::</span><span class="no">Engine</span><span class="o">.</span><span class="n">hash_secret</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="n">pw_salt</span><span class="p">)</span>
@@ -251,11 +250,11 @@ with the same password still have different hashes.</p>
 
 
 <p>This way, even if your database was compromised and leaked, the users would be
-relatively save.</p>
+relatively&nbsp;save.</p>
 <p>That was the complicated part, the rest will not give anyone headaches. What
 remains is to ensure, that texts are owned by someone and that only that
 someone can edit them. Obviously we need to extend the <code>Text</code> class to have a
-<code>User</code> it belongs to:</p>
+<code>User</code> it belongs&nbsp;to:</p>
 <div class="codehilite"><pre><span class="c1"># models.rb</span>
 <span class="k">class</span> <span class="nc">Text</span>
   <span class="c1"># ...</span>
@@ -273,7 +272,7 @@ someone can edit them. Obviously we need to extend the <code>Text</code> class t
 </pre></div>
 
 
-<p>and the <code>User</code> to contain the texts:</p>
+<p>and the <code>User</code> to contain the&nbsp;texts:</p>
 <div class="codehilite"><pre><span class="c1"># models.rb</span>
 <span class="k">class</span> <span class="nc">User</span>
   <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="p">)</span>
@@ -298,9 +297,9 @@ someone can edit them. Obviously we need to extend the <code>Text</code> class t
 </pre></div>
 
 
-<p>The controller should check if the action is allowed. We'll use the current
+<p>The controller should check if the action is allowed. We&#8217;ll use the current
 user (not the current user name) a lot, so it makes sense to fetch it before
-anything else happens:</p>
+anything else&nbsp;happens:</p>
 <div class="codehilite"><pre><span class="c1"># controller.rb</span>
 
 <span class="n">before</span> <span class="k">do</span>
@@ -309,8 +308,7 @@ anything else happens:</p>
 </pre></div>
 
 
-<p>Now the controller needs to ensure, that a user might only do allowed
-operations:</p>
+<p>Now the controller needs to ensure, that a user might only do allowed&nbsp;operations:</p>
 <div class="codehilite"><pre><span class="n">post</span> <span class="s2">&quot;/text/:id&quot;</span> <span class="k">do</span>
     <span class="n">text</span> <span class="o">=</span> <span class="no">Text</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">].</span><span class="n">to_i</span><span class="p">)</span>
 
@@ -324,31 +322,31 @@ operations:</p>
 </pre></div>
 
 
-<p>and for creation the same. Finally, we can wrap </p>
+<p>and for creation the same. Finally, we can&nbsp;wrap </p>
 <div class="codehilite"><pre><span class="p">-</span> <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">editable?</span> <span class="vi">@user</span>
   <span class="nt">%ul</span>
     <span class="nt">%li</span>
       <span class="nt">%a</span>(<span class="na">href=</span><span class="s">&quot;/text/#{text.id}/edit&quot;</span>) edit
     <span class="nt">%li</span>
-      <span class="nt">%form</span>(<span class="na">action=</span><span class="s">&quot;/text/#{text.id}&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span>)
+      <span class="nt">%form</span>(<span class="na">action=</span><span class="s">&quot;/text/#{text.id}&quot;</span> <span class="na">method=</span><span class="s">&quot;<span class="caps">POST</span>&quot;</span>)
         <span class="nt">%input</span>(<span class="na">name =</span><span class="s">&quot;_method&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">value=</span><span class="s">&quot;delete&quot;</span>)
         <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;delete&quot;</span>)
 </pre></div>
 
 
-<p>and similarly for the "new text" link.</p>
+<p>and similarly for the &#8220;new text&#8221;&nbsp;link.</p>
 <p>This adds some security to our page. You could now add a per user listing, a
-profile for each user, ... but you could do that with what you already know.
-Try it!</p>
-<p>You should now know:</p>
+profile for each user, &#8230; but you could do that with what you already know.
+Try&nbsp;it!</p>
+<p>You should now&nbsp;know:</p>
 <ul>
-<li>What a session is and how to use it.</li>
+<li>What a session is and how to use&nbsp;it.</li>
 <li>How to use the <code>layout.haml</code> file</li>
 <li>How to use <code>yield_content</code> and <code>content_for</code></li>
 <li>That you should <em>never</em> store plain text passwords and how to use a hash
-    function with salt.</li>
-<li>How to make relations between model classes.</li>
-<li>Ensure that restricted operations are executed only with the valid user.</li>
+    function with&nbsp;salt.</li>
+<li>How to make relations between model&nbsp;classes.</li>
+<li>Ensure that restricted operations are executed only with the valid&nbsp;user.</li>
 </ul>
     </div><!-- /.entry-content -->
     
@@ -360,7 +358,6 @@ Try it!</p>
                         <ul>
                                                     <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
                                                     <li><a href="http://python.org">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
                                                 </ul>
                 </div><!-- /.blogroll -->
                                 <div class="social">

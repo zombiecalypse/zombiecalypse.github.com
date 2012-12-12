@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>The Story of how I built a Model</title>
+        <title>The Story of how I built a Model</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+        <link rel="stylesheet" href="../../theme/css/main.css" type="text/css" />
                 <link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zombiecalypse the Blog Atom Feed" />
                 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
         <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
-                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../../css/ie.css"/>
+                <script src="../../js/IE8.js" type="text/javascript"></script><![endif]-->
 
         <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../../css/ie6.css"/><![endif]-->
 
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="./">Zombiecalypse the Blog </a></h1>
+                <h1><a href="../../">Zombiecalypse the Blog </a></h1>
                 <nav><ul>
-                                                                    <li><a href="./pages/about-me.html">About me</a></li>
-                                                                    <li class="active"><a href="./category/programming.html">programming</a></li>
+                                                                    <li><a href="../../pages/about-me.html">About&nbsp;me</a></li>
+                                                                    <li class="active"><a href="../../category/programming.html">programming</a></li>
                                 </ul></nav>
         </header><!-- /#banner -->
         <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="./the-story-of-how-i-built-a-model.html" rel="bookmark"
-           title="Permalink to The Story of how I built a Model">The Story of how I built a Model</a></h1>
+        <a href="../../2012/Oct/the-story-of-how-i-built-a-model.html" rel="bookmark"
+           title="Permalink to The Story of how I built a Model">The Story of how I built a&nbsp;Model</a></h1>
           </header>
 
     <div class="entry-content">
@@ -41,27 +41,27 @@
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/zombiecalypse.html">Zombiecalypse</a>
+                By <a class="url fn" href="../../author/zombiecalypse.html">Zombiecalypse</a>
         </address>
-        <p>In <a href="./category/programming.html">programming</a>. </p>
+        <p>In <a href="../../category/programming.html">programming</a>. </p>
 
-</footer><!-- /.post-info -->      <p>This article is part of the <a href="./sinatra-story.html">Sinatra Story</a> series.</p>
+</footer><!-- /.post-info -->      <p><em>This article is part of the <a href="../../2012/Oct/sinatra-story.html">Sinatra Story</a>&nbsp;series.</em></p>
 <p>So in this text, I will actually build a very simple Webapp including data
 that is stored on the server. I will not use a database, so as not to
-complicate things. </p>
+complicate&nbsp;things. </p>
 <p>The project is the following: I like to write stories in my free time, but
-with my notes all over time and space (I don't know, where they're
+with my notes all over time and space (I don&#8217;t know, where they&#8217;re
 getting lost), it gets quite annoying. Also the notes are completely
-disorganized, but that we will fix later.</p>
+disorganized, but that we will fix&nbsp;later.</p>
 <p>So the idea is to have a web application that stores my stories. For now, lets
-assume, that the stories only have a title and a body.</p>
-<p>In ruby, classes don't need no stupid type declarations, you just call it
-<code>@variablename</code> and the '@' tells us that it has instance scope and the
+assume, that the stories only have a title and a&nbsp;body.</p>
+<p>In ruby, classes don&#8217;t need no stupid type declarations, you just call it
+<code>@variablename</code> and the &#8216;@&#8217; tells us that it has instance scope and the
 variable can hold a string, a number, or any object. Similarily
-<code>@@classvariable</code> has class scope. The first, we won't even see, because Ruby
+<code>@@classvariable</code> has class scope. The first, we won&#8217;t even see, because Ruby
 can define getters and setters automatically with the <code>attr_accessor</code>
 function, to which you give <em>symbols</em> - strings that signify a name. The
-minimal class, that has a publicly accessable text and title is</p>
+minimal class, that has a publicly accessable text and title&nbsp;is</p>
 <div class="codehilite"><pre><span class="k">class</span> <span class="nc">Text</span>
   <span class="kp">attr_accessor</span> <span class="ss">:text</span><span class="p">,</span> <span class="ss">:title</span>
 <span class="k">end</span>
@@ -69,8 +69,8 @@ minimal class, that has a publicly accessable text and title is</p>
 
 
 <p>But we want a constructor, which is called <code>initialize</code> in ruby and some
-management of all the entities, e.g. displaying all Texts.</p>
-<p>The constructor only passes the arguments to the setters:</p>
+management of all the entities, e.g. displaying all&nbsp;Texts.</p>
+<p>The constructor only passes the arguments to the&nbsp;setters:</p>
 <div class="codehilite"><pre><span class="k">class</span> <span class="nc">Text</span>
   <span class="kp">attr_accessor</span> <span class="ss">:text</span><span class="p">,</span> <span class="ss">:title</span>
 
@@ -85,10 +85,9 @@ management of all the entities, e.g. displaying all Texts.</p>
 
 
 <p><code>def</code> defines methods (or functions) in the current scope and <code>self</code> is
-<em>always</em> bound to the current object.</p>
+<em>always</em> bound to the current&nbsp;object.</p>
 <p>Now we need a class scoped set of all the Texts, preferably only the ones we
-save (think of tests, where we generate Texts that should not appear in the
-set).</p>
+save (think of tests, where we generate Texts that should not appear in the&nbsp;set).</p>
 <div class="codehilite"><pre><span class="k">class</span> <span class="nc">Text</span>
   <span class="c1"># ...</span>
   <span class="vc">@@texts</span> <span class="o">=</span> <span class="o">[]</span>
@@ -100,15 +99,14 @@ set).</p>
 </pre></div>
 
 
-<p>Ok, that's a bit to digest:</p>
+<p>Ok, that&#8217;s a bit to&nbsp;digest:</p>
 <ul>
-<li><code>@@texts = []</code> initializes the class scoped variable with an empty list
-    literal.</li>
-<li><code>save</code> does not take any arguments, we don't need to write the parens in
-    method declarations.</li>
-<li>The shift operator adds the element to the list.</li>
+<li><code>@@texts = []</code> initializes the class scoped variable with an empty list&nbsp;literal.</li>
+<li><code>save</code> does not take any arguments, we don&#8217;t need to write the parens in
+    method&nbsp;declarations.</li>
+<li>The shift operator adds the element to the&nbsp;list.</li>
 <li>The postfix <code>unless</code> (or <code>if</code>) is an idiomatic way to write one-line
-    conditional statements. It is equivalent to </li>
+    conditional statements. It is equivalent&nbsp;to </li>
 </ul>
 <p><code>ruby
     unless @@texts.include? self
@@ -116,9 +114,9 @@ set).</p>
     end</code></p>
 <p>but is much more readable.
 * <code>include?</code> is a valid method name and indeed idiomatic for predicates
-    (methods, that return true or false). Again, you don't need to write the
-  parens on the method calls (fun fact: attr_accessor is a method too).</p>
-<p>That said, the delete method should be simple</p>
+    (methods, that return true or false). Again, you don&#8217;t need to write the
+  parens on the method calls (fun fact: attr_accessor is a method&nbsp;too).</p>
+<p>That said, the delete method should be&nbsp;simple</p>
 <div class="codehilite"><pre><span class="k">class</span> <span class="nc">Text</span>
   <span class="c1"># ...</span>
   <span class="k">def</span> <span class="nf">delete</span>
@@ -132,13 +130,13 @@ set).</p>
 </pre></div>
 
 
-<p>but the <code>all</code> method needs some explaining again:</p>
+<p>but the <code>all</code> method needs some explaining&nbsp;again:</p>
 <ul>
 <li>Remember how <code>self</code> is <em>always</em> bound to the current object? In the body of
-    a class, that object is the class you're currently defining! That's why
-  <code>def self.all</code> defines the method <code>all</code> in the class, not the instances.</li>
+    a class, that object is the class you&#8217;re currently defining! That&#8217;s why
+  <code>def self.all</code> defines the method <code>all</code> in the class, not the&nbsp;instances.</li>
 </ul>
-<p>Finally, lets add a unique identifier with what we have learned:</p>
+<p>Finally, lets add a unique identifier with what we have&nbsp;learned:</p>
 <div class="codehilite"><pre><span class="k">class</span> <span class="nc">Text</span>
   <span class="kp">attr_accessor</span> <span class="ss">:text</span><span class="p">,</span> <span class="ss">:title</span>
 
@@ -160,7 +158,7 @@ set).</p>
 </pre></div>
 
 
-<p>and add a lookup:</p>
+<p>and add a&nbsp;lookup:</p>
 <div class="codehilite"><pre>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">by_id</span> <span class="nb">id</span>
     <span class="vc">@@texts</span><span class="o">.</span><span class="n">detect</span> <span class="p">{</span><span class="o">|</span><span class="n">txt</span><span class="o">|</span> <span class="n">txt</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">}</span>
   <span class="k">end</span>
@@ -170,15 +168,15 @@ set).</p>
 <ul>
 <li>The <code>detect</code> method takes a block, that is an executable part of code. This
     block is evaluated and the method returns the first element, for which the
-  block returns <code>true</code>. In the same fashion, there are</li>
-<li><code>select</code>: returns a list of all the elements, for which the block is true.</li>
+  block returns <code>true</code>. In the same fashion, there&nbsp;are</li>
+<li><code>select</code>: returns a list of all the elements, for which the block is&nbsp;true.</li>
 <li><code>collect</code>: returns a list of all the return values for the block executed
-    on the elements</li>
-<li><code>inject</code>: ... Lets not get into <a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">that</a>.</li>
+    on the&nbsp;elements</li>
+<li><code>inject</code>: &#8230; Lets not get into <a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)">that</a>.</li>
 </ul>
-<p>This is all there is to do for the model part.</p>
+<p>This is all there is to do for the model&nbsp;part.</p>
 <p>Now we can present that with Sinatra, we need to require the models file as
-well and pass the variables.</p>
+well and pass the&nbsp;variables.</p>
 <div class="codehilite"><pre><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;sinatra&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;./models.rb&#39;</span>
@@ -200,12 +198,12 @@ well and pass the variables.</p>
 <ul>
 <li>Note that I converted the parameter <code>id</code> to an integer before handing it to
     the <code>#by_id</code> method.</li>
-<li>I can return the 'not found' code 404 directly, if... well... I didn't find
-    the text with the id.</li>
+<li>I can return the &#8216;not found&#8217; code 404 directly, if&#8230; well&#8230; I didn&#8217;t find
+    the text with the&nbsp;id.</li>
 <li>We can extract parameters from a <code>get</code> request (or any request really), by
-    marking the variable with a colon (like a symbol).</li>
+    marking the variable with a colon (like a&nbsp;symbol).</li>
 </ul>
-<p>Finally, we can display all that with two haml files:</p>
+<p>Finally, we can display all that with two haml&nbsp;files:</p>
 <div class="codehilite"><pre># index.haml
 <span class="nt">%ul</span>
   <span class="p">-</span> <span class="k">for</span> <span class="n">text</span> <span class="k">in</span> <span class="n">texts</span>
@@ -214,15 +212,14 @@ well and pass the variables.</p>
 </pre></div>
 
 
-<p>This displays links to all texts in an unsorted list showing their title.</p>
+<p>This displays links to all texts in an unsorted list showing their&nbsp;title.</p>
 <ul>
 <li>In a ruby string, you can put a ruby expression between <code>#{</code> and <code>}</code>, and it
-    will insert the value into the string.</li>
-<li>In HAML, you can define attributes of a block (in this example <code>a</code>) by
-    putting them in parens. The right hand side of the equal signs are ruby
-  expressions.</li>
+    will insert the value into the&nbsp;string.</li>
+<li>In <span class="caps">HAML</span>, you can define attributes of a block (in this example <code>a</code>) by
+    putting them in parens. The right hand side of the equal signs are ruby&nbsp;expressions.</li>
 </ul>
-<p>Finally, we need to add a file to show a single text:</p>
+<p>Finally, we need to add a file to show a single&nbsp;text:</p>
 <div class="codehilite"><pre># show.haml
 <span class="nt">%h1</span>
   <span class="p">=</span> <span class="n">text</span><span class="o">.</span><span class="n">title</span>
@@ -233,13 +230,13 @@ well and pass the variables.</p>
 
 
 <ul>
-<li>In HAML, when we prepose a paragraph with a filter name, like <code>markdown</code>,
+<li>In <span class="caps">HAML</span>, when we prepose a paragraph with a filter name, like <code>markdown</code>,
     then that is processed through that. Note however, that prefixing something
-  with <code>=</code> does no longer insert it.</li>
+  with <code>=</code> does no longer insert&nbsp;it.</li>
 </ul>
 <p>Of course, if we run that program, it will not show anything, in lack of any
 texts and also a way to add them. For the moment, we can fix that by adding a
-<em>fixture</em> to the controller file:</p>
+<em>fixture</em> to the controller&nbsp;file:</p>
 <div class="codehilite"><pre><span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;sinatra&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;rdiscount&#39;</span>
@@ -263,16 +260,16 @@ texts and also a way to add them. For the moment, we can fix that by adding a
 
 <ul>
 <li>Ruby objects are initialized by the <code>#new</code> method of the class, which in
-    turn runs the <code>#initialize</code> method of the new object.</li>
-<li>There is no magic "fixture" file, the fixture is just some code that adds
-    objects to the collection.</li>
+    turn runs the <code>#initialize</code> method of the new&nbsp;object.</li>
+<li>There is no magic &#8220;fixture&#8221; file, the fixture is just some code that adds
+    objects to the&nbsp;collection.</li>
 </ul>
 <p>That concludes this. We can now build a simple model and know how to build a
-in-memory database. The rest should be a breeze, right?</p>
-<p>Next time, I'll show you, how to make the application understand request like
-"add this text" and "this text sucks, change it" and also "this text sucks so
-much, forget it ever existed". You will see, that the designers of the HTTP
-protocol had something like that in mind.</p>
+in-memory database. The rest should be a breeze,&nbsp;right?</p>
+<p>Next time, I&#8217;ll show you, how to make the application understand request like
+&#8220;add this text&#8221; and &#8220;this text sucks, change it&#8221; and also &#8220;this text sucks so
+much, forget it ever existed&#8221;. You will see, that the designers of the <span class="caps">HTTP</span>
+protocol had something like that in&nbsp;mind.</p>
     </div><!-- /.entry-content -->
     
   </article>
@@ -283,7 +280,6 @@ protocol had something like that in mind.</p>
                         <ul>
                                                     <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
                                                     <li><a href="http://python.org">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
                                                 </ul>
                 </div><!-- /.blogroll -->
                                 <div class="social">

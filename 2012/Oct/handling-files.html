@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Handling Files</title>
+        <title>Handling Files</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+        <link rel="stylesheet" href="../../theme/css/main.css" type="text/css" />
                 <link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zombiecalypse the Blog Atom Feed" />
                 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
         <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
-                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../../css/ie.css"/>
+                <script src="../../js/IE8.js" type="text/javascript"></script><![endif]-->
 
         <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../../css/ie6.css"/><![endif]-->
 
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="./">Zombiecalypse the Blog </a></h1>
+                <h1><a href="../../">Zombiecalypse the Blog </a></h1>
                 <nav><ul>
-                                                                    <li><a href="./pages/about-me.html">About me</a></li>
-                                                                    <li class="active"><a href="./category/programming.html">programming</a></li>
+                                                                    <li><a href="../../pages/about-me.html">About&nbsp;me</a></li>
+                                                                    <li class="active"><a href="../../category/programming.html">programming</a></li>
                                 </ul></nav>
         </header><!-- /#banner -->
         <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="./handling-files.html" rel="bookmark"
-           title="Permalink to Handling Files">Handling Files</a></h1>
+        <a href="../../2012/Oct/handling-files.html" rel="bookmark"
+           title="Permalink to Handling Files">Handling&nbsp;Files</a></h1>
           </header>
 
     <div class="entry-content">
@@ -41,27 +41,27 @@
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/zombiecalypse.html">Zombiecalypse</a>
+                By <a class="url fn" href="../../author/zombiecalypse.html">Zombiecalypse</a>
         </address>
-        <p>In <a href="./category/programming.html">programming</a>. </p>
+        <p>In <a href="../../category/programming.html">programming</a>. </p>
 
-</footer><!-- /.post-info -->      <p><em>This article is part of the <a href="./sinatra-story.html">Sinatra Story</a> series.</em></p>
-<p>This is not necessarily Sinatra or Ruby or HAML related, but the question of
-how to handle file upload pops up sooner or later.</p>
+</footer><!-- /.post-info -->      <p><em>This article is part of the <a href="../../2012/Oct/sinatra-story.html">Sinatra Story</a>&nbsp;series.</em></p>
+<p>This is not necessarily Sinatra or Ruby or <span class="caps">HAML</span> related, but the question of
+how to handle file upload pops up sooner or&nbsp;later.</p>
 <p>So our texts might profit from illustrations, that set the mood and act as
-the cover from which the texts will be judged. Brainstorming:</p>
+the cover from which the texts will be judged.&nbsp;Brainstorming:</p>
 <ol>
-<li>Pictures should be optional.</li>
+<li>Pictures should be&nbsp;optional.</li>
 <li>Pictures should be located on the hard disk of the server, so that Ruby
-   doesn't use up all the RAM.</li>
+   doesn&#8217;t use up all the&nbsp;<span class="caps">RAM</span>.</li>
 <li>There should be a limit for the file size. Lets say <code>400kB</code></li>
 <li>The image belongs to the text, therefore the texts are not the leaves of
    our application. This implies, that we have URLs like <code>/text/1/</code> instead
-   of <code>/text/1</code>. Yeah, that kind of details sometimes are important.</li>
+   of <code>/text/1</code>. Yeah, that kind of details sometimes are&nbsp;important.</li>
 </ol>
 <h2>Model</h2>
 <p>By 2., we should not give a list of <code>File</code>s to the <code>Text</code>, but rather a list
-of file paths. </p>
+of file&nbsp;paths. </p>
 <div class="codehilite"><pre><span class="k">class</span> <span class="nc">Text</span>
   <span class="kp">attr_reader</span> <span class="ss">:image_paths</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
@@ -74,21 +74,21 @@ of file paths. </p>
 
 
 <h2>View</h2>
-<p>As it turns out, 3. can not simply be checked on the client side (HTML5 +
-JavaScript can, but that's out of the scope of this text). However, 4.
+<p>As it turns out, 3. can not simply be checked on the client side (<span class="caps">HTML5</span> +
+JavaScript can, but that&#8217;s out of the scope of this text). However, 4.
 influences the View part: Files should be uploaded in the edit form for the
 texts, and since we use markdown in the texts, relative links should be
-possible with a simple</p>
+possible with a&nbsp;simple</p>
 <div class="codehilite"><pre><span class="sx">![alt](image.jpg)</span>
 </pre></div>
 
 
 <p>which tells us, that the controller urls should be something like
 <code>/text/:id/:img</code>.</p>
-<p>Lets add a form in the <code>edit.haml</code> to upload images.</p>
+<p>Lets add a form in the <code>edit.haml</code> to upload&nbsp;images.</p>
 <div class="codehilite"><pre>...
 <span class="nt">%h2</span> Upload
-<span class="nt">%form</span>(<span class="na">action =</span> <span class="s">&quot;/text/#{@text.id}/images&quot;</span> <span class="na">method =</span> <span class="s">&quot;POST&quot;</span> <span class="na">enctype=</span><span class="s">&quot;multipart/form-data&quot;</span>)
+<span class="nt">%form</span>(<span class="na">action =</span> <span class="s">&quot;/text/#{@text.id}/images&quot;</span> <span class="na">method =</span> <span class="s">&quot;<span class="caps">POST</span>&quot;</span> <span class="na">enctype=</span><span class="s">&quot;multipart/form-data&quot;</span>)
   <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&#39;file&#39;</span> <span class="na">name=</span><span class="s">&quot;file_upload&quot;</span> <span class="na">accept=</span><span class="s">&quot;image/*&quot;</span>)
   <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&#39;submit&#39;</span> <span class="na">value=</span><span class="s">&#39;upload&#39;</span>)
 </pre></div>
@@ -96,18 +96,16 @@ possible with a simple</p>
 
 <ul>
 <li>The form part should be familiar, except for the <code>enctype</code>.</li>
-<li><code>enctype</code> <em>must</em> be <code>multipart/form-data</code> for file upload.</li>
-<li>There is an input type <code>file</code>, which lets the user choose a file from their
-  machine.</li>
+<li><code>enctype</code> <em>must</em> be <code>multipart/form-data</code> for file&nbsp;upload.</li>
+<li>There is an input type <code>file</code>, which lets the user choose a file from their&nbsp;machine.</li>
 <li>The <code>accept</code> option tells the browser, that the user should only choose
   image files. This leads to the file-choosing dialog does only display those
-  files. They might still upload all kind of crap, but it's still useful for
-  users.</li>
-<li>There is no standard way to tell the form about our 400kB size limit.</li>
+  files. They might still upload all kind of crap, but it&#8217;s still useful for&nbsp;users.</li>
+<li>There is no standard way to tell the form about our 400kB size&nbsp;limit.</li>
 </ul>
 <h2>Controller</h2>
 <p>The difficult part comes in the controller. On one hand, we need to implement
-an upload route and on the other hand a route that gives back the image.</p>
+an upload route and on the other hand a route that gives back the&nbsp;image.</p>
 <div class="codehilite"><pre><span class="n">post</span> <span class="s2">&quot;/text/:id/images&quot;</span> <span class="k">do</span>
   <span class="n">text</span> <span class="o">=</span> <span class="no">Text</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">].</span><span class="n">to_i</span><span class="p">)</span>
   <span class="k">return</span> <span class="mi">404</span> <span class="k">unless</span> <span class="n">text</span>
@@ -128,15 +126,15 @@ skeleton is a hash, that contains among other things a <code>:filename</code> an
 <code>:tempfile</code>. </p>
 <p>When we save the image to the disk, we want a consistent naming, that does not 
 let different texts images interfere with each other. To make that consistent,
-we define a helper function:</p>
+we define a helper&nbsp;function:</p>
 <div class="codehilite"><pre><span class="k">def</span> <span class="nf">id_image_to_filename</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
   <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">_</span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">end</span>
 </pre></div>
 
 
-<p>The complete path on the disks might be <code>public/images/...</code> (doesn't really
-matter, people wont usually see this), create these folders.</p>
+<p>The complete path on the disks might be <code>public/images/...</code> (doesn&#8217;t really
+matter, people wont usually see this), create these&nbsp;folders.</p>
 <div class="codehilite"><pre><span class="n">post</span> <span class="s2">&quot;/text/:id/images&quot;</span> <span class="k">do</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="n">file</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:file_upload</span><span class="o">]</span>
@@ -154,12 +152,12 @@ matter, people wont usually see this), create these folders.</p>
 <ul>
 <li><code>413</code> is the code for <code>Data sent to server is too large</code>.</li>
 <li><code>FileUtils</code> is a standard ruby module, which gives nice functions to deal
-  with files, for example to copy them.</li>
-<li>The <code>:tempfile</code> is saved somewhere on the disk and <code>.path</code> tells us where.</li>
+  with files, for example to copy&nbsp;them.</li>
+<li>The <code>:tempfile</code> is saved somewhere on the disk and <code>.path</code> tells us&nbsp;where.</li>
 <li><code>File.join(...)</code> interleaves the argument with the right separator for the
-  operating system (i.e. <code>\</code> on Windows and <code>/</code> on the other systems).</li>
+  operating system (i.e. <code>\</code> on Windows and <code>/</code> on the other&nbsp;systems).</li>
 </ul>
-<p>The other route needs to access the same file and send it back:</p>
+<p>The other route needs to access the same file and send it&nbsp;back:</p>
 <div class="codehilite"><pre><span class="n">get</span> <span class="s2">&quot;/text/:id/images/:pic&quot;</span> <span class="k">do</span>
   <span class="n">send_file</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;public&quot;</span><span class="p">,</span><span class="s2">&quot;images&quot;</span><span class="p">,</span> <span class="n">id_image_to_filename</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:pic</span><span class="o">]</span><span class="p">)))</span>
 <span class="k">end</span>
@@ -167,19 +165,19 @@ matter, people wont usually see this), create these folders.</p>
 
 
 <ul>
-<li><code>send_file</code> takes a local file path and sends the file back.</li>
+<li><code>send_file</code> takes a local file path and sends the file&nbsp;back.</li>
 </ul>
-<p>And that's it! Try uploading a file and accessing <code>![alt](image/something.jpg)</code>.</p>
+<p>And that&#8217;s it! Try uploading a file and accessing <code>![alt](image/something.jpg)</code>.</p>
 <h2>Summary</h2>
 <ul>
-<li><code>&lt;input type="file"&gt;</code> gives a form field that uploads a file.</li>
+<li><code>&lt;input type="file"&gt;</code> gives a form field that uploads a&nbsp;file.</li>
 <li>You can add an expected file type with <code>accept="..."</code>, where <code>...</code> is a
-    MIME type.</li>
-<li><code>enctype="multipart/form-data</code> must be included in the form definition.</li>
+    <span class="caps">MIME</span>&nbsp;type.</li>
+<li><code>enctype="multipart/form-data</code> must be included in the form&nbsp;definition.</li>
 <li>The uploaded file is given as a dictionary with its original file name in
   <code>:filename</code> and a temp file in <code>:tempfile</code>. You can copy the file by the
-  path or use the data directly.</li>
-<li><code>send_file</code> sends back a (binary) file.</li>
+  path or use the data&nbsp;directly.</li>
+<li><code>send_file</code> sends back a (binary)&nbsp;file.</li>
 </ul>
     </div><!-- /.entry-content -->
     
@@ -191,7 +189,6 @@ matter, people wont usually see this), create these folders.</p>
                         <ul>
                                                     <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
                                                     <li><a href="http://python.org">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
                                                 </ul>
                 </div><!-- /.blogroll -->
                                 <div class="social">

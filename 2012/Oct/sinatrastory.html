@@ -3,34 +3,34 @@
 <head>
         <title>SinatraStory</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+        <link rel="stylesheet" href="../../theme/css/main.css" type="text/css" />
                 <link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zombiecalypse the Blog Atom Feed" />
                 
         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
         <!--[if lte IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
-                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../../css/ie.css"/>
+                <script src="../../js/IE8.js" type="text/javascript"></script><![endif]-->
 
         <!--[if lt IE 7]>
-                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+                <link rel="stylesheet" type="text/css" media="all" href="../../css/ie6.css"/><![endif]-->
 
 </head>
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="./">Zombiecalypse the Blog </a></h1>
+                <h1><a href="../../">Zombiecalypse the Blog </a></h1>
                 <nav><ul>
-                                                                    <li><a href="./pages/about-me.html">About me</a></li>
-                                                                    <li class="active"><a href="./category/programming.html">programming</a></li>
+                                                                    <li><a href="../../pages/about-me.html">About&nbsp;me</a></li>
+                                                                    <li class="active"><a href="../../category/programming.html">programming</a></li>
                                 </ul></nav>
         </header><!-- /#banner -->
         <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="./sinatrastory.html" rel="bookmark"
+        <a href="../../2012/Oct/sinatrastory.html" rel="bookmark"
            title="Permalink to SinatraStory">SinatraStory</a></h1>
           </header>
 
@@ -41,21 +41,20 @@
         </abbr>
 
                 <address class="vcard author">
-                By <a class="url fn" href="./author/zombiecalypse.html">Zombiecalypse</a>
+                By <a class="url fn" href="../../author/zombiecalypse.html">Zombiecalypse</a>
         </address>
-        <p>In <a href="./category/programming.html">programming</a>. </p>
+        <p>In <a href="../../category/programming.html">programming</a>. </p>
 
-</footer><!-- /.post-info -->      <p><em>This article is part of the <a href="./sinatra-story.html">Sinatra Story</a> series.</em></p>
-<p>Hi there! In this tutorial, I'll show you how you can build web apps in the
+</footer><!-- /.post-info -->      <p><em>This article is part of the <a href="../../2012/Oct/sinatra-story.html">Sinatra Story</a>&nbsp;series.</em></p>
+<p>Hi there! In this tutorial, I&#8217;ll show you how you can build web apps in the
 ruby <a href="http://www.sinatrarb.com/">Sinatra</a> framework. As web frameworks go,
 Sinatra is a very simplistic one, as opposed to for example <a href="http://rubyonrails.org/">Rails</a>
 which is huge, does everything for you and leaves you with a feeling of not
-knowing, what the heck is going on. I'm not saying that that is necessarily
+knowing, what the heck is going on. I&#8217;m not saying that that is necessarily
 bad, if you accept it, it allows for very fast development. Sinatra on the
 other hand gives the developer much more freedom and actually feels more like
-a nice library than a framework. </p>
-<p>The canonical <code>hello world</code> example uses only a single file and goes like
-this:</p>
+a nice library than a&nbsp;framework. </p>
+<p>The canonical <code>hello world</code> example uses only a single file and goes like&nbsp;this:</p>
 <div class="codehilite"><pre><span class="c1"># hello.rb</span>
 <span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;sinatra&#39;</span>
@@ -67,10 +66,10 @@ this:</p>
 
 
 <p>if you run it with <code>ruby hello.rb</code> and head to
-<a href="http://localhost:4567">localhost:4567</a>, you get the rewarding "Hello World".</p>
-<p>But you wouldn't call that a web application yet. In the first step, let us
+<a href="http://localhost:4567">localhost:4567</a>, you get the rewarding &#8220;Hello&nbsp;World&#8221;.</p>
+<p>But you wouldn&#8217;t call that a web application yet. In the first step, let us
 figure out, how to write html. If we were really hardcore, we could just write
-it into the return value of our method:</p>
+it into the return value of our&nbsp;method:</p>
 <div class="codehilite"><pre><span class="c1"># hello2.rb</span>
 <span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;sinatra&#39;</span>
@@ -81,10 +80,10 @@ it into the return value of our method:</p>
 </pre></div>
 
 
-<p>but who does that? Nobody, that's who! Well, at least not a software aesthete
-as myself. I personally prefer <a href="http://haml.info">HAML</a>, which translates directly
-into HTML, but removes all the boilerplate. Fortunately, it is really easy to
-use with Sinatra:</p>
+<p>but who does that? Nobody, that&#8217;s who! Well, at least not a software aesthete
+as myself. I personally prefer <a href="http://haml.info"><span class="caps">HAML</span></a>, which translates directly
+into <span class="caps">HTML</span>, but removes all the boilerplate. Fortunately, it is really easy to
+use with&nbsp;Sinatra:</p>
 <div class="codehilite"><pre><span class="c1"># hello2.rb</span>
 <span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;sinatra&#39;</span>
@@ -96,13 +95,13 @@ use with Sinatra:</p>
 </pre></div>
 
 
-<p>because <code>haml</code> just converts the string into HTML and returns that. If you
-know the <a href="http://en.wikipedia.org/wiki/Model_View_Controller">MVC</a> pattern,
+<p>because <code>haml</code> just converts the string into <span class="caps">HTML</span> and returns that. If you
+know the <a href="http://en.wikipedia.org/wiki/Model_View_Controller"><span class="caps">MVC</span></a> pattern,
 you should recognize, that Sinatra provides the <em>controller</em> part, so it
 should grab some <em>model</em> parts and redirect them to the <em>view</em>. Ok,
-admittedly, we don't need a model at this point, but it would be nice to
-separate the controller part from the view part, so we should move the HAML
-code to a separate file:</p>
+admittedly, we don&#8217;t need a model at this point, but it would be nice to
+separate the controller part from the view part, so we should move the <span class="caps">HAML</span>
+code to a separate&nbsp;file:</p>
 <div class="codehilite"><pre># views/hello3.haml
 <span class="nt">%h1</span> Hello World
 </pre></div>
@@ -119,21 +118,21 @@ code to a separate file:</p>
 </pre></div>
 
 
-<p>Sinatra will look for the "views" folder and find the matching file.</p>
+<p>Sinatra will look for the &#8220;views&#8221; folder and find the matching&nbsp;file.</p>
 <p>Now we can start adding some actual fuctionality to it: The Hello World is a
 bit unpersonal, so lets add that: First of all, we need a form, in which we
 ask the user for their name and then direct to a page in which displays the
-Hello User page.</p>
-<p>For this, you need to know, that HTTP has <code>GET</code> and <code>POST</code> commands, the
+Hello User&nbsp;page.</p>
+<p>For this, you need to know, that <span class="caps">HTTP</span> has <code>GET</code> and <code>POST</code> commands, the
 latter of which pushes new information onto the server. That kind of reflects,
-what we want, so we add a new route:</p>
+what we want, so we add a new&nbsp;route:</p>
 <div class="codehilite"><pre><span class="n">post</span> <span class="s2">&quot;/greet&quot;</span> <span class="k">do</span>
   <span class="c1"># ...</span>
 <span class="k">end</span>
 </pre></div>
 
 
-<p>In that route, we want to display the Hello User, so the HAML will look like</p>
+<p>In that route, we want to display the Hello User, so the <span class="caps">HAML</span> will look&nbsp;like</p>
 <div class="codehilite"><pre># views/greet.haml
 <span class="nt">%h1</span> 
   Hello
@@ -142,7 +141,7 @@ what we want, so we add a new route:</p>
 
 
 <p>The <code>=</code> tells haml to evaluate the <code>greetee</code> and display it. Now we only need
-to define the <code>greetee</code> variable in this context:</p>
+to define the <code>greetee</code> variable in this&nbsp;context:</p>
 <div class="codehilite"><pre><span class="c1"># routes.rb</span>
 <span class="n">post</span> <span class="s2">&quot;/greet&quot;</span> <span class="k">do</span>
   <span class="n">haml</span> <span class="ss">:greet</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:greetee</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:greetee</span><span class="o">]</span> <span class="p">}</span>
@@ -152,8 +151,8 @@ to define the <code>greetee</code> variable in this context:</p>
 
 <p>The <code>params</code> variable, as you might have guessed, gives a dictionary of the
 parameters, that were sent to the server in this request. <code>locals</code> defines,
-what variables can be used in the HAML file.</p>
-<p>Now we need a form that queries the name:</p>
+what variables can be used in the <span class="caps">HAML</span>&nbsp;file.</p>
+<p>Now we need a form that queries the&nbsp;name:</p>
 <div class="codehilite"><pre><span class="c1"># routes.rb </span>
 <span class="n">get</span> <span class="s2">&quot;/&quot;</span> <span class="k">do</span>
   <span class="n">haml</span> <span class="ss">:index</span>
@@ -162,7 +161,7 @@ what variables can be used in the HAML file.</p>
 
 
 <div class="codehilite"><pre># views/index.haml
-<span class="nt">%form</span>(<span class="na">action =</span> <span class="s">&quot;/greet&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span>)
+<span class="nt">%form</span>(<span class="na">action =</span> <span class="s">&quot;/greet&quot;</span> <span class="na">method=</span><span class="s">&quot;<span class="caps">POST</span>&quot;</span>)
   <span class="nt">%label</span> 
     Name:
     <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&#39;text&#39;</span> <span class="na">name =</span> <span class="s">&#39;greetee&#39;</span> <span class="na">value=</span><span class="s">&#39;world&#39;</span>)
@@ -171,13 +170,13 @@ what variables can be used in the HAML file.</p>
 
 
 <p>This form gives a single text field, that is sent back under the name of
-<code>:greetee</code> and <code>POST</code>s it to the "/greet" URL. As you can see, it is very
-straight forward what is happening.</p>
+<code>:greetee</code> and <code>POST</code>s it to the &#8220;/greet&#8221; <span class="caps">URL</span>. As you can see, it is very
+straight forward what is&nbsp;happening.</p>
 <p>Now, when you run it and go to the <a href="http://localhost:4567">localhost:4567</a>, you get a
-form, and if you enter "Tim" into the form field, the greeting will be "Hello
-Tim" instead of "Hello World".</p>
-<p>That is enough for the first iteration, the <a href="./the-story-of-how-i-built-a-model.html">next time</a>, I'll show you, how you
-can use a model too. Hint: It is just plain ruby.</p>
+form, and if you enter &#8220;Tim&#8221; into the form field, the greeting will be &#8220;Hello
+Tim&#8221; instead of &#8220;Hello&nbsp;World&#8221;.</p>
+<p>That is enough for the first iteration, the <a href="../../2012/Oct/the-story-of-how-i-built-a-model.html">next time</a>, I&#8217;ll show you, how you
+can use a model too. Hint: It is just plain&nbsp;ruby.</p>
     </div><!-- /.entry-content -->
     
   </article>
@@ -188,7 +187,6 @@ can use a model too. Hint: It is just plain ruby.</p>
                         <ul>
                                                     <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
                                                     <li><a href="http://python.org">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
                                                 </ul>
                 </div><!-- /.blogroll -->
                                 <div class="social">

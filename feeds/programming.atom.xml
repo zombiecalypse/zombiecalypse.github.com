@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Zombiecalypse the Blog</title><link href="http://zombiecalypse.github.com/Blog/" rel="alternate"></link><link href="http://zombiecalypse.github.com/Blog/feeds/programming.atom.xml" rel="self"></link><id>http://zombiecalypse.github.com/Blog/</id><updated>2012-10-04T00:00:00+02:00</updated><entry><title>Handling Files</title><link href="http://zombiecalypse.github.com/Blog/handling-files.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:handling-files.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;This is not necessarily Sinatra or Ruby or HAML related, but the question of
-how to handle file upload pops up sooner or later.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zombiecalypse the Blog</title><link href="http://zombiecalypse.github.com/Blog/" rel="alternate"></link><link href="http://zombiecalypse.github.com/Blog/feeds/programming.atom.xml" rel="self"></link><id>http://zombiecalypse.github.com/Blog/</id><updated>2012-10-04T00:00:00+02:00</updated><entry><title>Handling Files</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/handling-files.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/handling-files.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;This is not necessarily Sinatra or Ruby or &lt;span class="caps"&gt;HAML&lt;/span&gt; related, but the question of
+how to handle file upload pops up sooner or&amp;nbsp;later.&lt;/p&gt;
 &lt;p&gt;So our texts might profit from illustrations, that set the mood and act as
-the cover from which the texts will be judged. Brainstorming:&lt;/p&gt;
+the cover from which the texts will be judged.&amp;nbsp;Brainstorming:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Pictures should be optional.&lt;/li&gt;
+&lt;li&gt;Pictures should be&amp;nbsp;optional.&lt;/li&gt;
 &lt;li&gt;Pictures should be located on the hard disk of the server, so that Ruby
-   doesn't use up all the RAM.&lt;/li&gt;
+   doesn&amp;#8217;t use up all the&amp;nbsp;&lt;span class="caps"&gt;RAM&lt;/span&gt;.&lt;/li&gt;
 &lt;li&gt;There should be a limit for the file size. Lets say &lt;code&gt;400kB&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;The image belongs to the text, therefore the texts are not the leaves of
    our application. This implies, that we have URLs like &lt;code&gt;/text/1/&lt;/code&gt; instead
-   of &lt;code&gt;/text/1&lt;/code&gt;. Yeah, that kind of details sometimes are important.&lt;/li&gt;
+   of &lt;code&gt;/text/1&lt;/code&gt;. Yeah, that kind of details sometimes are&amp;nbsp;important.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2&gt;Model&lt;/h2&gt;
 &lt;p&gt;By 2., we should not give a list of &lt;code&gt;File&lt;/code&gt;s to the &lt;code&gt;Text&lt;/code&gt;, but rather a list
-of file paths. &lt;/p&gt;
+of file&amp;nbsp;paths. &lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Text&lt;/span&gt;
   &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:image_paths&lt;/span&gt;
   &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
@@ -28,21 +28,21 @@ of file paths. &lt;/p&gt;
 
 
 &lt;h2&gt;View&lt;/h2&gt;
-&lt;p&gt;As it turns out, 3. can not simply be checked on the client side (HTML5 +
-JavaScript can, but that's out of the scope of this text). However, 4.
+&lt;p&gt;As it turns out, 3. can not simply be checked on the client side (&lt;span class="caps"&gt;HTML5&lt;/span&gt; +
+JavaScript can, but that&amp;#8217;s out of the scope of this text). However, 4.
 influences the View part: Files should be uploaded in the edit form for the
 texts, and since we use markdown in the texts, relative links should be
-possible with a simple&lt;/p&gt;
+possible with a&amp;nbsp;simple&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="sx"&gt;![alt](image.jpg)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;which tells us, that the controller urls should be something like
 &lt;code&gt;/text/:id/:img&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Lets add a form in the &lt;code&gt;edit.haml&lt;/code&gt; to upload images.&lt;/p&gt;
+&lt;p&gt;Lets add a form in the &lt;code&gt;edit.haml&lt;/code&gt; to upload&amp;nbsp;images.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;...
 &lt;span class="nt"&gt;%h2&lt;/span&gt; Upload
-&lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action =&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/text/#{@text.id}/images&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method =&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;enctype=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;multipart/form-data&amp;quot;&lt;/span&gt;)
+&lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action =&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/text/#{@text.id}/images&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method =&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;span class="caps"&gt;POST&lt;/span&gt;&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;enctype=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;multipart/form-data&amp;quot;&lt;/span&gt;)
   &lt;span class="nt"&gt;%input&lt;/span&gt;(&lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;file&amp;#39;&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;file_upload&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;accept=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;image/*&amp;quot;&lt;/span&gt;)
   &lt;span class="nt"&gt;%input&lt;/span&gt;(&lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;submit&amp;#39;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;upload&amp;#39;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
@@ -50,18 +50,16 @@ possible with a simple&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;The form part should be familiar, except for the &lt;code&gt;enctype&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;enctype&lt;/code&gt; &lt;em&gt;must&lt;/em&gt; be &lt;code&gt;multipart/form-data&lt;/code&gt; for file upload.&lt;/li&gt;
-&lt;li&gt;There is an input type &lt;code&gt;file&lt;/code&gt;, which lets the user choose a file from their
-  machine.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;enctype&lt;/code&gt; &lt;em&gt;must&lt;/em&gt; be &lt;code&gt;multipart/form-data&lt;/code&gt; for file&amp;nbsp;upload.&lt;/li&gt;
+&lt;li&gt;There is an input type &lt;code&gt;file&lt;/code&gt;, which lets the user choose a file from their&amp;nbsp;machine.&lt;/li&gt;
 &lt;li&gt;The &lt;code&gt;accept&lt;/code&gt; option tells the browser, that the user should only choose
   image files. This leads to the file-choosing dialog does only display those
-  files. They might still upload all kind of crap, but it's still useful for
-  users.&lt;/li&gt;
-&lt;li&gt;There is no standard way to tell the form about our 400kB size limit.&lt;/li&gt;
+  files. They might still upload all kind of crap, but it&amp;#8217;s still useful for&amp;nbsp;users.&lt;/li&gt;
+&lt;li&gt;There is no standard way to tell the form about our 400kB size&amp;nbsp;limit.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Controller&lt;/h2&gt;
 &lt;p&gt;The difficult part comes in the controller. On one hand, we need to implement
-an upload route and on the other hand a route that gives back the image.&lt;/p&gt;
+an upload route and on the other hand a route that gives back the&amp;nbsp;image.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/text/:id/images&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;by_id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="n"&gt;to_i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;404&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;
@@ -82,15 +80,15 @@ skeleton is a hash, that contains among other things a &lt;code&gt;:filename&lt;
 &lt;code&gt;:tempfile&lt;/code&gt;. &lt;/p&gt;
 &lt;p&gt;When we save the image to the disk, we want a consistent naming, that does not 
 let different texts images interfere with each other. To make that consistent,
-we define a helper function:&lt;/p&gt;
+we define a helper&amp;nbsp;function:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;id_image_to_filename&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;_&lt;/span&gt;&lt;span class="si"&gt;#{&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The complete path on the disks might be &lt;code&gt;public/images/...&lt;/code&gt; (doesn't really
-matter, people wont usually see this), create these folders.&lt;/p&gt;
+&lt;p&gt;The complete path on the disks might be &lt;code&gt;public/images/...&lt;/code&gt; (doesn&amp;#8217;t really
+matter, people wont usually see this), create these&amp;nbsp;folders.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/text/:id/images&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
   &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:file_upload&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
@@ -108,12 +106,12 @@ matter, people wont usually see this), create these folders.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;413&lt;/code&gt; is the code for &lt;code&gt;Data sent to server is too large&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;FileUtils&lt;/code&gt; is a standard ruby module, which gives nice functions to deal
-  with files, for example to copy them.&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;:tempfile&lt;/code&gt; is saved somewhere on the disk and &lt;code&gt;.path&lt;/code&gt; tells us where.&lt;/li&gt;
+  with files, for example to copy&amp;nbsp;them.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;:tempfile&lt;/code&gt; is saved somewhere on the disk and &lt;code&gt;.path&lt;/code&gt; tells us&amp;nbsp;where.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;File.join(...)&lt;/code&gt; interleaves the argument with the right separator for the
-  operating system (i.e. &lt;code&gt;\&lt;/code&gt; on Windows and &lt;code&gt;/&lt;/code&gt; on the other systems).&lt;/li&gt;
+  operating system (i.e. &lt;code&gt;\&lt;/code&gt; on Windows and &lt;code&gt;/&lt;/code&gt; on the other&amp;nbsp;systems).&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;The other route needs to access the same file and send it back:&lt;/p&gt;
+&lt;p&gt;The other route needs to access the same file and send it&amp;nbsp;back:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/text/:id/images/:pic&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="n"&gt;send_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="no"&gt;File&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;public&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;images&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;id_image_to_filename&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:pic&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
@@ -121,54 +119,53 @@ matter, people wont usually see this), create these folders.&lt;/p&gt;
 
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;send_file&lt;/code&gt; takes a local file path and sends the file back.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;send_file&lt;/code&gt; takes a local file path and sends the file&amp;nbsp;back.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;And that's it! Try uploading a file and accessing &lt;code&gt;![alt](image/something.jpg)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;And that&amp;#8217;s it! Try uploading a file and accessing &lt;code&gt;![alt](image/something.jpg)&lt;/code&gt;.&lt;/p&gt;
 &lt;h2&gt;Summary&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;input type="file"&amp;gt;&lt;/code&gt; gives a form field that uploads a file.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;input type="file"&amp;gt;&lt;/code&gt; gives a form field that uploads a&amp;nbsp;file.&lt;/li&gt;
 &lt;li&gt;You can add an expected file type with &lt;code&gt;accept="..."&lt;/code&gt;, where &lt;code&gt;...&lt;/code&gt; is a
-    MIME type.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;enctype="multipart/form-data&lt;/code&gt; must be included in the form definition.&lt;/li&gt;
+    &lt;span class="caps"&gt;MIME&lt;/span&gt;&amp;nbsp;type.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;enctype="multipart/form-data&lt;/code&gt; must be included in the form&amp;nbsp;definition.&lt;/li&gt;
 &lt;li&gt;The uploaded file is given as a dictionary with its original file name in
   &lt;code&gt;:filename&lt;/code&gt; and a temp file in &lt;code&gt;:tempfile&lt;/code&gt;. You can copy the file by the
-  path or use the data directly.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;send_file&lt;/code&gt; sends back a (binary) file.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Installing Ruby and Sinatra</title><link href="http://zombiecalypse.github.com/Blog/installing-ruby-and-sinatra.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:installing-ruby-and-sinatra.html</id><summary type="html">&lt;p&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/p&gt;
+  path or use the data&amp;nbsp;directly.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;send_file&lt;/code&gt; sends back a (binary)&amp;nbsp;file.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Installing Ruby and Sinatra</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/installing-ruby-and-sinatra.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/installing-ruby-and-sinatra.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Hi there, so before we can get started with the Sinatra framework, we need to
-get it to run in the first place, so here is how you get ruby and Sinatra.&lt;/p&gt;
-&lt;h2&gt;Getting Ruby&lt;/h2&gt;
+get it to run in the first place, so here is how you get ruby and&amp;nbsp;Sinatra.&lt;/p&gt;
+&lt;h2&gt;Getting&amp;nbsp;Ruby&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;: You're probably in for some pain, consider dual-booting with linux or
+&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;: You&amp;#8217;re probably in for some pain, consider dual-booting with linux or
 &lt;a href="http://www.cygwin.com/"&gt;cygwin&lt;/a&gt;. You should also look at
 &lt;a href="https://rvm.io/rvm/install/"&gt;rvm&lt;/a&gt;
 (&lt;a href="http://blog.developwithpassion.com/2012/03/30/installing-rvm-with-cygwin-on-windows/"&gt;here&lt;/a&gt;
-is a tutorial how to install it in cygwin)&lt;/p&gt;
+is a tutorial how to install it in&amp;nbsp;cygwin)&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;Mac OSX&lt;/strong&gt;: I heard &lt;a href="http://macruby.org/"&gt;MacRuby&lt;/a&gt; was a good choice. You
-    can also use &lt;a href="https://rvm.io/rvm/install/"&gt;rvm&lt;/a&gt; with the &lt;a href="http://unfiniti.com/software/mac/jewelrybox"&gt;GUI&lt;/a&gt; for OSX.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mac &lt;span class="caps"&gt;OSX&lt;/span&gt;&lt;/strong&gt;: I heard &lt;a href="http://macruby.org/"&gt;MacRuby&lt;/a&gt; was a good choice. You
+    can also use &lt;a href="https://rvm.io/rvm/install/"&gt;rvm&lt;/a&gt; with the &lt;a href="http://unfiniti.com/software/mac/jewelrybox"&gt;&lt;span class="caps"&gt;GUI&lt;/span&gt;&lt;/a&gt; for&amp;nbsp;&lt;span class="caps"&gt;OSX&lt;/span&gt;.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Linux&lt;/strong&gt;: I recommend using &lt;a href="https://rvm.io/rvm/install/"&gt;rvm&lt;/a&gt; and
     installing it as the website recommends. For example Ubuntu still uses the 
-    &lt;code&gt;1.8&lt;/code&gt; version of ruby by default and you can't install personal gems. After
+    &lt;code&gt;1.8&lt;/code&gt; version of ruby by default and you can&amp;#8217;t install personal gems. After
   installing &lt;code&gt;rvm&lt;/code&gt;, run &lt;code&gt;rvm install 1.9.2&lt;/code&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Getting Bundler&lt;/h2&gt;
+&lt;h2&gt;Getting&amp;nbsp;Bundler&lt;/h2&gt;
 &lt;p&gt;&lt;a href="http://gembundler.com/"&gt;Bundler&lt;/a&gt; manages dependencies to other libraries
-(called "gems"). You list the gems your application needs in the application
+(called &amp;#8220;gems&amp;#8221;). You list the gems your application needs in the application
 root directory in a file with the name &lt;code&gt;Gemfile&lt;/code&gt;. The next guy trying to use
-your application can then simply run &lt;code&gt;bundle install&lt;/code&gt; and all dependencies are
-resolved.&lt;/p&gt;
+your application can then simply run &lt;code&gt;bundle install&lt;/code&gt; and all dependencies are&amp;nbsp;resolved.&lt;/p&gt;
 &lt;p&gt;To get &lt;code&gt;bundler&lt;/code&gt;, just run &lt;code&gt;gem install bundler&lt;/code&gt; in a terminal. If you
 installed ruby via rvm, that should work, otherwise look at 
 &lt;a href="http://rubygems.org/pages/download"&gt;the ruby gems installation page&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Starting a Sinatra project&lt;/h2&gt;
+&lt;h2&gt;Starting a Sinatra&amp;nbsp;project&lt;/h2&gt;
 &lt;p&gt;Make a new directory, in which you make a new file &lt;code&gt;Gemfile&lt;/code&gt;, in there, add
-the repository for the gems first, and then the dependencies:&lt;/p&gt;
+the repository for the gems first, and then the&amp;nbsp;dependencies:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;source&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;https://rubygems.org&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sinatra&amp;#39;&lt;/span&gt;
 &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sinatra-contrib&amp;#39;&lt;/span&gt;
@@ -189,14 +186,14 @@ Now you can try the Hello World from &lt;a href="http://www.sinatrarb.com/"&gt;S
 
 
 &lt;p&gt;then run &lt;code&gt;ruby hello.rb&lt;/code&gt;. If there are no errors, sinatra is installed just
-fine. You can exit the server with &lt;code&gt;Ctrl+C&lt;/code&gt;.&lt;/p&gt;</summary></entry><entry><title>Modularity</title><link href="http://zombiecalypse.github.com/Blog/modularity.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:modularity.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/em&gt;&lt;/p&gt;
+fine. You can exit the server with &lt;code&gt;Ctrl+C&lt;/code&gt;.&lt;/p&gt;</summary></entry><entry><title>Modularity</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/modularity.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/modularity.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Look at &lt;a href="https://github.com/zombiecalypse/SinatraStory/tree/master/iteration05"&gt;the code of the last iteration&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Up to this point, we just threw new classes, new models, new tests, and new
 routes into a few files. This works for small projects, but in a team it is
-&lt;em&gt;very&lt;/em&gt; problematic if everybody works on the same files. So lets change that!&lt;/p&gt;
+&lt;em&gt;very&lt;/em&gt; problematic if everybody works on the same files. So lets change&amp;nbsp;that!&lt;/p&gt;
 &lt;p&gt;One file should solve one problem. Usually that means that there is exactly one
-class in it, but with routes, it could look a bit different.&lt;/p&gt;
-&lt;p&gt;We notice some changes, that we could do:&lt;/p&gt;
+class in it, but with routes, it could look a bit&amp;nbsp;different.&lt;/p&gt;
+&lt;p&gt;We notice some changes, that we could&amp;nbsp;do:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Split the &lt;code&gt;models.rb&lt;/code&gt; file into a &lt;code&gt;text.rb&lt;/code&gt; and an &lt;code&gt;user.rb&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Split the &lt;code&gt;controller.rb&lt;/code&gt; into an &lt;code&gt;authentication.rb&lt;/code&gt; and a
@@ -204,9 +201,9 @@ class in it, but with routes, it could look a bit different.&lt;/p&gt;
 &lt;li&gt;Split the &lt;code&gt;tests.rb&lt;/code&gt; into &lt;code&gt;user_test.rb&lt;/code&gt; and &lt;code&gt;server_test.rb&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This seems simple enough and it turns out, aside from the second point, it
-really is.&lt;/p&gt;
+really&amp;nbsp;is.&lt;/p&gt;
 &lt;h2&gt;Model&lt;/h2&gt;
-&lt;p&gt;So lets first take the model:&lt;/p&gt;
+&lt;p&gt;So lets first take the&amp;nbsp;model:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# models.rb&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rubygems&amp;#39;&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;bcrypt&amp;#39;&lt;/span&gt;
@@ -221,7 +218,7 @@ really is.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;So we can split this up into:&lt;/p&gt;
+&lt;p&gt;So we can split this up&amp;nbsp;into:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# app/models/text.rb&lt;/span&gt;
 &lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;Models&lt;/span&gt;
   &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Text&lt;/span&gt;
@@ -245,14 +242,14 @@ really is.&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;You can define name spaces with &lt;code&gt;module&lt;/code&gt;. You could also add another name
-  space with your application name.&lt;/li&gt;
+  space with your application&amp;nbsp;name.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Now instead of including &lt;code&gt;models&lt;/code&gt;, we would include &lt;code&gt;app/models/user.rb&lt;/code&gt; or
 &lt;code&gt;app/models/text.rb&lt;/code&gt;. Because of the name space, we would need to access the
 classes via &lt;code&gt;Models::User&lt;/code&gt;, which is very cumbersome, so we &lt;code&gt;include&lt;/code&gt; the
-&lt;code&gt;Models&lt;/code&gt; name space into the active one to get that out of the way.&lt;/p&gt;
+&lt;code&gt;Models&lt;/code&gt; name space into the active one to get that out of the&amp;nbsp;way.&lt;/p&gt;
 &lt;h2&gt;Tests&lt;/h2&gt;
-&lt;p&gt;We had one test file, that included everything from everywhere. We can transform&lt;/p&gt;
+&lt;p&gt;We had one test file, that included everything from everywhere. We can&amp;nbsp;transform&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# tests.rb&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;relative&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 
@@ -274,7 +271,7 @@ classes via &lt;code&gt;Models::User&lt;/code&gt;, which is very cumbersome, so 
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;can be transformed into&lt;/p&gt;
+&lt;p&gt;can be transformed&amp;nbsp;into&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# user_test.rb&lt;/span&gt;
 &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;relative&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 
@@ -311,13 +308,13 @@ classes via &lt;code&gt;Models::User&lt;/code&gt;, which is very cumbersome, so 
 &lt;a href="http://www.sinatrarb.com/documentation"&gt;Sinatra documentation&lt;/a&gt;, there are two
 ways of doing things: The classic approach, that we took before and the modular.
 With the modular approach, we define modules (actually classes) for controllers
-and can then plug them together.&lt;/p&gt;
+and can then plug them&amp;nbsp;together.&lt;/p&gt;
 &lt;p&gt;First of all, the &lt;code&gt;require 'sinatra'&lt;/code&gt; has to go, it sets up everything for a
-classic application, something we explicitly don't want it to do.  Instead, we
+classic application, something we explicitly don&amp;#8217;t want it to do.  Instead, we
 define controller classes, that inherit from &lt;code&gt;Sinatra::Base&lt;/code&gt; in the
 &lt;code&gt;sinatra/base&lt;/code&gt; file. But surely, we need some configuration constants, like
 for example the location of the &lt;code&gt;views&lt;/code&gt; folder. For this, place the following
-in the root directory and include it in every file:&lt;/p&gt;
+in the root directory and include it in every&amp;nbsp;file:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# config.rb&lt;/span&gt;
 &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;
 &lt;span class="no"&gt;Views&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;relative&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;views&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -325,7 +322,7 @@ in the root directory and include it in every file:&lt;/p&gt;
 
 
 &lt;p&gt;Fortunately the &lt;code&gt;get&lt;/code&gt;, &lt;code&gt;post&lt;/code&gt;, and &lt;code&gt;delete&lt;/code&gt; definitions are relatively easy to
-take appart into the different classes, so we can define&lt;/p&gt;
+take appart into the different classes, so we can&amp;nbsp;define&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;Controllers&lt;/span&gt;
   &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Authentication&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Sinatra&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
     &lt;span class="k"&gt;module&lt;/span&gt; &lt;span class="nn"&gt;Helpers&lt;/span&gt;
@@ -346,10 +343,10 @@ take appart into the different classes, so we can define&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;You typically need to include the helper methods of extensions with
-  &lt;code&gt;helpers&lt;/code&gt;. The argument must be a module, not a class.&lt;/li&gt;
+  &lt;code&gt;helpers&lt;/code&gt;. The argument must be a module, not a&amp;nbsp;class.&lt;/li&gt;
 &lt;li&gt;The &lt;code&gt;views&lt;/code&gt; folder must be set manually. If this bothers you, you can write
   a minimal subclass of &lt;code&gt;Sinatra::Base&lt;/code&gt; that does exactly this and subclass
-  every of your controllers from that.&lt;/li&gt;
+  every of your controllers from&amp;nbsp;that.&lt;/li&gt;
 &lt;li&gt;The &lt;code&gt;@user&lt;/code&gt; variable is not visible from outside this class, but the
   &lt;code&gt;#user&lt;/code&gt; method can be used. It must be packed into a module, that can later
   be included via &lt;code&gt;helpers&lt;/code&gt;.&lt;/li&gt;
@@ -371,7 +368,7 @@ the &lt;code&gt;Authentication&lt;/code&gt; helpers.&lt;/p&gt;
 &lt;p&gt;Finally, you need to edit all the views and replace &lt;code&gt;@user&lt;/code&gt; with &lt;code&gt;user&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;In the &lt;code&gt;main.rb&lt;/code&gt; file at the root of your directory, you need to include all
 controllers and define a main application which uses the other classes.
-Finally, you run that class.&lt;/p&gt;
+Finally, you run that&amp;nbsp;class.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Main&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="no"&gt;Sinatra&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Base&lt;/span&gt;
   &lt;span class="n"&gt;enable&lt;/span&gt; &lt;span class="ss"&gt;:sessions&lt;/span&gt;
   &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="ss"&gt;:views&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="no"&gt;Views&lt;/span&gt;
@@ -388,37 +385,36 @@ Finally, you run that class.&lt;/p&gt;
 &lt;p&gt;Try it, fix the errors, repeat, but this should allow you to make modular
 Sinatra applications. You should also consider to move views for different
 controllers into different folders, you can do that with &lt;code&gt;:'path/to/view'&lt;/code&gt; in
-the controller. Have fun!&lt;/p&gt;</summary></entry><entry><title>Putting, Modifying and the REST</title><link href="http://zombiecalypse.github.com/Blog/putting-modifying-and-the-rest.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:putting-modifying-and-the-rest.html</id><summary type="html">&lt;p&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/p&gt;
+the controller. Have&amp;nbsp;fun!&lt;/p&gt;</summary></entry><entry><title>Putting, Modifying and the REST</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/putting-modifying-and-the-rest.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/putting-modifying-and-the-rest.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Until now, the texts had to be hard coded into the fixture. That of course is
 just ridiculous for a webapp. The whole point of an application like this is
 that it is interactive, so that I can publish my own texts, modify my old ones
-and delete the garbage.&lt;/p&gt;
-&lt;p&gt;As you might know, the HTTP has four main verbs:&lt;/p&gt;
+and delete the&amp;nbsp;garbage.&lt;/p&gt;
+&lt;p&gt;As you might know, the &lt;span class="caps"&gt;HTTP&lt;/span&gt; has four main&amp;nbsp;verbs:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;em&gt;GET&lt;/em&gt;: A content is shown, no modification should occur.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;POST&lt;/em&gt;: Modify a content by sending the server information.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;PUT&lt;/em&gt;: Create new content on the server by URL&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;DELETE&lt;/em&gt;: What do you think?&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;span class="caps"&gt;GET&lt;/span&gt;&lt;/em&gt;: A content is shown, no modification should&amp;nbsp;occur.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;span class="caps"&gt;POST&lt;/span&gt;&lt;/em&gt;: Modify a content by sending the server&amp;nbsp;information.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;span class="caps"&gt;PUT&lt;/span&gt;&lt;/em&gt;: Create new content on the server by&amp;nbsp;&lt;span class="caps"&gt;URL&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;span class="caps"&gt;DELETE&lt;/span&gt;&lt;/em&gt;: What do you&amp;nbsp;think?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;There are some others, but these four help you design your interface. For
-example, our application manages texts, so the following requests should be
-possible:&lt;/p&gt;
+example, our application manages texts, so the following requests should be&amp;nbsp;possible:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;GET /text&lt;/code&gt; should display a list of all texts.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;PUT /text&lt;/code&gt; should publish a new text.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;GET /text/:id&lt;/code&gt; should display the text with the given id.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;POST /text/:id&lt;/code&gt; should modify the text.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;DELETE /text/:id&lt;/code&gt; ...What do you think?&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /text&lt;/code&gt; should display a list of all&amp;nbsp;texts.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PUT /text&lt;/code&gt; should publish a new&amp;nbsp;text.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /text/:id&lt;/code&gt; should display the text with the given&amp;nbsp;id.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;POST /text/:id&lt;/code&gt; should modify the&amp;nbsp;text.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DELETE /text/:id&lt;/code&gt; &amp;#8230;What do you&amp;nbsp;think?&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Using only meaningful URLs and HTTP methods and not cookies, etc, to navigate
+&lt;p&gt;Using only meaningful URLs and &lt;span class="caps"&gt;HTTP&lt;/span&gt; methods and not cookies, etc, to navigate
 the user through the site is known as
-&lt;a href="http://en.wikipedia.org/wiki/Representational_state_transfer"&gt;REST&lt;/a&gt;.
+&lt;a href="http://en.wikipedia.org/wiki/Representational_state_transfer"&gt;&lt;span class="caps"&gt;REST&lt;/span&gt;&lt;/a&gt;.
 Not only does it give an simple interface, it also helps performance, etc.
-Putting a cool new name on it like "REST" on it hides the fact, that this was
-how the makers of HTTP imagined the web all along.&lt;/p&gt;
+Putting a cool new name on it like &amp;#8220;&lt;span class="caps"&gt;REST&lt;/span&gt;&amp;#8221; on it hides the fact, that this was
+how the makers of &lt;span class="caps"&gt;HTTP&lt;/span&gt; imagined the web all&amp;nbsp;along.&lt;/p&gt;
 &lt;p&gt;Sinatra is RESTful by default, but of course, you have to take care of the
 URLs yourself. The last time, we defined the two &lt;code&gt;GET&lt;/code&gt; methods, so lets add
-publishing a new text first:&lt;/p&gt;
+publishing a new text&amp;nbsp;first:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/text&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;new&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:title&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:text&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save&lt;/span&gt;
@@ -426,9 +422,9 @@ publishing a new text first:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Pretty easy, huh? The &lt;code&gt;params&lt;/code&gt; will come from a form, but that's not our
-problem now.&lt;/p&gt;
-&lt;p&gt;Next, we can post changes:&lt;/p&gt;
+&lt;p&gt;Pretty easy, huh? The &lt;code&gt;params&lt;/code&gt; will come from a form, but that&amp;#8217;s not our
+problem&amp;nbsp;now.&lt;/p&gt;
+&lt;p&gt;Next, we can post&amp;nbsp;changes:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/text/:id&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
     &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;by_id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="n"&gt;to_i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -450,16 +446,16 @@ problem now.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Ok, &lt;em&gt;now&lt;/em&gt; we can face the problem, that we can't actually access these
-methods, since we don't have a form for the editing part yet.&lt;/p&gt;
+&lt;p&gt;Ok, &lt;em&gt;now&lt;/em&gt; we can face the problem, that we can&amp;#8217;t actually access these
+methods, since we don&amp;#8217;t have a form for the editing part&amp;nbsp;yet.&lt;/p&gt;
 &lt;p&gt;First of all, we notice that it would be stupid to write the same form twice -
-once for the editing and once for the creating. We'd prefer to just show the
+once for the editing and once for the creating. We&amp;#8217;d prefer to just show the
 same form. This problem can be solved with &lt;em&gt;partials&lt;/em&gt;: basically, we insert a
-HAML call into the HAML template. Define a HAML file &lt;code&gt;form.haml&lt;/code&gt;, and use it
+&lt;span class="caps"&gt;HAML&lt;/span&gt; call into the &lt;span class="caps"&gt;HAML&lt;/span&gt; template. Define a &lt;span class="caps"&gt;HAML&lt;/span&gt; file &lt;code&gt;form.haml&lt;/code&gt;, and use it
 from both &lt;code&gt;new.haml&lt;/code&gt; and &lt;code&gt;edit.haml&lt;/code&gt;.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;# form.haml
 
-&lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action =&lt;/span&gt; &lt;span class="nv"&gt;actionurl&lt;/span&gt; &lt;span class="na"&gt;method =&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;)
+&lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action =&lt;/span&gt; &lt;span class="nv"&gt;actionurl&lt;/span&gt; &lt;span class="na"&gt;method =&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;span class="caps"&gt;POST&lt;/span&gt;&amp;quot;&lt;/span&gt;)
   &lt;span class="nt"&gt;%label&lt;/span&gt;
     Title:
     &lt;span class="nt"&gt;%input&lt;/span&gt;(&lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;text&amp;#39;&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;title&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;#{title}&amp;quot;&lt;/span&gt;)
@@ -482,7 +478,7 @@ from both &lt;code&gt;new.haml&lt;/code&gt; and &lt;code&gt;edit.haml&lt;/code&g
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;We need to add URLs for the form of course, for example &lt;/p&gt;
+&lt;p&gt;We need to add URLs for the form of course, for&amp;nbsp;example &lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;get &amp;quot;/text/new&amp;quot; do
     haml :new
 end
@@ -497,9 +493,9 @@ end
 
 &lt;ul&gt;
 &lt;li&gt;Instead of adding &lt;code&gt;:locals&lt;/code&gt;, you can also define instance variables. This is
-    often preferable.&lt;/li&gt;
+    often&amp;nbsp;preferable.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;There is only putting the respective links into the views:&lt;/p&gt;
+&lt;p&gt;There is only putting the respective links into the&amp;nbsp;views:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;# index.haml
 &lt;span class="nt"&gt;%ul&lt;/span&gt;
   &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;texts&lt;/span&gt;
@@ -517,47 +513,45 @@ end
   &lt;span class="nt"&gt;%li&lt;/span&gt;
     &lt;span class="nt"&gt;%a&lt;/span&gt;(&lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/text/#{text.id}&amp;quot;&lt;/span&gt;) edit
   &lt;span class="nt"&gt;%li&lt;/span&gt;
-    &lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/text/#{text.id}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;)
+    &lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/text/#{text.id}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;span class="caps"&gt;POST&lt;/span&gt;&amp;quot;&lt;/span&gt;)
       &lt;span class="nt"&gt;%input&lt;/span&gt;(&lt;span class="na"&gt;name =&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;_method&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hidden&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;delete&amp;quot;&lt;/span&gt;)
       &lt;span class="nt"&gt;%input&lt;/span&gt;(&lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;submit&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;delete&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;You might be wondering, what the heck the line &lt;/p&gt;
+&lt;p&gt;You might be wondering, what the heck the&amp;nbsp;line &lt;/p&gt;
 &lt;p&gt;&lt;code&gt;%input(name ="_method" type="hidden" value="delete")&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;is about. Fun fact: Browsers can't use &lt;code&gt;PUT&lt;/code&gt; or &lt;code&gt;DELETE&lt;/code&gt;. It's embarrassing
+&lt;p&gt;is about. Fun fact: Browsers can&amp;#8217;t use &lt;code&gt;PUT&lt;/code&gt; or &lt;code&gt;DELETE&lt;/code&gt;. It&amp;#8217;s embarrassing
 but true. The fix is the following: We sent a &lt;code&gt;POST&lt;/code&gt;, which tells the server
-that it actually should have been a &lt;code&gt;DELETE&lt;/code&gt; method. Sinatra understands this and
-translates.&lt;/p&gt;
-&lt;p&gt;Please don't let &lt;code&gt;GET&lt;/code&gt; requests change anything on the server, or a google
-spider might delete all your posts.&lt;/p&gt;
-&lt;p&gt;You should now know&lt;/p&gt;
+that it actually should have been a &lt;code&gt;DELETE&lt;/code&gt; method. Sinatra understands this and&amp;nbsp;translates.&lt;/p&gt;
+&lt;p&gt;Please don&amp;#8217;t let &lt;code&gt;GET&lt;/code&gt; requests change anything on the server, or a google
+spider might delete all your&amp;nbsp;posts.&lt;/p&gt;
+&lt;p&gt;You should now&amp;nbsp;know&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;What REST is and how RESTful application typically build up their URLs.&lt;/li&gt;
-&lt;li&gt;How to use partials.&lt;/li&gt;
-&lt;li&gt;How to use the &lt;code&gt;PUT&lt;/code&gt; and &lt;code&gt;DELETE&lt;/code&gt; methods, even though browsers don't
-    support it.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Sinatra Story</title><link href="http://zombiecalypse.github.com/Blog/sinatra-story.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:sinatra-story.html</id><summary type="html">&lt;h2&gt;The Sinatra Web Framework for Beginners&lt;/h2&gt;
+&lt;li&gt;What &lt;span class="caps"&gt;REST&lt;/span&gt; is and how RESTful application typically build up their&amp;nbsp;URLs.&lt;/li&gt;
+&lt;li&gt;How to use&amp;nbsp;partials.&lt;/li&gt;
+&lt;li&gt;How to use the &lt;code&gt;PUT&lt;/code&gt; and &lt;code&gt;DELETE&lt;/code&gt; methods, even though browsers don&amp;#8217;t
+    support&amp;nbsp;it.&lt;/li&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Sinatra Story</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/sinatra-story.html</id><summary type="html">&lt;h2&gt;The Sinatra Web Framework for&amp;nbsp;Beginners&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/installing-ruby-and-sinatra.html"&gt;Installation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/sinatrastory.html"&gt;Getting Started&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/the-story-of-how-i-built-a-model.html"&gt;Creating a Model&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/putting-modifying-and-the-rest.html"&gt;Updating and Deleting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/user-sessions-and-layouts.html"&gt;Adding Users&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/testing.html"&gt;Testing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/modularity.html"&gt;Modularity&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/handling-files.html"&gt;File Handling&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>SinatraStory</title><link href="http://zombiecalypse.github.com/Blog/sinatrastory.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:sinatrastory.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Hi there! In this tutorial, I'll show you how you can build web apps in the
+&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/installing-ruby-and-sinatra.html"&gt;Installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatrastory.html"&gt;Getting&amp;nbsp;Started&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/the-story-of-how-i-built-a-model.html"&gt;Creating a&amp;nbsp;Model&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/putting-modifying-and-the-rest.html"&gt;Updating and&amp;nbsp;Deleting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/user-sessions-and-layouts.html"&gt;Adding&amp;nbsp;Users&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/testing.html"&gt;Testing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/modularity.html"&gt;Modularity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/handling-files.html"&gt;File&amp;nbsp;Handling&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</summary></entry><entry><title>SinatraStory</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatrastory.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/sinatrastory.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Hi there! In this tutorial, I&amp;#8217;ll show you how you can build web apps in the
 ruby &lt;a href="http://www.sinatrarb.com/"&gt;Sinatra&lt;/a&gt; framework. As web frameworks go,
 Sinatra is a very simplistic one, as opposed to for example &lt;a href="http://rubyonrails.org/"&gt;Rails&lt;/a&gt;
 which is huge, does everything for you and leaves you with a feeling of not
-knowing, what the heck is going on. I'm not saying that that is necessarily
+knowing, what the heck is going on. I&amp;#8217;m not saying that that is necessarily
 bad, if you accept it, it allows for very fast development. Sinatra on the
 other hand gives the developer much more freedom and actually feels more like
-a nice library than a framework. &lt;/p&gt;
-&lt;p&gt;The canonical &lt;code&gt;hello world&lt;/code&gt; example uses only a single file and goes like
-this:&lt;/p&gt;
+a nice library than a&amp;nbsp;framework. &lt;/p&gt;
+&lt;p&gt;The canonical &lt;code&gt;hello world&lt;/code&gt; example uses only a single file and goes like&amp;nbsp;this:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# hello.rb&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rubygems&amp;#39;&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sinatra&amp;#39;&lt;/span&gt;
@@ -569,10 +563,10 @@ this:&lt;/p&gt;
 
 
 &lt;p&gt;if you run it with &lt;code&gt;ruby hello.rb&lt;/code&gt; and head to
-&lt;a href="http://localhost:4567"&gt;localhost:4567&lt;/a&gt;, you get the rewarding "Hello World".&lt;/p&gt;
-&lt;p&gt;But you wouldn't call that a web application yet. In the first step, let us
+&lt;a href="http://localhost:4567"&gt;localhost:4567&lt;/a&gt;, you get the rewarding &amp;#8220;Hello&amp;nbsp;World&amp;#8221;.&lt;/p&gt;
+&lt;p&gt;But you wouldn&amp;#8217;t call that a web application yet. In the first step, let us
 figure out, how to write html. If we were really hardcore, we could just write
-it into the return value of our method:&lt;/p&gt;
+it into the return value of our&amp;nbsp;method:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# hello2.rb&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rubygems&amp;#39;&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sinatra&amp;#39;&lt;/span&gt;
@@ -583,10 +577,10 @@ it into the return value of our method:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;but who does that? Nobody, that's who! Well, at least not a software aesthete
-as myself. I personally prefer &lt;a href="http://haml.info"&gt;HAML&lt;/a&gt;, which translates directly
-into HTML, but removes all the boilerplate. Fortunately, it is really easy to
-use with Sinatra:&lt;/p&gt;
+&lt;p&gt;but who does that? Nobody, that&amp;#8217;s who! Well, at least not a software aesthete
+as myself. I personally prefer &lt;a href="http://haml.info"&gt;&lt;span class="caps"&gt;HAML&lt;/span&gt;&lt;/a&gt;, which translates directly
+into &lt;span class="caps"&gt;HTML&lt;/span&gt;, but removes all the boilerplate. Fortunately, it is really easy to
+use with&amp;nbsp;Sinatra:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# hello2.rb&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rubygems&amp;#39;&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sinatra&amp;#39;&lt;/span&gt;
@@ -598,13 +592,13 @@ use with Sinatra:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;because &lt;code&gt;haml&lt;/code&gt; just converts the string into HTML and returns that. If you
-know the &lt;a href="http://en.wikipedia.org/wiki/Model_View_Controller"&gt;MVC&lt;/a&gt; pattern,
+&lt;p&gt;because &lt;code&gt;haml&lt;/code&gt; just converts the string into &lt;span class="caps"&gt;HTML&lt;/span&gt; and returns that. If you
+know the &lt;a href="http://en.wikipedia.org/wiki/Model_View_Controller"&gt;&lt;span class="caps"&gt;MVC&lt;/span&gt;&lt;/a&gt; pattern,
 you should recognize, that Sinatra provides the &lt;em&gt;controller&lt;/em&gt; part, so it
 should grab some &lt;em&gt;model&lt;/em&gt; parts and redirect them to the &lt;em&gt;view&lt;/em&gt;. Ok,
-admittedly, we don't need a model at this point, but it would be nice to
-separate the controller part from the view part, so we should move the HAML
-code to a separate file:&lt;/p&gt;
+admittedly, we don&amp;#8217;t need a model at this point, but it would be nice to
+separate the controller part from the view part, so we should move the &lt;span class="caps"&gt;HAML&lt;/span&gt;
+code to a separate&amp;nbsp;file:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;# views/hello3.haml
 &lt;span class="nt"&gt;%h1&lt;/span&gt; Hello World
 &lt;/pre&gt;&lt;/div&gt;
@@ -621,21 +615,21 @@ code to a separate file:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Sinatra will look for the "views" folder and find the matching file.&lt;/p&gt;
+&lt;p&gt;Sinatra will look for the &amp;#8220;views&amp;#8221; folder and find the matching&amp;nbsp;file.&lt;/p&gt;
 &lt;p&gt;Now we can start adding some actual fuctionality to it: The Hello World is a
 bit unpersonal, so lets add that: First of all, we need a form, in which we
 ask the user for their name and then direct to a page in which displays the
-Hello User page.&lt;/p&gt;
-&lt;p&gt;For this, you need to know, that HTTP has &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt; commands, the
+Hello User&amp;nbsp;page.&lt;/p&gt;
+&lt;p&gt;For this, you need to know, that &lt;span class="caps"&gt;HTTP&lt;/span&gt; has &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt; commands, the
 latter of which pushes new information onto the server. That kind of reflects,
-what we want, so we add a new route:&lt;/p&gt;
+what we want, so we add a new&amp;nbsp;route:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/greet&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="c1"&gt;# ...&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;In that route, we want to display the Hello User, so the HAML will look like&lt;/p&gt;
+&lt;p&gt;In that route, we want to display the Hello User, so the &lt;span class="caps"&gt;HAML&lt;/span&gt; will look&amp;nbsp;like&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;# views/greet.haml
 &lt;span class="nt"&gt;%h1&lt;/span&gt; 
   Hello
@@ -644,7 +638,7 @@ what we want, so we add a new route:&lt;/p&gt;
 
 
 &lt;p&gt;The &lt;code&gt;=&lt;/code&gt; tells haml to evaluate the &lt;code&gt;greetee&lt;/code&gt; and display it. Now we only need
-to define the &lt;code&gt;greetee&lt;/code&gt; variable in this context:&lt;/p&gt;
+to define the &lt;code&gt;greetee&lt;/code&gt; variable in this&amp;nbsp;context:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# routes.rb&lt;/span&gt;
 &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/greet&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="n"&gt;haml&lt;/span&gt; &lt;span class="ss"&gt;:greet&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:locals&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="ss"&gt;:greetee&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:greetee&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
@@ -654,8 +648,8 @@ to define the &lt;code&gt;greetee&lt;/code&gt; variable in this context:&lt;/p&g
 
 &lt;p&gt;The &lt;code&gt;params&lt;/code&gt; variable, as you might have guessed, gives a dictionary of the
 parameters, that were sent to the server in this request. &lt;code&gt;locals&lt;/code&gt; defines,
-what variables can be used in the HAML file.&lt;/p&gt;
-&lt;p&gt;Now we need a form that queries the name:&lt;/p&gt;
+what variables can be used in the &lt;span class="caps"&gt;HAML&lt;/span&gt;&amp;nbsp;file.&lt;/p&gt;
+&lt;p&gt;Now we need a form that queries the&amp;nbsp;name:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# routes.rb &lt;/span&gt;
 &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="n"&gt;haml&lt;/span&gt; &lt;span class="ss"&gt;:index&lt;/span&gt;
@@ -664,7 +658,7 @@ what variables can be used in the HAML file.&lt;/p&gt;
 
 
 &lt;div class="codehilite"&gt;&lt;pre&gt;# views/index.haml
-&lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action =&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/greet&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;)
+&lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action =&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/greet&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;span class="caps"&gt;POST&lt;/span&gt;&amp;quot;&lt;/span&gt;)
   &lt;span class="nt"&gt;%label&lt;/span&gt; 
     Name:
     &lt;span class="nt"&gt;%input&lt;/span&gt;(&lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;text&amp;#39;&lt;/span&gt; &lt;span class="na"&gt;name =&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;greetee&amp;#39;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;#39;world&amp;#39;&lt;/span&gt;)
@@ -673,17 +667,17 @@ what variables can be used in the HAML file.&lt;/p&gt;
 
 
 &lt;p&gt;This form gives a single text field, that is sent back under the name of
-&lt;code&gt;:greetee&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;s it to the "/greet" URL. As you can see, it is very
-straight forward what is happening.&lt;/p&gt;
+&lt;code&gt;:greetee&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;s it to the &amp;#8220;/greet&amp;#8221; &lt;span class="caps"&gt;URL&lt;/span&gt;. As you can see, it is very
+straight forward what is&amp;nbsp;happening.&lt;/p&gt;
 &lt;p&gt;Now, when you run it and go to the &lt;a href="http://localhost:4567"&gt;localhost:4567&lt;/a&gt;, you get a
-form, and if you enter "Tim" into the form field, the greeting will be "Hello
-Tim" instead of "Hello World".&lt;/p&gt;
-&lt;p&gt;That is enough for the first iteration, the &lt;a href="http://zombiecalypse.github.com/Blog/the-story-of-how-i-built-a-model.html"&gt;next time&lt;/a&gt;, I'll show you, how you
-can use a model too. Hint: It is just plain ruby.&lt;/p&gt;</summary></entry><entry><title>Testing</title><link href="http://zombiecalypse.github.com/Blog/testing.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:testing.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/em&gt;&lt;/p&gt;
+form, and if you enter &amp;#8220;Tim&amp;#8221; into the form field, the greeting will be &amp;#8220;Hello
+Tim&amp;#8221; instead of &amp;#8220;Hello&amp;nbsp;World&amp;#8221;.&lt;/p&gt;
+&lt;p&gt;That is enough for the first iteration, the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/the-story-of-how-i-built-a-model.html"&gt;next time&lt;/a&gt;, I&amp;#8217;ll show you, how you
+can use a model too. Hint: It is just plain&amp;nbsp;ruby.&lt;/p&gt;</summary></entry><entry><title>Testing</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/testing.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/testing.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Up to this point, I always felt kinda bad, because I always had to start up the
 server and go through all the pages in order to catch errors (there always are).
-The solution to that is of course to automate that. Since I don't have a
-clicking robot, I'll fake this by sending requests directly. This is possible
+The solution to that is of course to automate that. Since I don&amp;#8217;t have a
+clicking robot, I&amp;#8217;ll fake this by sending requests directly. This is possible
 by the &lt;code&gt;rack&lt;/code&gt; testing library. Also I will use the &lt;code&gt;rspec&lt;/code&gt; testing library,
 because it doubles as documentation, and provides the very handy &lt;code&gt;should&lt;/code&gt;
 method.&lt;/p&gt;
@@ -700,25 +694,25 @@ method.&lt;/p&gt;
 
 
 &lt;p&gt;Now the nice thing about &lt;code&gt;rspec&lt;/code&gt; is that it looks very much like natural
-language. First you say, what you test, then -- if you want -- you define
+language. First you say, what you test, then &amp;#8212; if you want &amp;#8212; you define
 different contexts in which the thing you test can be, and finally, you say
-what &lt;code&gt;it&lt;/code&gt; should be able to do.&lt;/p&gt;
+what &lt;code&gt;it&lt;/code&gt; should be able to&amp;nbsp;do.&lt;/p&gt;
 &lt;p&gt;However &lt;code&gt;rspec&lt;/code&gt; is a separate executable from &lt;code&gt;ruby&lt;/code&gt;, so before you do this,
-you should &lt;code&gt;gem install rspec&lt;/code&gt; and when you're done, execute the tests with
+you should &lt;code&gt;gem install rspec&lt;/code&gt; and when you&amp;#8217;re done, execute the tests with
 &lt;code&gt;rspec &amp;lt;file&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Lets start with unit-testing, so stick to one class for as long as you can.
-For a User e.g. "Tom", we know that&lt;/p&gt;
+For a User e.g. &amp;#8220;Tom&amp;#8221;, we know&amp;nbsp;that&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;it can create texts&lt;/li&gt;
-&lt;li&gt;it can be found by name&lt;/li&gt;
-&lt;li&gt;it can remove texts by their id&lt;/li&gt;
+&lt;li&gt;it can create&amp;nbsp;texts&lt;/li&gt;
+&lt;li&gt;it can be found by&amp;nbsp;name&lt;/li&gt;
+&lt;li&gt;it can remove texts by their&amp;nbsp;id&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Further, the database&lt;/p&gt;
+&lt;p&gt;Further, the&amp;nbsp;database&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;can tell if a user can login&lt;/li&gt;
-&lt;li&gt;can list all users&lt;/li&gt;
+&lt;li&gt;can tell if a user can&amp;nbsp;login&lt;/li&gt;
+&lt;li&gt;can list all&amp;nbsp;users&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;And this is the structure of our test: &lt;/p&gt;
+&lt;p&gt;And this is the structure of our&amp;nbsp;test: &lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Tom&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
     &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;can create texts&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
@@ -748,10 +742,10 @@ For a User e.g. "Tom", we know that&lt;/p&gt;
 
 
 &lt;p&gt;Usually, we also want to create some conditions before the tests are run, for
-example creating some users, ... We can do this with the &lt;code&gt;before&lt;/code&gt; method which
+example creating some users, &amp;#8230; We can do this with the &lt;code&gt;before&lt;/code&gt; method which
 comes in two flavours: &lt;code&gt;before(:all)&lt;/code&gt;, which is executed before any of the
-tests run, and &lt;code&gt;before(:each)&lt;/code&gt;, which runs before each of the test methods.&lt;/p&gt;
-&lt;p&gt;For example, to set up the user "Tom", we can add this to the &lt;code&gt;context "Tom"&lt;/code&gt;
+tests run, and &lt;code&gt;before(:each)&lt;/code&gt;, which runs before each of the test&amp;nbsp;methods.&lt;/p&gt;
+&lt;p&gt;For example, to set up the user &amp;#8220;Tom&amp;#8221;, we can add this to the &lt;code&gt;context "Tom"&lt;/code&gt;
 block.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;    &lt;span class="n"&gt;before&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:all&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
       &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reset&lt;/span&gt;
@@ -763,11 +757,10 @@ block.&lt;/p&gt;
 
 
 &lt;ul&gt;
-&lt;li&gt;We clear the whole database and then add &lt;code&gt;@tom&lt;/code&gt; and save him.&lt;/li&gt;
+&lt;li&gt;We clear the whole database and then add &lt;code&gt;@tom&lt;/code&gt; and save&amp;nbsp;him.&lt;/li&gt;
 &lt;li&gt;Similarly you can define an &lt;code&gt;after(:each)&lt;/code&gt; or &lt;code&gt;after(:all)&lt;/code&gt; call.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Now to implement &lt;code&gt;it "can create texts"&lt;/code&gt;, we can assume, that this &lt;code&gt;@tom&lt;/code&gt; is
-given:&lt;/p&gt;
+&lt;p&gt;Now to implement &lt;code&gt;it "can create texts"&lt;/code&gt;, we can assume, that this &lt;code&gt;@tom&lt;/code&gt; is&amp;nbsp;given:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;can create texts&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
       &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@tom&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add_text&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Humpty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Dumpty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
       &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="n"&gt;eq&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vi"&gt;@tom&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -779,12 +772,12 @@ given:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;every object has a &lt;code&gt;#should&lt;/code&gt; method, that accepts matchers (you can look
     them up &lt;a href="http://rubydoc.info/gems/rspec-expectations/2.4.0/RSpec/Matchers"&gt;here&lt;/a&gt;.).
-  You probably need &lt;code&gt;eq(...)&lt;/code&gt; most often.&lt;/li&gt;
+  You probably need &lt;code&gt;eq(...)&lt;/code&gt; most&amp;nbsp;often.&lt;/li&gt;
 &lt;li&gt;You can invert the test by the &lt;code&gt;#should_not&lt;/code&gt; method.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;To describe the Server's abilities, we notice, that there is no class that we
+&lt;p&gt;To describe the Server&amp;#8217;s abilities, we notice, that there is no class that we
 describe. But &lt;code&gt;rspec&lt;/code&gt; is forgiving and allows you to describe something by a
-string name:&lt;/p&gt;
+string&amp;nbsp;name:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Server&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="n"&gt;context&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;for unregistered users&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
     &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;lists all text titles under /text&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
@@ -797,17 +790,17 @@ string name:&lt;/p&gt;
 
     &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;deletes posts on /text/:id&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 
-    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;updates posts on POST /text/:id&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;updates posts on &lt;span class="caps"&gt;POST&lt;/span&gt; /text/:id&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;&lt;code&gt;rack/test&lt;/code&gt; has not been included for nothing, it offers functions &lt;code&gt;get&lt;/code&gt;,
-&lt;code&gt;post&lt;/code&gt;, ... that do requests to the localhost. To start the server, we need to
+&lt;code&gt;post&lt;/code&gt;, &amp;#8230; that do requests to the localhost. To start the server, we need to
 define an &lt;code&gt;app&lt;/code&gt; method, which is then started before the tests run. At the
-moment, we don't have a class for that, but we can provide the standard
-Sinatra app.&lt;/p&gt;
+moment, we don&amp;#8217;t have a class for that, but we can provide the standard
+Sinatra&amp;nbsp;app.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;describe&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Server&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;app&lt;/span&gt;
     &lt;span class="no"&gt;Sinatra&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Application&lt;/span&gt;
@@ -817,7 +810,7 @@ Sinatra app.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;A test could now look like this:&lt;/p&gt;
+&lt;p&gt;A test could now look like&amp;nbsp;this:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;lists all text titles under /text&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
       &lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/text&amp;quot;&lt;/span&gt;
       &lt;span class="n"&gt;last_response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;should&lt;/span&gt; &lt;span class="kp"&gt;include&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Humpty&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -827,11 +820,11 @@ Sinatra app.&lt;/p&gt;
 
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;get ...&lt;/code&gt; sends a get request to the server and saves the response.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;get ...&lt;/code&gt; sends a get request to the server and saves the&amp;nbsp;response.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;last_response&lt;/code&gt; can then be used to extract information about the
-    answer, for example, if the text of the response contains something.&lt;/li&gt;
+    answer, for example, if the text of the response contains&amp;nbsp;something.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Now to the parametrized requests:&lt;/p&gt;
+&lt;p&gt;Now to the parametrized&amp;nbsp;requests:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;    &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;accepts posts to /text as new text&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
       &lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/text&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:title&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;The Cat&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:text&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;The cat sat on the mat&amp;quot;&lt;/span&gt;
 
@@ -842,29 +835,28 @@ Sinatra app.&lt;/p&gt;
 
 
 &lt;ul&gt;
-&lt;li&gt;You just add the parameters of the request as named parameters of the query. &lt;/li&gt;
-&lt;li&gt;You can test the response code of the query.&lt;/li&gt;
-&lt;li&gt;You can be very concise in ruby. Basically, the last line says "'The Cat'
-    should be among the titles of texts".&lt;/li&gt;
+&lt;li&gt;You just add the parameters of the request as named parameters of the&amp;nbsp;query. &lt;/li&gt;
+&lt;li&gt;You can test the response code of the&amp;nbsp;query.&lt;/li&gt;
+&lt;li&gt;You can be very concise in ruby. Basically, the last line says &amp;#8220;&amp;#8216;The Cat&amp;#8217;
+    should be among the titles of&amp;nbsp;texts&amp;#8221;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;With these building blocks, you probably can figure out 90% of your testing
-needs.&lt;/p&gt;</summary></entry><entry><title>The Story of how I built a Model</title><link href="http://zombiecalypse.github.com/Blog/the-story-of-how-i-built-a-model.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:the-story-of-how-i-built-a-model.html</id><summary type="html">&lt;p&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/p&gt;
+&lt;p&gt;With these building blocks, you probably can figure out 90% of your testing&amp;nbsp;needs.&lt;/p&gt;</summary></entry><entry><title>The Story of how I built a Model</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/the-story-of-how-i-built-a-model.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/the-story-of-how-i-built-a-model.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;So in this text, I will actually build a very simple Webapp including data
 that is stored on the server. I will not use a database, so as not to
-complicate things. &lt;/p&gt;
+complicate&amp;nbsp;things. &lt;/p&gt;
 &lt;p&gt;The project is the following: I like to write stories in my free time, but
-with my notes all over time and space (I don't know, where they're
+with my notes all over time and space (I don&amp;#8217;t know, where they&amp;#8217;re
 getting lost), it gets quite annoying. Also the notes are completely
-disorganized, but that we will fix later.&lt;/p&gt;
+disorganized, but that we will fix&amp;nbsp;later.&lt;/p&gt;
 &lt;p&gt;So the idea is to have a web application that stores my stories. For now, lets
-assume, that the stories only have a title and a body.&lt;/p&gt;
-&lt;p&gt;In ruby, classes don't need no stupid type declarations, you just call it
-&lt;code&gt;@variablename&lt;/code&gt; and the '@' tells us that it has instance scope and the
+assume, that the stories only have a title and a&amp;nbsp;body.&lt;/p&gt;
+&lt;p&gt;In ruby, classes don&amp;#8217;t need no stupid type declarations, you just call it
+&lt;code&gt;@variablename&lt;/code&gt; and the &amp;#8216;@&amp;#8217; tells us that it has instance scope and the
 variable can hold a string, a number, or any object. Similarily
-&lt;code&gt;@@classvariable&lt;/code&gt; has class scope. The first, we won't even see, because Ruby
+&lt;code&gt;@@classvariable&lt;/code&gt; has class scope. The first, we won&amp;#8217;t even see, because Ruby
 can define getters and setters automatically with the &lt;code&gt;attr_accessor&lt;/code&gt;
 function, to which you give &lt;em&gt;symbols&lt;/em&gt; - strings that signify a name. The
-minimal class, that has a publicly accessable text and title is&lt;/p&gt;
+minimal class, that has a publicly accessable text and title&amp;nbsp;is&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Text&lt;/span&gt;
   &lt;span class="kp"&gt;attr_accessor&lt;/span&gt; &lt;span class="ss"&gt;:text&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:title&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
@@ -872,8 +864,8 @@ minimal class, that has a publicly accessable text and title is&lt;/p&gt;
 
 
 &lt;p&gt;But we want a constructor, which is called &lt;code&gt;initialize&lt;/code&gt; in ruby and some
-management of all the entities, e.g. displaying all Texts.&lt;/p&gt;
-&lt;p&gt;The constructor only passes the arguments to the setters:&lt;/p&gt;
+management of all the entities, e.g. displaying all&amp;nbsp;Texts.&lt;/p&gt;
+&lt;p&gt;The constructor only passes the arguments to the&amp;nbsp;setters:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Text&lt;/span&gt;
   &lt;span class="kp"&gt;attr_accessor&lt;/span&gt; &lt;span class="ss"&gt;:text&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:title&lt;/span&gt;
 
@@ -888,10 +880,9 @@ management of all the entities, e.g. displaying all Texts.&lt;/p&gt;
 
 
 &lt;p&gt;&lt;code&gt;def&lt;/code&gt; defines methods (or functions) in the current scope and &lt;code&gt;self&lt;/code&gt; is
-&lt;em&gt;always&lt;/em&gt; bound to the current object.&lt;/p&gt;
+&lt;em&gt;always&lt;/em&gt; bound to the current&amp;nbsp;object.&lt;/p&gt;
 &lt;p&gt;Now we need a class scoped set of all the Texts, preferably only the ones we
-save (think of tests, where we generate Texts that should not appear in the
-set).&lt;/p&gt;
+save (think of tests, where we generate Texts that should not appear in the&amp;nbsp;set).&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Text&lt;/span&gt;
   &lt;span class="c1"&gt;# ...&lt;/span&gt;
   &lt;span class="vc"&gt;@@texts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;[]&lt;/span&gt;
@@ -903,15 +894,14 @@ set).&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Ok, that's a bit to digest:&lt;/p&gt;
+&lt;p&gt;Ok, that&amp;#8217;s a bit to&amp;nbsp;digest:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;@@texts = []&lt;/code&gt; initializes the class scoped variable with an empty list
-    literal.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;save&lt;/code&gt; does not take any arguments, we don't need to write the parens in
-    method declarations.&lt;/li&gt;
-&lt;li&gt;The shift operator adds the element to the list.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@@texts = []&lt;/code&gt; initializes the class scoped variable with an empty list&amp;nbsp;literal.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;save&lt;/code&gt; does not take any arguments, we don&amp;#8217;t need to write the parens in
+    method&amp;nbsp;declarations.&lt;/li&gt;
+&lt;li&gt;The shift operator adds the element to the&amp;nbsp;list.&lt;/li&gt;
 &lt;li&gt;The postfix &lt;code&gt;unless&lt;/code&gt; (or &lt;code&gt;if&lt;/code&gt;) is an idiomatic way to write one-line
-    conditional statements. It is equivalent to &lt;/li&gt;
+    conditional statements. It is equivalent&amp;nbsp;to &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;code&gt;ruby
     unless @@texts.include? self
@@ -919,9 +909,9 @@ set).&lt;/p&gt;
     end&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;but is much more readable.
 * &lt;code&gt;include?&lt;/code&gt; is a valid method name and indeed idiomatic for predicates
-    (methods, that return true or false). Again, you don't need to write the
-  parens on the method calls (fun fact: attr_accessor is a method too).&lt;/p&gt;
-&lt;p&gt;That said, the delete method should be simple&lt;/p&gt;
+    (methods, that return true or false). Again, you don&amp;#8217;t need to write the
+  parens on the method calls (fun fact: attr_accessor is a method&amp;nbsp;too).&lt;/p&gt;
+&lt;p&gt;That said, the delete method should be&amp;nbsp;simple&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Text&lt;/span&gt;
   &lt;span class="c1"&gt;# ...&lt;/span&gt;
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;delete&lt;/span&gt;
@@ -935,13 +925,13 @@ set).&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;but the &lt;code&gt;all&lt;/code&gt; method needs some explaining again:&lt;/p&gt;
+&lt;p&gt;but the &lt;code&gt;all&lt;/code&gt; method needs some explaining&amp;nbsp;again:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Remember how &lt;code&gt;self&lt;/code&gt; is &lt;em&gt;always&lt;/em&gt; bound to the current object? In the body of
-    a class, that object is the class you're currently defining! That's why
-  &lt;code&gt;def self.all&lt;/code&gt; defines the method &lt;code&gt;all&lt;/code&gt; in the class, not the instances.&lt;/li&gt;
+    a class, that object is the class you&amp;#8217;re currently defining! That&amp;#8217;s why
+  &lt;code&gt;def self.all&lt;/code&gt; defines the method &lt;code&gt;all&lt;/code&gt; in the class, not the&amp;nbsp;instances.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Finally, lets add a unique identifier with what we have learned:&lt;/p&gt;
+&lt;p&gt;Finally, lets add a unique identifier with what we have&amp;nbsp;learned:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Text&lt;/span&gt;
   &lt;span class="kp"&gt;attr_accessor&lt;/span&gt; &lt;span class="ss"&gt;:text&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:title&lt;/span&gt;
 
@@ -963,7 +953,7 @@ set).&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;and add a lookup:&lt;/p&gt;
+&lt;p&gt;and add a&amp;nbsp;lookup:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;  &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nc"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;by_id&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt;
     &lt;span class="vc"&gt;@@texts&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;detect&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;txt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
   &lt;span class="k"&gt;end&lt;/span&gt;
@@ -973,15 +963,15 @@ set).&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The &lt;code&gt;detect&lt;/code&gt; method takes a block, that is an executable part of code. This
     block is evaluated and the method returns the first element, for which the
-  block returns &lt;code&gt;true&lt;/code&gt;. In the same fashion, there are&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;select&lt;/code&gt;: returns a list of all the elements, for which the block is true.&lt;/li&gt;
+  block returns &lt;code&gt;true&lt;/code&gt;. In the same fashion, there&amp;nbsp;are&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;select&lt;/code&gt;: returns a list of all the elements, for which the block is&amp;nbsp;true.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;collect&lt;/code&gt;: returns a list of all the return values for the block executed
-    on the elements&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;inject&lt;/code&gt;: ... Lets not get into &lt;a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)"&gt;that&lt;/a&gt;.&lt;/li&gt;
+    on the&amp;nbsp;elements&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;inject&lt;/code&gt;: &amp;#8230; Lets not get into &lt;a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)"&gt;that&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;This is all there is to do for the model part.&lt;/p&gt;
+&lt;p&gt;This is all there is to do for the model&amp;nbsp;part.&lt;/p&gt;
 &lt;p&gt;Now we can present that with Sinatra, we need to require the models file as
-well and pass the variables.&lt;/p&gt;
+well and pass the&amp;nbsp;variables.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rubygems&amp;#39;&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sinatra&amp;#39;&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;./models.rb&amp;#39;&lt;/span&gt;
@@ -1003,12 +993,12 @@ well and pass the variables.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Note that I converted the parameter &lt;code&gt;id&lt;/code&gt; to an integer before handing it to
     the &lt;code&gt;#by_id&lt;/code&gt; method.&lt;/li&gt;
-&lt;li&gt;I can return the 'not found' code 404 directly, if... well... I didn't find
-    the text with the id.&lt;/li&gt;
+&lt;li&gt;I can return the &amp;#8216;not found&amp;#8217; code 404 directly, if&amp;#8230; well&amp;#8230; I didn&amp;#8217;t find
+    the text with the&amp;nbsp;id.&lt;/li&gt;
 &lt;li&gt;We can extract parameters from a &lt;code&gt;get&lt;/code&gt; request (or any request really), by
-    marking the variable with a colon (like a symbol).&lt;/li&gt;
+    marking the variable with a colon (like a&amp;nbsp;symbol).&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Finally, we can display all that with two haml files:&lt;/p&gt;
+&lt;p&gt;Finally, we can display all that with two haml&amp;nbsp;files:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;# index.haml
 &lt;span class="nt"&gt;%ul&lt;/span&gt;
   &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt; &lt;span class="n"&gt;texts&lt;/span&gt;
@@ -1017,15 +1007,14 @@ well and pass the variables.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;This displays links to all texts in an unsorted list showing their title.&lt;/p&gt;
+&lt;p&gt;This displays links to all texts in an unsorted list showing their&amp;nbsp;title.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;In a ruby string, you can put a ruby expression between &lt;code&gt;#{&lt;/code&gt; and &lt;code&gt;}&lt;/code&gt;, and it
-    will insert the value into the string.&lt;/li&gt;
-&lt;li&gt;In HAML, you can define attributes of a block (in this example &lt;code&gt;a&lt;/code&gt;) by
-    putting them in parens. The right hand side of the equal signs are ruby
-  expressions.&lt;/li&gt;
+    will insert the value into the&amp;nbsp;string.&lt;/li&gt;
+&lt;li&gt;In &lt;span class="caps"&gt;HAML&lt;/span&gt;, you can define attributes of a block (in this example &lt;code&gt;a&lt;/code&gt;) by
+    putting them in parens. The right hand side of the equal signs are ruby&amp;nbsp;expressions.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Finally, we need to add a file to show a single text:&lt;/p&gt;
+&lt;p&gt;Finally, we need to add a file to show a single&amp;nbsp;text:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;# show.haml
 &lt;span class="nt"&gt;%h1&lt;/span&gt;
   &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;title&lt;/span&gt;
@@ -1036,13 +1025,13 @@ well and pass the variables.&lt;/p&gt;
 
 
 &lt;ul&gt;
-&lt;li&gt;In HAML, when we prepose a paragraph with a filter name, like &lt;code&gt;markdown&lt;/code&gt;,
+&lt;li&gt;In &lt;span class="caps"&gt;HAML&lt;/span&gt;, when we prepose a paragraph with a filter name, like &lt;code&gt;markdown&lt;/code&gt;,
     then that is processed through that. Note however, that prefixing something
-  with &lt;code&gt;=&lt;/code&gt; does no longer insert it.&lt;/li&gt;
+  with &lt;code&gt;=&lt;/code&gt; does no longer insert&amp;nbsp;it.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Of course, if we run that program, it will not show anything, in lack of any
 texts and also a way to add them. For the moment, we can fix that by adding a
-&lt;em&gt;fixture&lt;/em&gt; to the controller file:&lt;/p&gt;
+&lt;em&gt;fixture&lt;/em&gt; to the controller&amp;nbsp;file:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rubygems&amp;#39;&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;sinatra&amp;#39;&lt;/span&gt;
 &lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rdiscount&amp;#39;&lt;/span&gt;
@@ -1066,26 +1055,26 @@ texts and also a way to add them. For the moment, we can fix that by adding a
 
 &lt;ul&gt;
 &lt;li&gt;Ruby objects are initialized by the &lt;code&gt;#new&lt;/code&gt; method of the class, which in
-    turn runs the &lt;code&gt;#initialize&lt;/code&gt; method of the new object.&lt;/li&gt;
-&lt;li&gt;There is no magic "fixture" file, the fixture is just some code that adds
-    objects to the collection.&lt;/li&gt;
+    turn runs the &lt;code&gt;#initialize&lt;/code&gt; method of the new&amp;nbsp;object.&lt;/li&gt;
+&lt;li&gt;There is no magic &amp;#8220;fixture&amp;#8221; file, the fixture is just some code that adds
+    objects to the&amp;nbsp;collection.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;That concludes this. We can now build a simple model and know how to build a
-in-memory database. The rest should be a breeze, right?&lt;/p&gt;
-&lt;p&gt;Next time, I'll show you, how to make the application understand request like
-"add this text" and "this text sucks, change it" and also "this text sucks so
-much, forget it ever existed". You will see, that the designers of the HTTP
-protocol had something like that in mind.&lt;/p&gt;</summary></entry><entry><title>User Sessions and Layouts</title><link href="http://zombiecalypse.github.com/Blog/user-sessions-and-layouts.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:user-sessions-and-layouts.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt; series.&lt;/em&gt;&lt;/p&gt;
+in-memory database. The rest should be a breeze,&amp;nbsp;right?&lt;/p&gt;
+&lt;p&gt;Next time, I&amp;#8217;ll show you, how to make the application understand request like
+&amp;#8220;add this text&amp;#8221; and &amp;#8220;this text sucks, change it&amp;#8221; and also &amp;#8220;this text sucks so
+much, forget it ever existed&amp;#8221;. You will see, that the designers of the &lt;span class="caps"&gt;HTTP&lt;/span&gt;
+protocol had something like that in&amp;nbsp;mind.&lt;/p&gt;</summary></entry><entry><title>User Sessions and Layouts</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/user-sessions-and-layouts.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/user-sessions-and-layouts.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The SinatraStory project now has a single model class, that is very simple and
 allows everybody that can connect to the server to create and delete
 everything. It seemed like a good idea at the time, but now it seems like an
 even better idea would be to restrict access on a user basis. A user should
-only be able to edit and delete their own texts.&lt;/p&gt;
+only be able to edit and delete their own&amp;nbsp;texts.&lt;/p&gt;
 &lt;p&gt;This implementation is blatantly ripped off &lt;a href="http://www.128bitstudios.com/2011/11/21/authentication-with-sinatra/"&gt;Authentication with Sinatra&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;First of all, we need a model for the user. Lets ignore the relation between
 the user and the texts for the moment and focus on the login procedure. We
 want the ability to sign up, to log in, and to log out. For this, we need some
-new routes:&lt;/p&gt;
+new&amp;nbsp;routes:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/signup&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="n"&gt;haml&lt;/span&gt; &lt;span class="ss"&gt;:signup&lt;/span&gt;
 &lt;span class="k"&gt;end&lt;/span&gt;
@@ -1107,8 +1096,8 @@ new routes:&lt;/p&gt;
 &lt;p&gt;Now the thing is, to save a login, we need something called a &lt;em&gt;session&lt;/em&gt;. A
 session is a piece of information stored on the server that relates to the
 user, as such the user can not edit it. You might notice, that this is in
-conflict to the REST principles, but still commonly done. To acknowledge that
-this is not pure, we need to enable it:&lt;/p&gt;
+conflict to the &lt;span class="caps"&gt;REST&lt;/span&gt; principles, but still commonly done. To acknowledge that
+this is not pure, we need to enable&amp;nbsp;it:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# controller.rb&lt;/span&gt;
 
 &lt;span class="c1"&gt;# ...&lt;/span&gt;
@@ -1119,7 +1108,7 @@ this is not pure, we need to enable it:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Next we can imagine how a login and logout procedures would look like:&lt;/p&gt;
+&lt;p&gt;Next we can imagine how a login and logout procedures would look&amp;nbsp;like:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/login&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="nb"&gt;fail&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;No such login&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;unless&lt;/span&gt; &lt;span class="no"&gt;User&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;login&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:username&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:password&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
 
@@ -1136,14 +1125,14 @@ this is not pure, we need to enable it:&lt;/p&gt;
 
 
 &lt;ul&gt;
-&lt;li&gt;Failing is an option and gives an error page.&lt;/li&gt;
-&lt;li&gt;The session looks like a dictionary.&lt;/li&gt;
-&lt;li&gt;You can redirect to the last page visited.&lt;/li&gt;
+&lt;li&gt;Failing is an option and gives an error&amp;nbsp;page.&lt;/li&gt;
+&lt;li&gt;The session looks like a&amp;nbsp;dictionary.&lt;/li&gt;
+&lt;li&gt;You can redirect to the last page&amp;nbsp;visited.&lt;/li&gt;
 &lt;li&gt;We store only the username in the session, because it takes
-  less space.&lt;/li&gt;
+  less&amp;nbsp;space.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Similiarly, on signup you should create an account if the name is available.
-Normally, we should also send the password twice, if the user misstyped.&lt;/p&gt;
+Normally, we should also send the password twice, if the user&amp;nbsp;misstyped.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/signup&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
   &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pw&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pw2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:username&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:password&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:password2&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
 
@@ -1159,13 +1148,13 @@ Normally, we should also send the password twice, if the user misstyped.&lt;/p&g
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The HAML file for this is left up as an exercise to the reader.&lt;/p&gt;
+&lt;p&gt;The &lt;span class="caps"&gt;HAML&lt;/span&gt; file for this is left up as an exercise to the&amp;nbsp;reader.&lt;/p&gt;
 &lt;p&gt;Now it would be nice to have a layout around every of our pages that could
-include the login. Unfortunately, that's not how it works, we need to edit it
-into every view file separately....&lt;/p&gt;
+include the login. Unfortunately, that&amp;#8217;s not how it works, we need to edit it
+into every view file&amp;nbsp;separately&amp;#8230;.&lt;/p&gt;
 &lt;p&gt;Just kidding. There is the &lt;code&gt;layout.haml&lt;/code&gt; file, which is rendered around every
-HAML file (partials not included). You can decide, where to put the inner page
-by placing &lt;code&gt;= yield&lt;/code&gt; at the respective point. &lt;/p&gt;
+&lt;span class="caps"&gt;HAML&lt;/span&gt; file (partials not included). You can decide, where to put the inner page
+by placing &lt;code&gt;= yield&lt;/code&gt; at the respective&amp;nbsp;point. &lt;/p&gt;
 &lt;p&gt;This of course assumes, that there is exactly one point, which is filled in -
 not very realistic: Typically, depending on the page, you would display
 another page title or a slightly different sidebar. Sure, you could configure
@@ -1174,8 +1163,8 @@ that does that called &lt;code&gt;sinatra-outputbuffer&lt;/code&gt; - accept no 
 Seriously, I tried 3 gems that offered this and that was the only one that
 seemed to work. If you &lt;code&gt;require 'sinatra/outputbuffer'&lt;/code&gt; it, you can use the
 commands &lt;code&gt;content_for :some_name&lt;/code&gt; to fill a part and 
-&lt;code&gt;yield_content :some_name&lt;/code&gt; to leave the gap open to be filled in.&lt;/p&gt;
-&lt;p&gt;With this, we can write a layout file:&lt;/p&gt;
+&lt;code&gt;yield_content :some_name&lt;/code&gt; to leave the gap open to be filled&amp;nbsp;in.&lt;/p&gt;
+&lt;p&gt;With this, we can write a layout&amp;nbsp;file:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="nn"&gt;!!! 5&lt;/span&gt;
 &lt;span class="nt"&gt;%head&lt;/span&gt;
   &lt;span class="nt"&gt;%title&lt;/span&gt;
@@ -1188,7 +1177,7 @@ commands &lt;code&gt;content_for :some_name&lt;/code&gt; to fill a part and
         &lt;span class="nt"&gt;%b&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="vi"&gt;@user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
         &lt;span class="nt"&gt;%a&lt;/span&gt;(&lt;span class="na"&gt;href =&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/logout&amp;quot;&lt;/span&gt;) logout
       &lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt;
-        &lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/login&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;)
+        &lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/login&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;span class="caps"&gt;POST&lt;/span&gt;&amp;quot;&lt;/span&gt;)
           &lt;span class="nt"&gt;%label&lt;/span&gt;
             Username
             &lt;span class="nt"&gt;%input&lt;/span&gt;(&lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;text&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;name=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;username&amp;quot;&lt;/span&gt;) 
@@ -1202,13 +1191,13 @@ commands &lt;code&gt;content_for :some_name&lt;/code&gt; to fill a part and
 
 
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;!!! 5&lt;/code&gt; means it is converted to HTML 5.&lt;/li&gt;
-&lt;li&gt;The title is set to "SinatraStory - &lt;subpage title&gt;"&lt;/li&gt;
-&lt;li&gt;If &lt;code&gt;@user&lt;/code&gt; is not nil, show the name and a logout link.&lt;/li&gt;
-&lt;li&gt;If it is, show the signup link and a login field.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;!!! 5&lt;/code&gt; means it is converted to &lt;span class="caps"&gt;HTML&lt;/span&gt;&amp;nbsp;5.&lt;/li&gt;
+&lt;li&gt;The title is set to &amp;#8220;SinatraStory - &lt;subpage title&gt;&amp;#8220;&lt;/li&gt;
+&lt;li&gt;If &lt;code&gt;@user&lt;/code&gt; is not nil, show the name and a logout&amp;nbsp;link.&lt;/li&gt;
+&lt;li&gt;If it is, show the signup link and a login&amp;nbsp;field.&lt;/li&gt;
 &lt;li&gt;Insert the bulk of the inner page into an &lt;code&gt;&amp;lt;article&amp;gt;&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Now there's the user information on every page!&lt;/p&gt;
+&lt;p&gt;Now there&amp;#8217;s the user information on every&amp;nbsp;page!&lt;/p&gt;
 &lt;p&gt;Or it were, if there was a &lt;code&gt;User&lt;/code&gt; class.&lt;/p&gt;
 &lt;p&gt;At the moment that class should store the user name and the password
 information. Hopefully, the recent news about all kind of password leaks
@@ -1218,11 +1207,10 @@ project, but if anybody copied this, it should at least be somewhat secure.
 Always store passwords using a &lt;a href="http://en.wikipedia.org/wiki/Hash_function"&gt;hash function&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In the following I will use BCrypt, not because it is fast, but because it is
 slow. A slow hash function ensures, that a brute force cracking attempt with a
-known hash takes long enough.&lt;/p&gt;
+known hash takes long&amp;nbsp;enough.&lt;/p&gt;
 &lt;p&gt;Anyway, include the &lt;code&gt;bcrypt-ruby&lt;/code&gt; gem and &lt;code&gt;require 'bcrypt'&lt;/code&gt; in your
-&lt;code&gt;models.rb&lt;/code&gt; file. We don't want anyone to touch any of the attributes, so they
-are read only. Besides the hash, we also generate a salt (a random value
-basically).&lt;/p&gt;
+&lt;code&gt;models.rb&lt;/code&gt; file. We don&amp;#8217;t want anyone to touch any of the attributes, so they
+are read only. Besides the hash, we also generate a salt (a random value&amp;nbsp;basically).&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;
   &lt;span class="kp"&gt;attr_reader&lt;/span&gt; &lt;span class="ss"&gt;:name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:password_hash&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:password_salt&lt;/span&gt;
 
@@ -1253,7 +1241,7 @@ basically).&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;This is similar to the Text class and should only be a problem in that it
-    uses a dictionary instead of a list.&lt;/li&gt;
+    uses a dictionary instead of a&amp;nbsp;list.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;However, it does not address the &lt;code&gt;initialize(name, password)&lt;/code&gt; and the
 &lt;code&gt;User.login(name, password)&lt;/code&gt; methods.&lt;/p&gt;
@@ -1261,7 +1249,7 @@ basically).&lt;/p&gt;
 creation, we will take the password and generate a hash for it and only store
 that in the model. When we &lt;code&gt;login&lt;/code&gt;, we check that the passwords hash is the
 same as the stored hash. Additionally, we add a random salt, so that two users
-with the same password still have different hashes.&lt;/p&gt;
+with the same password still have different&amp;nbsp;hashes.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="n"&gt;pw_salt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;BCrypt&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Engine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;generate_salt&lt;/span&gt;
   &lt;span class="n"&gt;pw_hash&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;BCrypt&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="no"&gt;Engine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hash_secret&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pw_salt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1281,11 +1269,11 @@ with the same password still have different hashes.&lt;/p&gt;
 
 
 &lt;p&gt;This way, even if your database was compromised and leaked, the users would be
-relatively save.&lt;/p&gt;
+relatively&amp;nbsp;save.&lt;/p&gt;
 &lt;p&gt;That was the complicated part, the rest will not give anyone headaches. What
 remains is to ensure, that texts are owned by someone and that only that
 someone can edit them. Obviously we need to extend the &lt;code&gt;Text&lt;/code&gt; class to have a
-&lt;code&gt;User&lt;/code&gt; it belongs to:&lt;/p&gt;
+&lt;code&gt;User&lt;/code&gt; it belongs&amp;nbsp;to:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# models.rb&lt;/span&gt;
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Text&lt;/span&gt;
   &lt;span class="c1"&gt;# ...&lt;/span&gt;
@@ -1303,7 +1291,7 @@ someone can edit them. Obviously we need to extend the &lt;code&gt;Text&lt;/code
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;and the &lt;code&gt;User&lt;/code&gt; to contain the texts:&lt;/p&gt;
+&lt;p&gt;and the &lt;code&gt;User&lt;/code&gt; to contain the&amp;nbsp;texts:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# models.rb&lt;/span&gt;
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;
   &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;initialize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;.&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1328,9 +1316,9 @@ someone can edit them. Obviously we need to extend the &lt;code&gt;Text&lt;/code
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;The controller should check if the action is allowed. We'll use the current
+&lt;p&gt;The controller should check if the action is allowed. We&amp;#8217;ll use the current
 user (not the current user name) a lot, so it makes sense to fetch it before
-anything else happens:&lt;/p&gt;
+anything else&amp;nbsp;happens:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# controller.rb&lt;/span&gt;
 
 &lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
@@ -1339,8 +1327,7 @@ anything else happens:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Now the controller needs to ensure, that a user might only do allowed
-operations:&lt;/p&gt;
+&lt;p&gt;Now the controller needs to ensure, that a user might only do allowed&amp;nbsp;operations:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;post&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/text/:id&amp;quot;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
     &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="no"&gt;Text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;by_id&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;params&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:id&lt;/span&gt;&lt;span class="o"&gt;].&lt;/span&gt;&lt;span class="n"&gt;to_i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -1354,29 +1341,29 @@ operations:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;and for creation the same. Finally, we can wrap &lt;/p&gt;
+&lt;p&gt;and for creation the same. Finally, we can&amp;nbsp;wrap &lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="p"&gt;-&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;editable?&lt;/span&gt; &lt;span class="vi"&gt;@user&lt;/span&gt;
   &lt;span class="nt"&gt;%ul&lt;/span&gt;
     &lt;span class="nt"&gt;%li&lt;/span&gt;
       &lt;span class="nt"&gt;%a&lt;/span&gt;(&lt;span class="na"&gt;href=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/text/#{text.id}/edit&amp;quot;&lt;/span&gt;) edit
     &lt;span class="nt"&gt;%li&lt;/span&gt;
-      &lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/text/#{text.id}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;)
+      &lt;span class="nt"&gt;%form&lt;/span&gt;(&lt;span class="na"&gt;action=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;/text/#{text.id}&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;method=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;span class="caps"&gt;POST&lt;/span&gt;&amp;quot;&lt;/span&gt;)
         &lt;span class="nt"&gt;%input&lt;/span&gt;(&lt;span class="na"&gt;name =&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;_method&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;hidden&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;delete&amp;quot;&lt;/span&gt;)
         &lt;span class="nt"&gt;%input&lt;/span&gt;(&lt;span class="na"&gt;type=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;submit&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;value=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;delete&amp;quot;&lt;/span&gt;)
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;and similarly for the "new text" link.&lt;/p&gt;
+&lt;p&gt;and similarly for the &amp;#8220;new text&amp;#8221;&amp;nbsp;link.&lt;/p&gt;
 &lt;p&gt;This adds some security to our page. You could now add a per user listing, a
-profile for each user, ... but you could do that with what you already know.
-Try it!&lt;/p&gt;
-&lt;p&gt;You should now know:&lt;/p&gt;
+profile for each user, &amp;#8230; but you could do that with what you already know.
+Try&amp;nbsp;it!&lt;/p&gt;
+&lt;p&gt;You should now&amp;nbsp;know:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;What a session is and how to use it.&lt;/li&gt;
+&lt;li&gt;What a session is and how to use&amp;nbsp;it.&lt;/li&gt;
 &lt;li&gt;How to use the &lt;code&gt;layout.haml&lt;/code&gt; file&lt;/li&gt;
 &lt;li&gt;How to use &lt;code&gt;yield_content&lt;/code&gt; and &lt;code&gt;content_for&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;That you should &lt;em&gt;never&lt;/em&gt; store plain text passwords and how to use a hash
-    function with salt.&lt;/li&gt;
-&lt;li&gt;How to make relations between model classes.&lt;/li&gt;
-&lt;li&gt;Ensure that restricted operations are executed only with the valid user.&lt;/li&gt;
+    function with&amp;nbsp;salt.&lt;/li&gt;
+&lt;li&gt;How to make relations between model&amp;nbsp;classes.&lt;/li&gt;
+&lt;li&gt;Ensure that restricted operations are executed only with the valid&amp;nbsp;user.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>
