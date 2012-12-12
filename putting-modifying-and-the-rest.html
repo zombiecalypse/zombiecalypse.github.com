@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Putting, Modifying and the REST</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+                <link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zombiecalypse the Blog Atom Feed" />
+                
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
+                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="./">Zombiecalypse the Blog </a></h1>
+                <nav><ul>
+                                                                    <li><a href="./pages/about-me.html">About me</a></li>
+                                                                    <li class="active"><a href="./category/programming.html">programming</a></li>
+                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./putting-modifying-and-the-rest.html" rel="bookmark"
+           title="Permalink to Putting, Modifying and the REST">Putting, Modifying and the REST</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="./category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->      <p>Until now, the texts had to be hard coded into the fixture. That of course is
+just ridiculous for a webapp. The whole point of an application like this is
+that it is interactive, so that I can publish my own texts, modify my old ones
+and delete the garbage.</p>
+<p>As you might know, the HTTP has four main verbs:</p>
+<ul>
+<li><em>GET</em>: A content is shown, no modification should occur.</li>
+<li><em>POST</em>: Modify a content by sending the server information.</li>
+<li><em>PUT</em>: Create new content on the server by URL</li>
+<li><em>DELETE</em>: What do you think?</li>
+</ul>
+<p>There are some others, but these four help you design your interface. For
+example, our application manages texts, so the following requests should be
+possible:</p>
+<ul>
+<li><code>GET /text</code> should display a list of all texts.</li>
+<li><code>PUT /text</code> should publish a new text.</li>
+<li><code>GET /text/:id</code> should display the text with the given id.</li>
+<li><code>POST /text/:id</code> should modify the text.</li>
+<li><code>DELETE /text/:id</code> ...What do you think?</li>
+</ul>
+<p>Using only meaningful URLs and HTTP methods and not cookies, etc, to navigate
+the user through the site is known as
+<a href="http://en.wikipedia.org/wiki/Representational_state_transfer">REST</a>.
+Not only does it give an simple interface, it also helps performance, etc.
+Putting a cool new name on it like "REST" on it hides the fact, that this was
+how the makers of HTTP imagined the web all along.</p>
+<p>Sinatra is RESTful by default, but of course, you have to take care of the
+URLs yourself. The last time, we defined the two <code>GET</code> methods, so lets add
+publishing a new text first:</p>
+<div class="codehilite"><pre><span class="n">post</span> <span class="s2">&quot;/text&quot;</span> <span class="k">do</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="no">Text</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:title</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:text</span><span class="o">]</span><span class="p">)</span>
+  <span class="n">text</span><span class="o">.</span><span class="n">save</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Pretty easy, huh? The <code>params</code> will come from a form, but that's not our
+problem now.</p>
+<p>Next, we can post changes:</p>
+<div class="codehilite"><pre><span class="n">post</span> <span class="s2">&quot;/text/:id&quot;</span> <span class="k">do</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="no">Text</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">].</span><span class="n">to_i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="mi">404</span> <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">nil?</span>
+
+  <span class="n">text</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:title</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:text</span><span class="o">]</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>This mixes the two sources for <code>params</code>.</p>
+<div class="codehilite"><pre><span class="n">delete</span> <span class="s2">&quot;/text/:id&quot;</span> <span class="k">do</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="no">Text</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">].</span><span class="n">to_i</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="mi">404</span> <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">nil?</span>
+
+  <span class="n">text</span><span class="o">.</span><span class="n">delete</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Ok, <em>now</em> we can face the problem, that we can't actually access these
+methods, since we don't have a form for the editing part yet.</p>
+<p>First of all, we notice that it would be stupid to write the same form twice -
+once for the editing and once for the creating. We'd prefer to just show the
+same form. This problem can be solved with <em>partials</em>: basically, we insert a
+HAML call into the HAML template. Define a HAML file <code>form.haml</code>, and use it
+from both <code>new.haml</code> and <code>edit.haml</code>.</p>
+<div class="codehilite"><pre># form.haml
+
+<span class="nt">%form</span>(<span class="na">action =</span> <span class="nv">actionurl</span> <span class="na">method =</span> <span class="s">&quot;POST&quot;</span>)
+  <span class="nt">%label</span>
+    Title:
+    <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&#39;text&#39;</span> <span class="na">name=</span><span class="s">&quot;title&quot;</span> <span class="na">value=</span><span class="s">&quot;#{title}&quot;</span>)
+  <span class="nt">%label</span>
+    Text:
+    <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&#39;textarea&#39;</span> <span class="na">name=</span><span class="s">&quot;text&quot;</span> <span class="na">value=</span><span class="s">&quot;#{text}&quot;</span>)
+  <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&#39;submit&#39;</span>)
+
+# edit.haml
+
+<span class="nt">%h1</span>
+  Edit
+  <span class="nt">%q</span><span class="p">=</span> <span class="vi">@text</span><span class="o">.</span><span class="n">title</span>
+<span class="p">=</span> <span class="n">haml</span> <span class="ss">:form</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:title</span> <span class="o">=&gt;</span>  <span class="vi">@text</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="vi">@text</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="ss">:actionurl</span> <span class="o">=&gt;</span> <span class="s2">&quot;/text/</span><span class="si">#{</span><span class="vi">@text</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+
+# new.haml
+
+<span class="nt">%h1</span> New Txt
+<span class="p">=</span> <span class="n">haml</span> <span class="ss">:form</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="ss">:title</span> <span class="o">=&gt;</span>  <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="ss">:actionurl</span> <span class="o">=&gt;</span> <span class="s2">&quot;/text&quot;</span><span class="p">}</span>
+</pre></div>
+
+
+<p>We need to add URLs for the form of course, for example </p>
+<div class="codehilite"><pre>get &quot;/text/new&quot; do
+    haml :new
+end
+
+get &quot;text/:id/edit&quot; do
+    @text = Text.by_id(params[:id].to_i)
+
+    haml :edit
+end
+</pre></div>
+
+
+<ul>
+<li>Instead of adding <code>:locals</code>, you can also define instance variables. This is
+    often preferable.</li>
+</ul>
+<p>There is only putting the respective links into the views:</p>
+<div class="codehilite"><pre># index.haml
+<span class="nt">%ul</span>
+  <span class="p">-</span> <span class="k">for</span> <span class="n">text</span> <span class="k">in</span> <span class="n">texts</span>
+    <span class="nt">%li</span>
+      <span class="nt">%a</span>( <span class="na">href=</span><span class="s">&quot;/text/#{text.id}&quot;</span> )<span class="p">=</span> <span class="n">text</span><span class="o">.</span><span class="n">title</span>
+<span class="nt">%a</span>( <span class="na">href=</span><span class="s">&quot;/text/new&quot;</span> ) new text
+
+# show.haml
+<span class="nt">%h1</span>
+  <span class="p">=</span> <span class="n">text</span><span class="o">.</span><span class="n">title</span>
+<span class="nt">%div</span>
+  <span class="nd">:markdown</span>
+    <span class="si">#{</span><span class="n">text</span><span class="o">.</span><span class="n">text</span><span class="si">}</span>
+<span class="nt">%ul</span>
+  <span class="nt">%li</span>
+    <span class="nt">%a</span>(<span class="na">href=</span><span class="s">&quot;/text/#{text.id}&quot;</span>) edit
+  <span class="nt">%li</span>
+    <span class="nt">%form</span>(<span class="na">action=</span><span class="s">&quot;/text/#{text.id}&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span>)
+      <span class="nt">%input</span>(<span class="na">name =</span><span class="s">&quot;_method&quot;</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">value=</span><span class="s">&quot;delete&quot;</span>)
+      <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&quot;submit&quot;</span> <span class="na">value=</span><span class="s">&quot;delete&quot;</span>)
+</pre></div>
+
+
+<p>You might be wondering, what the heck the line </p>
+<p><code>%input(name ="_method" type="hidden" value="delete")</code></p>
+<p>is about. Fun fact: Browsers can't use <code>PUT</code> or <code>DELETE</code>. It's embarrassing
+but true. The fix is the following: We sent a <code>POST</code>, which tells the server
+that it actually should have been a <code>DELETE</code> method. Sinatra understands this and
+translates.</p>
+<p>Please don't let <code>GET</code> requests change anything on the server, or a google
+spider might delete all your posts.</p>
+<p>You should now know</p>
+<ul>
+<li>What REST is and how RESTful application typically build up their URLs.</li>
+<li>How to use partials.</li>
+<li>How to use the <code>PUT</code> and <code>DELETE</code> methods, even though browsers don't
+    support it.</li>
+</ul>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+                                                    <li><a href="http://python.org">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                    <li><a href="http://twitter.com/zombiecalypse">twitter</a></li>
+                                                    <li><a href="http://github.com/zombiecalypse">github</a></li>
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

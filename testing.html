@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Testing</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+                <link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zombiecalypse the Blog Atom Feed" />
+                
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
+                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="./">Zombiecalypse the Blog </a></h1>
+                <nav><ul>
+                                                                    <li><a href="./pages/about-me.html">About me</a></li>
+                                                                    <li class="active"><a href="./category/programming.html">programming</a></li>
+                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./testing.html" rel="bookmark"
+           title="Permalink to Testing">Testing</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="./category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->      <p>Up to this point, I always felt kinda bad, because I always had to start up the
+server and go through all the pages in order to catch errors (there always are).
+The solution to that is of course to automate that. Since I don't have a
+clicking robot, I'll fake this by sending requests directly. This is possible
+by the <code>rack</code> testing library. Also I will use the <code>rspec</code> testing library,
+because it doubles as documentation, and provides the very handy <code>should</code>
+method.</p>
+<p>For structure, we use a different file, e.g. <code>tests.rb</code>:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">relative</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+  <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">),</span> <span class="n">path</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="nb">require</span> <span class="n">relative</span><span class="p">(</span><span class="s1">&#39;controller.rb&#39;</span><span class="p">)</span>
+
+<span class="nb">require</span> <span class="s1">&#39;rack/test&#39;</span>
+<span class="kp">include</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Test</span><span class="o">::</span><span class="no">Methods</span>
+</pre></div>
+
+
+<p>Now the nice thing about <code>rspec</code> is that it looks very much like natural
+language. First you say, what you test, then -- if you want -- you define
+different contexts in which the thing you test can be, and finally, you say
+what <code>it</code> should be able to do.</p>
+<p>However <code>rspec</code> is a separate executable from <code>ruby</code>, so before you do this,
+you should <code>gem install rspec</code> and when you're done, execute the tests with
+<code>rspec &lt;file&gt;</code>.</p>
+<p>Lets start with unit-testing, so stick to one class for as long as you can.
+For a User e.g. "Tom", we know that</p>
+<ul>
+<li>it can create texts</li>
+<li>it can be found by name</li>
+<li>it can remove texts by their id</li>
+</ul>
+<p>Further, the database</p>
+<ul>
+<li>can tell if a user can login</li>
+<li>can list all users</li>
+</ul>
+<p>And this is the structure of our test: </p>
+<div class="codehilite"><pre><span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
+  <span class="n">context</span> <span class="s2">&quot;Tom&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;can create texts&quot;</span> <span class="k">do</span>
+            <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s2">&quot;can be found by his name&quot;</span> <span class="k">do</span>
+            <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s2">&quot;can remove texts by id&quot;</span> <span class="k">do</span>
+            <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="n">context</span> <span class="s2">&quot;Database&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;can tell if a user can login&quot;</span> <span class="k">do</span>
+            <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+    <span class="k">end</span>
+
+    <span class="n">it</span> <span class="s2">&quot;can list all users&quot;</span> <span class="k">do</span>
+            <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Usually, we also want to create some conditions before the tests are run, for
+example creating some users, ... We can do this with the <code>before</code> method which
+comes in two flavours: <code>before(:all)</code>, which is executed before any of the
+tests run, and <code>before(:each)</code>, which runs before each of the test methods.</p>
+<p>For example, to set up the user "Tom", we can add this to the <code>context "Tom"</code>
+block.</p>
+<div class="codehilite"><pre>    <span class="n">before</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="k">do</span>
+      <span class="no">User</span><span class="o">.</span><span class="n">reset</span>
+      <span class="no">Text</span><span class="o">.</span><span class="n">reset</span>
+      <span class="vi">@tom</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span> <span class="s2">&quot;Tom&quot;</span><span class="p">,</span> <span class="s2">&quot;abc&quot;</span>
+      <span class="vi">@tom</span><span class="o">.</span><span class="n">save</span>
+    <span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li>We clear the whole database and then add <code>@tom</code> and save him.</li>
+<li>Similarly you can define an <code>after(:each)</code> or <code>after(:all)</code> call.</li>
+</ul>
+<p>Now to implement <code>it "can create texts"</code>, we can assume, that this <code>@tom</code> is
+given:</p>
+<div class="codehilite"><pre>    <span class="n">it</span> <span class="s2">&quot;can create texts&quot;</span> <span class="k">do</span>
+      <span class="n">text</span> <span class="o">=</span> <span class="vi">@tom</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s2">&quot;Humpty&quot;</span><span class="p">,</span> <span class="s2">&quot;Dumpty&quot;</span><span class="p">)</span>
+      <span class="n">text</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">should</span> <span class="n">eq</span><span class="p">(</span><span class="vi">@tom</span><span class="p">)</span>
+      <span class="vi">@tom</span><span class="o">.</span><span class="n">texts</span><span class="o">.</span><span class="n">should</span> <span class="n">eq</span><span class="p">(</span><span class="o">[</span><span class="n">text</span><span class="o">]</span><span class="p">)</span>
+    <span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li>every object has a <code>#should</code> method, that accepts matchers (you can look
+    them up <a href="http://rubydoc.info/gems/rspec-expectations/2.4.0/RSpec/Matchers">here</a>.).
+  You probably need <code>eq(...)</code> most often.</li>
+<li>You can invert the test by the <code>#should_not</code> method.</li>
+</ul>
+<p>To describe the Server's abilities, we notice, that there is no class that we
+describe. But <code>rspec</code> is forgiving and allows you to describe something by a
+string name:</p>
+<div class="codehilite"><pre><span class="n">describe</span> <span class="s2">&quot;Server&quot;</span> <span class="k">do</span>
+  <span class="n">context</span> <span class="s2">&quot;for unregistered users&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;lists all text titles under /text&quot;</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s2">&quot;can show the full text under /text/:id&quot;</span> <span class="p">{</span> <span class="p">}</span>
+  <span class="k">end</span>
+
+  <span class="n">context</span> <span class="s2">&quot;for registered users&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;accepts posts to /text as new text&quot;</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s2">&quot;deletes posts on /text/:id&quot;</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="n">it</span> <span class="s2">&quot;updates posts on POST /text/:id&quot;</span> <span class="p">{</span> <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p><code>rack/test</code> has not been included for nothing, it offers functions <code>get</code>,
+<code>post</code>, ... that do requests to the localhost. To start the server, we need to
+define an <code>app</code> method, which is then started before the tests run. At the
+moment, we don't have a class for that, but we can provide the standard
+Sinatra app.</p>
+<div class="codehilite"><pre><span class="n">describe</span> <span class="s2">&quot;Server&quot;</span> <span class="k">do</span>
+  <span class="k">def</span> <span class="nf">app</span>
+    <span class="no">Sinatra</span><span class="o">::</span><span class="no">Application</span>
+  <span class="k">end</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>A test could now look like this:</p>
+<div class="codehilite"><pre>    <span class="n">it</span> <span class="s2">&quot;lists all text titles under /text&quot;</span> <span class="k">do</span>
+      <span class="n">get</span> <span class="s2">&quot;/text&quot;</span>
+      <span class="n">last_response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">should</span> <span class="kp">include</span><span class="p">(</span><span class="s2">&quot;Humpty&quot;</span><span class="p">)</span>
+      <span class="n">last_response</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">should_not</span> <span class="kp">include</span><span class="p">(</span><span class="s2">&quot;Dumpty&quot;</span><span class="p">)</span>
+    <span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li><code>get ...</code> sends a get request to the server and saves the response.</li>
+<li><code>last_response</code> can then be used to extract information about the
+    answer, for example, if the text of the response contains something.</li>
+</ul>
+<p>Now to the parametrized requests:</p>
+<div class="codehilite"><pre>    <span class="n">it</span> <span class="s2">&quot;accepts posts to /text as new text&quot;</span> <span class="k">do</span>
+      <span class="n">post</span> <span class="s2">&quot;/text&quot;</span><span class="p">,</span> <span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s2">&quot;The Cat&quot;</span><span class="p">,</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="s2">&quot;The cat sat on the mat&quot;</span>
+
+      <span class="n">last_response</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">302</span>
+      <span class="no">Text</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:title</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="kp">include</span><span class="p">(</span><span class="s2">&quot;The Cat&quot;</span><span class="p">)</span>
+    <span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li>You just add the parameters of the request as named parameters of the query. </li>
+<li>You can test the response code of the query.</li>
+<li>You can be very concise in ruby. Basically, the last line says "'The Cat'
+    should be among the titles of texts".</li>
+</ul>
+<p>With these building blocks, you probably can figure out 90% of your testing
+needs.</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+                                                    <li><a href="http://python.org">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                    <li><a href="http://twitter.com/zombiecalypse">twitter</a></li>
+                                                    <li><a href="http://github.com/zombiecalypse">github</a></li>
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

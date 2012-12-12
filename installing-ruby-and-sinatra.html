@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Sinatra Story</title>
+        <title>Installing Ruby and Sinatra</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
                 <link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zombiecalypse the Blog Atom Feed" />
@@ -30,8 +30,8 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="./sinatra-story.html" rel="bookmark"
-           title="Permalink to Sinatra Story">Sinatra Story</a></h1>
+        <a href="./installing-ruby-and-sinatra.html" rel="bookmark"
+           title="Permalink to Installing Ruby and Sinatra">Installing Ruby and Sinatra</a></h1>
           </header>
 
     <div class="entry-content">
@@ -45,17 +45,61 @@
         </address>
         <p>In <a href="./category/programming.html">programming</a>. </p>
 
-</footer><!-- /.post-info -->      <h2>The Sinatra Web Framework for Beginners</h2>
-<ol>
-<li><a href="./installing-ruby-and-sinatra.html">Installation</a></li>
-<li><a href="./sinatrastory.html">Getting Started</a></li>
-<li><a href="./the-story-of-how-i-built-a-model.html">Creating a Model</a></li>
-<li><a href="./putting-modifying-and-the-rest.html">Updating and Deleting</a></li>
-<li><a href="./user-sessions-and-layouts.html">Adding Users</a></li>
-<li><a href="./testing.html">Testing</a></li>
-<li><a href="./modularity.html">Modularity</a></li>
-<li><a href="./handling-files.html">File Handling</a></li>
-</ol>
+</footer><!-- /.post-info -->      <p>Hi there, so before we can get started with the Sinatra framework, we need to
+get it to run in the first place, so here is how you get ruby and Sinatra.</p>
+<h2>Getting Ruby</h2>
+<ul>
+<li>
+<p><strong>Windows</strong>: You're probably in for some pain, consider dual-booting with linux or
+<a href="http://www.cygwin.com/">cygwin</a>. You should also look at
+<a href="https://rvm.io/rvm/install/">rvm</a>
+(<a href="http://blog.developwithpassion.com/2012/03/30/installing-rvm-with-cygwin-on-windows/">here</a>
+is a tutorial how to install it in cygwin)</p>
+</li>
+<li>
+<p><strong>Mac OSX</strong>: I heard <a href="http://macruby.org/">MacRuby</a> was a good choice. You
+    can also use <a href="https://rvm.io/rvm/install/">rvm</a> with the <a href="http://unfiniti.com/software/mac/jewelrybox">GUI</a> for OSX.</p>
+</li>
+<li>
+<p><strong>Linux</strong>: I recommend using <a href="https://rvm.io/rvm/install/">rvm</a> and
+    installing it as the website recommends. For example Ubuntu still uses the 
+    <code>1.8</code> version of ruby by default and you can't install personal gems. After
+  installing <code>rvm</code>, run <code>rvm install 1.9.2</code></p>
+</li>
+</ul>
+<h2>Getting Bundler</h2>
+<p><a href="http://gembundler.com/">Bundler</a> manages dependencies to other libraries
+(called "gems"). You list the gems your application needs in the application
+root directory in a file with the name <code>Gemfile</code>. The next guy trying to use
+your application can then simply run <code>bundle install</code> and all dependencies are
+resolved.</p>
+<p>To get <code>bundler</code>, just run <code>gem install bundler</code> in a terminal. If you
+installed ruby via rvm, that should work, otherwise look at 
+<a href="http://rubygems.org/pages/download">the ruby gems installation page</a>.</p>
+<h2>Starting a Sinatra project</h2>
+<p>Make a new directory, in which you make a new file <code>Gemfile</code>, in there, add
+the repository for the gems first, and then the dependencies:</p>
+<div class="codehilite"><pre><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;sinatra&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;sinatra-contrib&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;haml&#39;</span>
+</pre></div>
+
+
+<p>Now switch to the directory in a terminal and run <code>bundle install</code>, then wait.
+Now you can try the Hello World from <a href="http://www.sinatrarb.com/">Sinatra</a>:</p>
+<div class="codehilite"><pre><span class="c1"># hello.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;sinatra&#39;</span>
+
+<span class="n">get</span> <span class="s1">&#39;/hi&#39;</span> <span class="k">do</span>
+  <span class="s2">&quot;Hello World!&quot;</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>then run <code>ruby hello.rb</code>. If there are no errors, sinatra is installed just
+fine. You can exit the server with <code>Ctrl+C</code>.</p>
     </div><!-- /.entry-content -->
     
   </article>

@@ -23,7 +23,7 @@
                 <h1><a href="../">Zombiecalypse the Blog </a></h1>
                 <nav><ul>
                                                                     <li><a href="../pages/about-me.html">About me</a></li>
-                                                                    <li ><a href="../category/misc.html">misc</a></li>
+                                                                    <li ><a href="../category/programming.html">programming</a></li>
                                 </ul></nav>
         </header><!-- /#banner -->
                 
@@ -31,7 +31,7 @@
 
                             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="../sinatra-story.html">Sinatra Story</a></h1> 
+                    <h1 class="entry-title"><a href="../handling-files.html">Handling Files</a></h1> 
                     <footer class="post-info">
         <abbr class="published" title="2012-10-04T00:00:00">
                 Thu 04 October 2012
@@ -40,24 +40,379 @@
                 <address class="vcard author">
                 By <a class="url fn" href="../author/zombiecalypse.html">Zombiecalypse</a>
         </address>
-        <p>In <a href="../category/misc.html">misc</a>. </p>
+        <p>In <a href="../category/programming.html">programming</a>. </p>
 
-</footer><!-- /.post-info --><ol class="arabic simple">
-<li><a class="reference external" href="https://github.com/zombiecalypse/SinatraStory/blob/master/Installation.mdown">Installation</a></li>
-<li><a class="reference external" href="https://github.com/zombiecalypse/SinatraStory/blob/master/Start.mdown">Getting Started</a></li>
-<li><a class="reference external" href="https://github.com/zombiecalypse/SinatraStory/blob/master/Model.mdown">Creating a Model</a></li>
-<li><a class="reference external" href="https://github.com/zombiecalypse/SinatraStory/blob/master/REST.mdown">Updating and Deleting</a></li>
-<li><a class="reference external" href="https://github.com/zombiecalypse/SinatraStory/blob/master/Sessions.mdown">Adding Users</a></li>
-<li><a class="reference external" href="https://github.com/zombiecalypse/SinatraStory/blob/master/Testing.mdown">Testing</a></li>
-<li><a class="reference external" href="https://github.com/zombiecalypse/SinatraStory/blob/master/Modularity.mdown">Modularity</a></li>
-<li><a class="reference external" href="https://github.com/zombiecalypse/SinatraStory/blob/master/FileHandling.mdown">File Handling</a></li>
+</footer><!-- /.post-info --><p>This is not necessarily Sinatra or Ruby or HAML related, but the question of
+how to handle file upload pops up sooner or later.</p>
+<p>So our texts might profit from illustrations, that set the mood and act as
+the cover from which the texts will be judged. Brainstorming:</p>
+<ol>
+<li>Pictures should be optional.</li>
+<li>Pictures should be located on the hard disk of the server, so that Ruby
+   doesn't use up all the RAM.</li>
+<li>There should be a limit for the file size. Lets say <code>400kB</code></li>
+<li>The image belongs to the text, therefore the texts are not the leaves of
+   our application. This implies, that we have URLs like <code>/text/1/</code> instead
+   of <code>/text/1</code>. Yeah, that kind of details sometimes are important.</li>
 </ol>
-                </article>
-                                    <p class="paginator">
+<h2>Model</h2>
+<p>By 2., we should not give a list of <code>File</code>s to the <code>Text</code>, but rather a list
+of file paths. </p>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">Text</span>
+  <span class="kp">attr_reader</span> <span class="ss">:image_paths</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+    <span class="vi">@image_paths</span> <span class="o">=</span> <span class="o">[]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<h2>View</h2>
+<p>As it turns out, 3. can not simply be checked on the client side (HTML5 +
+JavaScript can, but that's out of the scope of this text). However, 4.
+influences the View part: Files should be uploaded in the edit form for the
+texts, and since we use markdown in the texts, relative links should be
+possible with a simple</p>
+<div class="codehilite"><pre><span class="sx">![alt](image.jpg)</span>
+</pre></div>
+
+
+<p>which tells us, that the controller urls should be something like
+<code>/text/:id/:img</code>.</p>
+<p>Lets add a form in the <code>edit.haml</code> to upload images.</p>
+<div class="codehilite"><pre>...
+<span class="nt">%h2</span> Upload
+<span class="nt">%form</span>(<span class="na">action =</span> <span class="s">&quot;/text/#{@text.id}/images&quot;</span> <span class="na">method =</span> <span class="s">&quot;POST&quot;</span> <span class="na">enctype=</span><span class="s">&quot;multipart/form-data&quot;</span>)
+  <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&#39;file&#39;</span> <span class="na">name=</span><span class="s">&quot;file_upload&quot;</span> <span class="na">accept=</span><span class="s">&quot;image/*&quot;</span>)
+  <span class="nt">%input</span>(<span class="na">type=</span><span class="s">&#39;submit&#39;</span> <span class="na">value=</span><span class="s">&#39;upload&#39;</span>)
+</pre></div>
+
+
+<ul>
+<li>The form part should be familiar, except for the <code>enctype</code>.</li>
+<li><code>enctype</code> <em>must</em> be <code>multipart/form-data</code> for file upload.</li>
+<li>There is an input type <code>file</code>, which lets the user choose a file from their
+  machine.</li>
+<li>The <code>accept</code> option tells the browser, that the user should only choose
+  image files. This leads to the file-choosing dialog does only display those
+  files. They might still upload all kind of crap, but it's still useful for
+  users.</li>
+<li>There is no standard way to tell the form about our 400kB size limit.</li>
+</ul>
+<h2>Controller</h2>
+<p>The difficult part comes in the controller. On one hand, we need to implement
+an upload route and on the other hand a route that gives back the image.</p>
+<div class="codehilite"><pre><span class="n">post</span> <span class="s2">&quot;/text/:id/images&quot;</span> <span class="k">do</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="no">Text</span><span class="o">.</span><span class="n">by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">].</span><span class="n">to_i</span><span class="p">)</span>
+  <span class="k">return</span> <span class="mi">404</span> <span class="k">unless</span> <span class="n">text</span>
+  <span class="k">return</span> <span class="mi">401</span> <span class="k">unless</span> <span class="n">text</span><span class="o">.</span><span class="n">editable?</span> <span class="n">user</span>
+  <span class="n">file</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:file_upload</span><span class="o">]</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+
+<span class="n">get</span> <span class="s2">&quot;/text/:id/images/:pic&quot;</span> <span class="k">do</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>So the thing about files in sinatra is that you get a temporary file on your
+server, but also the original file name. The <code>file</code> variable in the route
+skeleton is a hash, that contains among other things a <code>:filename</code> and a
+<code>:tempfile</code>. </p>
+<p>When we save the image to the disk, we want a consistent naming, that does not 
+let different texts images interfere with each other. To make that consistent,
+we define a helper function:</p>
+<div class="codehilite"><pre><span class="k">def</span> <span class="nf">id_image_to_filename</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+  <span class="s2">&quot;</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">_</span><span class="si">#{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>The complete path on the disks might be <code>public/images/...</code> (doesn't really
+matter, people wont usually see this), create these folders.</p>
+<div class="codehilite"><pre><span class="n">post</span> <span class="s2">&quot;/text/:id/images&quot;</span> <span class="k">do</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="n">file</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:file_upload</span><span class="o">]</span>
+  <span class="k">return</span> <span class="mi">413</span> <span class="k">if</span> <span class="n">file</span><span class="o">[</span><span class="ss">:tempfile</span><span class="o">].</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">400</span><span class="o">*</span><span class="mi">1024</span>
+
+  <span class="n">filename</span> <span class="o">=</span> <span class="n">id_image_to_filename</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">file</span><span class="o">[</span><span class="ss">:filename</span><span class="o">]</span><span class="p">)</span>
+
+  <span class="no">FileUtils</span><span class="o">::</span><span class="n">cp</span><span class="p">(</span><span class="n">file</span><span class="o">[</span><span class="ss">:tempfile</span><span class="o">].</span><span class="n">path</span><span class="p">,</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;public&quot;</span><span class="p">,</span> <span class="s2">&quot;images&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+
+  <span class="n">redirect</span> <span class="n">to</span><span class="p">(</span><span class="s2">&quot;/text/</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li><code>413</code> is the code for <code>Data sent to server is too large</code>.</li>
+<li><code>FileUtils</code> is a standard ruby module, which gives nice functions to deal
+  with files, for example to copy them.</li>
+<li>The <code>:tempfile</code> is saved somewhere on the disk and <code>.path</code> tells us where.</li>
+<li><code>File.join(...)</code> interleaves the argument with the right separator for the
+  operating system (i.e. <code>\</code> on Windows and <code>/</code> on the other systems).</li>
+</ul>
+<p>The other route needs to access the same file and send it back:</p>
+<div class="codehilite"><pre><span class="n">get</span> <span class="s2">&quot;/text/:id/images/:pic&quot;</span> <span class="k">do</span>
+  <span class="n">send_file</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;public&quot;</span><span class="p">,</span><span class="s2">&quot;images&quot;</span><span class="p">,</span> <span class="n">id_image_to_filename</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">,</span> <span class="n">params</span><span class="o">[</span><span class="ss">:pic</span><span class="o">]</span><span class="p">)))</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li><code>send_file</code> takes a local file path and sends the file back.</li>
+</ul>
+<p>And that's it! Try uploading a file and accessing <code>![alt](image/something.jpg)</code>.</p>
+<h2>Summary</h2>
+<ul>
+<li><code>&lt;input type="file"&gt;</code> gives a form field that uploads a file.</li>
+<li>You can add an expected file type with <code>accept="..."</code>, where <code>...</code> is a
+    MIME type.</li>
+<li><code>enctype="multipart/form-data</code> must be included in the form definition.</li>
+<li>The uploaded file is given as a dictionary with its original file name in
+  <code>:filename</code> and a temp file in <code>:tempfile</code>. You can copy the file by the
+  path or use the data directly.</li>
+<li><code>send_file</code> sends back a (binary) file.</li>
+</ul>                </article>
+                            </aside><!-- /#featured -->
+                            <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+                                                
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../installing-ruby-and-sinatra.html" rel="bookmark"
+                           title="Permalink to Installing Ruby and Sinatra">Installing Ruby and Sinatra</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="../category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->                <p>Hi there, so before we can get started with the Sinatra framework, we need to
+get it to run in the first place, so here is how you get ruby and Sinatra.</p>
+<h2>Getting Ruby</h2>
+<ul>
+<li>
+<p><strong>Windows</strong>: You're probably in for some pain, consider dual-booting with linux or
+<a href="http://www.cygwin.com/">cygwin</a>. You should ...</p></li></ul>
+                <a class="readmore" href="../installing-ruby-and-sinatra.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../modularity.html" rel="bookmark"
+                           title="Permalink to Modularity">Modularity</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="../category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->                <p>Look at <a href="https://github.com/zombiecalypse/SinatraStory/tree/master/iteration05">the code of the last iteration</a>.</p>
+<p>Up to this point, we just threw new classes, new models, new tests, and new
+routes into a few files. This works for small projects, but in a team it is
+<em>very</em> problematic if everybody works on the same files. So lets ...</p>
+                <a class="readmore" href="../modularity.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../putting-modifying-and-the-rest.html" rel="bookmark"
+                           title="Permalink to Putting, Modifying and the REST">Putting, Modifying and the REST</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="../category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->                <p>Until now, the texts had to be hard coded into the fixture. That of course is
+just ridiculous for a webapp. The whole point of an application like this is
+that it is interactive, so that I can publish my own texts, modify my old ones
+and delete the garbage ...</p>
+                <a class="readmore" href="../putting-modifying-and-the-rest.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../sinatra-story.html" rel="bookmark"
+                           title="Permalink to Sinatra Story">Sinatra Story</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="../category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->                <h2>The Sinatra Web Framework for Beginners</h2>
+<ol>
+<li><a href="../installing-ruby-and-sinatra.html">Installation</a></li>
+<li><a href="../sinatrastory.html">Getting Started</a></li>
+<li><a href="../the-story-of-how-i-built-a-model.html">Creating a Model</a></li>
+<li><a href="../putting-modifying-and-the-rest.html">Updating and Deleting</a></li>
+<li><a href="../user-sessions-and-layouts.html">Adding Users</a></li>
+<li><a href="../testing.html">Testing</a></li>
+<li><a href="../modularity.html">Modularity</a></li>
+<li><a href="../handling-files.html">File Handling</a></li>
+</ol>
+                <a class="readmore" href="../sinatra-story.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../sinatrastory.html" rel="bookmark"
+                           title="Permalink to SinatraStory">SinatraStory</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="../category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->                <p>Hi there! In this tutorial, I'll show you how you can build web apps in the
+ruby <a href="http://www.sinatrarb.com/">Sinatra</a> framework. As web frameworks go,
+Sinatra is a very simplistic one, as opposed to for example <a href="http://rubyonrails.org/">Rails</a>
+which is huge, does everything for you and leaves you with a feeling of ...</p>
+                <a class="readmore" href="../sinatrastory.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../testing.html" rel="bookmark"
+                           title="Permalink to Testing">Testing</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="../category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->                <p>Up to this point, I always felt kinda bad, because I always had to start up the
+server and go through all the pages in order to catch errors (there always are).
+The solution to that is of course to automate that. Since I don't have a
+clicking robot ...</p>
+                <a class="readmore" href="../testing.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../the-story-of-how-i-built-a-model.html" rel="bookmark"
+                           title="Permalink to The Story of how I built a Model">The Story of how I built a Model</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="../category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->                <p>So in this text, I will actually build a very simple Webapp including data
+that is stored on the server. I will not use a database, so as not to
+complicate things. </p>
+<p>The project is the following: I like to write stories in my free time, but
+with my notes ...</p>
+                <a class="readmore" href="../the-story-of-how-i-built-a-model.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            
+
+                 
+                        <li><article class="hentry">    
+                <header>
+                    <h1><a href="../user-sessions-and-layouts.html" rel="bookmark"
+                           title="Permalink to User Sessions and Layouts">User Sessions and Layouts</a></h1>
+                </header>
+                
+                <div class="entry-content">
+                <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="../author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="../category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->                <p>The SinatraStory project now has a single model class, that is very simple and
+allows everybody that can connect to the server to create and delete
+everything. It seemed like a good idea at the time, but now it seems like an
+even better idea would be to restrict access ...</p>
+                <a class="readmore" href="../user-sessions-and-layouts.html">read more</a>
+                                </div><!-- /.entry-content -->
+            </article></li>
+                            </ol><!-- /#posts-list -->
+                            <p class="paginator">
         Page 1 / 1
     </p>
-                            </aside><!-- /#featured -->
-                                                </ol><!-- /#posts-list -->
                         </section><!-- /#content -->
                     <section id="extras" class="body">
                         <div class="blogroll">

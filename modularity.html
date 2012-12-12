@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Modularity</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+                <link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zombiecalypse the Blog Atom Feed" />
+                
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <!--[if lte IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie.css"/>
+                <script src="./js/IE8.js" type="text/javascript"></script><![endif]-->
+
+        <!--[if lt IE 7]>
+                <link rel="stylesheet" type="text/css" media="all" href="./css/ie6.css"/><![endif]-->
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="./">Zombiecalypse the Blog </a></h1>
+                <nav><ul>
+                                                                    <li><a href="./pages/about-me.html">About me</a></li>
+                                                                    <li class="active"><a href="./category/programming.html">programming</a></li>
+                                </ul></nav>
+        </header><!-- /#banner -->
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="./modularity.html" rel="bookmark"
+           title="Permalink to Modularity">Modularity</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2012-10-04T00:00:00">
+                Thu 04 October 2012
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="./author/zombiecalypse.html">Zombiecalypse</a>
+        </address>
+        <p>In <a href="./category/programming.html">programming</a>. </p>
+
+</footer><!-- /.post-info -->      <p>Look at <a href="https://github.com/zombiecalypse/SinatraStory/tree/master/iteration05">the code of the last iteration</a>.</p>
+<p>Up to this point, we just threw new classes, new models, new tests, and new
+routes into a few files. This works for small projects, but in a team it is
+<em>very</em> problematic if everybody works on the same files. So lets change that!</p>
+<p>One file should solve one problem. Usually that means that there is exactly one
+class in it, but with routes, it could look a bit different.</p>
+<p>We notice some changes, that we could do:</p>
+<ul>
+<li>Split the <code>models.rb</code> file into a <code>text.rb</code> and an <code>user.rb</code></li>
+<li>Split the <code>controller.rb</code> into an <code>authentication.rb</code> and a
+  <code>text_controller.rb</code>.</li>
+<li>Split the <code>tests.rb</code> into <code>user_test.rb</code> and <code>server_test.rb</code>.</li>
+</ul>
+<p>This seems simple enough and it turns out, aside from the second point, it
+really is.</p>
+<h2>Model</h2>
+<p>So lets first take the model:</p>
+<div class="codehilite"><pre><span class="c1"># models.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;bcrypt&#39;</span>
+
+<span class="k">class</span> <span class="nc">Text</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">User</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>So we can split this up into:</p>
+<div class="codehilite"><pre><span class="c1"># app/models/text.rb</span>
+<span class="k">module</span> <span class="nn">Models</span>
+  <span class="k">class</span> <span class="nc">Text</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span class="c1"># app/models/user.rb</span>
+<span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;bcrypt&#39;</span>
+
+<span class="k">module</span> <span class="nn">Models</span>
+  <span class="k">class</span> <span class="nc">User</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li>You can define name spaces with <code>module</code>. You could also add another name
+  space with your application name.</li>
+</ul>
+<p>Now instead of including <code>models</code>, we would include <code>app/models/user.rb</code> or
+<code>app/models/text.rb</code>. Because of the name space, we would need to access the
+classes via <code>Models::User</code>, which is very cumbersome, so we <code>include</code> the
+<code>Models</code> name space into the active one to get that out of the way.</p>
+<h2>Tests</h2>
+<p>We had one test file, that included everything from everywhere. We can transform</p>
+<div class="codehilite"><pre><span class="c1"># tests.rb</span>
+<span class="k">def</span> <span class="nf">relative</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="p">{</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span> <span class="p">}</span>
+
+<span class="c1"># includes all models:</span>
+  <span class="nb">require</span> <span class="n">relative</span><span class="p">(</span><span class="s1">&#39;controller.rb&#39;</span><span class="p">)</span>
+
+<span class="c1"># only used by server test:</span>
+  <span class="nb">require</span> <span class="s1">&#39;rack/test&#39;</span>
+
+  <span class="kp">include</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Test</span><span class="o">::</span><span class="no">Methods</span>
+
+<span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+
+<span class="n">describe</span> <span class="s2">&quot;Server&quot;</span> <span class="k">do</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>can be transformed into</p>
+<div class="codehilite"><pre><span class="c1"># user_test.rb</span>
+<span class="k">def</span> <span class="nf">relative</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="p">{</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span> <span class="p">}</span>
+
+<span class="c1"># explicit about includes:</span>
+  <span class="nb">require</span> <span class="n">relative</span><span class="p">(</span><span class="s1">&#39;../app/model/user.rb&#39;</span><span class="p">)</span>
+  <span class="nb">require</span> <span class="n">relative</span><span class="p">(</span><span class="s1">&#39;../app/model/text.rb&#39;</span><span class="p">)</span>
+
+<span class="c1"># include module</span>
+  <span class="kp">include</span> <span class="no">Models</span>
+
+<span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+
+<span class="c1"># server_test.rb</span>
+<span class="k">def</span> <span class="nf">relative</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="p">{</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span> <span class="p">}</span>
+
+<span class="c1"># This time, we need the text controller:</span>
+  <span class="nb">require</span> <span class="n">relative</span><span class="p">(</span><span class="s1">&#39;../app/controller/text_controller.rb&#39;</span><span class="p">)</span>
+
+<span class="nb">require</span> <span class="s1">&#39;rack/test&#39;</span>
+
+<span class="kp">include</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Test</span><span class="o">::</span><span class="no">Methods</span>
+<span class="kp">include</span> <span class="no">Controllers</span>
+
+<span class="n">describe</span> <span class="s2">&quot;Server&quot;</span> <span class="k">do</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<h2>Controllers</h2>
+<p>This is actually a bit more difficult. If you looked at the 
+<a href="http://www.sinatrarb.com/documentation">Sinatra documentation</a>, there are two
+ways of doing things: The classic approach, that we took before and the modular.
+With the modular approach, we define modules (actually classes) for controllers
+and can then plug them together.</p>
+<p>First of all, the <code>require 'sinatra'</code> has to go, it sets up everything for a
+classic application, something we explicitly don't want it to do.  Instead, we
+define controller classes, that inherit from <code>Sinatra::Base</code> in the
+<code>sinatra/base</code> file. But surely, we need some configuration constants, like
+for example the location of the <code>views</code> folder. For this, place the following
+in the root directory and include it in every file:</p>
+<div class="codehilite"><pre><span class="c1"># config.rb</span>
+<span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="no">Views</span> <span class="o">=</span> <span class="n">relative</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Fortunately the <code>get</code>, <code>post</code>, and <code>delete</code> definitions are relatively easy to
+take appart into the different classes, so we can define</p>
+<div class="codehilite"><pre><span class="k">module</span> <span class="nn">Controllers</span>
+  <span class="k">class</span> <span class="nc">Authentication</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
+    <span class="k">module</span> <span class="nn">Helpers</span>
+      <span class="k">def</span> <span class="nf">user</span>
+        <span class="vi">@user</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="n">helpers</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">ContentFor</span>
+    <span class="n">helpers</span> <span class="no">Helpers</span>
+    <span class="n">set</span> <span class="ss">:views</span><span class="p">,</span> <span class="no">Views</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<ul>
+<li>You typically need to include the helper methods of extensions with
+  <code>helpers</code>. The argument must be a module, not a class.</li>
+<li>The <code>views</code> folder must be set manually. If this bothers you, you can write
+  a minimal subclass of <code>Sinatra::Base</code> that does exactly this and subclass
+  every of your controllers from that.</li>
+<li>The <code>@user</code> variable is not visible from outside this class, but the
+  <code>#user</code> method can be used. It must be packed into a module, that can later
+  be included via <code>helpers</code>.</li>
+</ul>
+<p>The <code>TextController</code> will use some things of the Authentication controller,
+namely the <code>user</code>. Be sure to include the <code>authentication.rb</code> and then declare
+the <code>Authentication</code> helpers.</p>
+<div class="codehilite"><pre><span class="c1"># text_controller.rb</span>
+
+<span class="k">class</span> <span class="nc">TextController</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">helpers</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">ContentFor</span>
+  <span class="n">helpers</span> <span class="no">Authentication</span><span class="o">::</span><span class="no">Helpers</span>
+  <span class="n">set</span> <span class="ss">:views</span><span class="p">,</span> <span class="no">Views</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+</pre></div>
+
+
+<p>Finally, you need to edit all the views and replace <code>@user</code> with <code>user</code>.</p>
+<p>In the <code>main.rb</code> file at the root of your directory, you need to include all
+controllers and define a main application which uses the other classes.
+Finally, you run that class.</p>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">Main</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">enable</span> <span class="ss">:sessions</span>
+  <span class="n">set</span> <span class="ss">:views</span><span class="p">,</span> <span class="no">Views</span>
+  <span class="n">use</span> <span class="no">Controllers</span><span class="o">::</span><span class="no">Authentication</span>
+  <span class="n">use</span> <span class="no">Controllers</span><span class="o">::</span><span class="no">TextController</span>
+
+  <span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">redirect</span> <span class="n">to</span><span class="p">(</span><span class="s2">&quot;/text&quot;</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">end</span>
+
+<span class="no">Main</span><span class="o">.</span><span class="n">run!</span>
+</pre></div>
+
+
+<p>Try it, fix the errors, repeat, but this should allow you to make modular
+Sinatra applications. You should also consider to move views for different
+controllers into different folders, you can do that with <code>:'path/to/view'</code> in
+the controller. Have fun!</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
+        <section id="extras" class="body">
+                        <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
+                                                    <li><a href="http://python.org">Python.org</a></li>
+                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
+                                                </ul>
+                </div><!-- /.blogroll -->
+                                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+                            
+                                                    <li><a href="http://twitter.com/zombiecalypse">twitter</a></li>
+                                                    <li><a href="http://github.com/zombiecalypse">github</a></li>
+                                                </ul>
+                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
