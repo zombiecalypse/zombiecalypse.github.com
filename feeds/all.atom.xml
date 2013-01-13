@@ -1,15 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Zombiecalypse the Blog</title><link href="http://zombiecalypse.github.com/Blog/" rel="alternate"></link><link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" rel="self"></link><id>http://zombiecalypse.github.com/Blog/</id><updated>2012-10-09T00:00:00+02:00</updated><entry><title>Sinatra Story</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html" rel="alternate"></link><updated>2012-10-09T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-09:2012/Oct/sinatra-story.html</id><summary type="html">&lt;h2&gt;The Sinatra Web Framework for&amp;nbsp;Beginners&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zombiecalypse the Blog</title><link href="http://zombiecalypse.github.com/Blog/" rel="alternate"></link><link href="http://zombiecalypse.github.com/Blog/feeds/all.atom.xml" rel="self"></link><id>http://zombiecalypse.github.com/Blog/</id><updated>2013-01-13T00:00:00+01:00</updated><entry><title>Delegated Voting and Classical Theorists I</title><link href="http://zombiecalypse.github.com/Blog/2013/Jan/delegated-voting-and-classical-theorists-i.html" rel="alternate"></link><updated>2013-01-13T00:00:00+01:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2013-01-13:2013/Jan/delegated-voting-and-classical-theorists-i.html</id><summary type="html">&lt;p&gt;As the modern idea of democracy rose to its contemporary positive connotation,
+many theorists held that direct democracy was the ideal, but impractical. Locke
+said &lt;strong&gt;quote about how indirect democracy is necessary&lt;/strong&gt; and for Rousseau, only
+a small community ensures happiness for its members, because he held it
+impossible to have immediate contact in a larger context. These constraints do
+not apply as much as they did when the theories were first developed -
+geographical distance is but a minor inconvenience in the information age. In
+reaction to the possibilities that this gives society, delegated voting
+(&lt;em&gt;Designing a Democratic System Based on Voluntary Vote-Delegation&lt;/em&gt;,  James
+Green-Armytage) as an alternative  to or synthesis of both representative and
+direct systems had been proposed. In this essay I will analyse how the novel
+idea fits into the framework that were the basis for the first modern
+democratic systems in America and France - &lt;strong&gt;Locke&lt;/strong&gt; and &lt;strong&gt;Rousseau&lt;/strong&gt;. As I firmly believe that one has to
+test their theories against the strongest opponents, I will also add &lt;strong&gt;Tocqueville&lt;/strong&gt; to the list of proponents I will compare&amp;nbsp;to. &lt;/p&gt;
+&lt;h2&gt;Delegated&amp;nbsp;Voting&lt;/h2&gt;
+&lt;p&gt;Before comparing it to classical approaches, I will shortly introduce the
+concept of delegated voting. Like other approaches, every citizen has one vote
+and as in a direct democratic setting, this vote can be cast on issues of
+public interest, not only for candidates. The novel approach is that the vote
+can be transferred from one person to another, that is, I can not only cast my
+vote directly for an proposal, but also for the opinion of another fellow
+voter, so that they not only decide where their own vote goes, but also where
+the votes of the people who vote for them go. I might choose that my expertise
+is not sufficient of an issue and lay my trust on an expert, thus closing the
+gap between direct voting and&amp;nbsp;representation. &lt;/p&gt;
+&lt;p&gt;To this goal it has also been proposed that the delegation can be restricted to
+a specific field of expertise. This of course leads to a significant power to
+those able to define the category of a proposal. Even now, where the influence
+is only an informal one, the framing of an proposal can make or break it. If
+the minaret initiative had been discussed as an issue of personal freedom or
+business interests (how many jobs could be created by building a minaret in
+each village), the proposal might well have taken a different turn. Adding to
+that that different people decide on the proposal, depending on what aspect is
+chosen, one can only imagine how significant this decision would have&amp;nbsp;been.&lt;/p&gt;
+&lt;h2&gt;Locke&lt;/h2&gt;
+&lt;p&gt;In Locke&amp;#8217;s &lt;em&gt;Two Treatises on Government&lt;/em&gt; he sets up a scenario of an anarchical
+society and argues that for granted property rights and justice, such a society
+would introduce a social contract and erect a government. He further argues
+that this government would be an representative democracy, because the parties
+of the social contract could not decide in a collective, that is a direct
+democracy is only possible in a small community. The validity of his argument
+can be seen in that even in Switzerland, policy decisions are seldom decided by
+the people and for most questions of public interest, its directness is only&amp;nbsp;theoretical. &lt;/p&gt;
+&lt;p&gt;This could be changed with todays technology, a public discourse of the whole
+population can take place in the time a law is proposed until the decision is
+made. Public media and especially the internet allow a voter to get many
+relevant information. A politically interested citizen can be as informed as
+politicians about issues of their choosing. Even politicians can hardly know
+every nuance of an issue. Often highly technical issues are decided by people,
+who only understand them from a second hand perspective. Locke asserts, that a
+politician can find a well rounded view on every decision, but that I think
+ceased to be the case, if it ever was. To decide for example, if the patent law
+needs to be revised, we&amp;#8217;d first need to understand what 
+the current laws allow, what causes problems and finally what law could prevent these problems. The first assessment alone would take a person years, or weeks&amp;nbsp;optimistically. &lt;/p&gt;
+&lt;p&gt;Since Locke based his treatises on a thought experiment resulting in a social contract, I propose to go through the steps of reasoning in the light of advancing technology. In the natural state, humans are free and generally respectful to each other, but exploitation exists and needs to be accounted for. Without laws, everyone is legislature and judge in one, which leads to unfairness and insecurity about what to expect from each other. This culminates in the people agreeing on a social contract, in which they pass this power to a newly created entity - the state. However, the people would not give that freedom away, without retaining as much as possible, so that the goal of a unified legislature and judiciary is still achieved. For this reason, it would not make sense to give away the right to decide on policy, except for practical considerations.&lt;br /&gt;
+&lt;/p&gt;
+&lt;p&gt;While Locke was the Father of the the democracies of England and America, the continental European democracies developed under heavy influence of Rousseau. What he would have said can be found &lt;a href="|filename|/political_theory/Liquid democracy and classical theories II.md"&gt;here&lt;/a&gt;.&lt;/p&gt;</summary></entry><entry><title>Delegated Voting and Classical Theorists II</title><link href="http://zombiecalypse.github.com/Blog/2013/Jan/delegated-voting-and-classical-theorists-ii.html" rel="alternate"></link><updated>2013-01-13T00:00:00+01:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2013-01-13:2013/Jan/delegated-voting-and-classical-theorists-ii.html</id><summary type="html">&lt;p&gt;This continues the series on 
+&lt;a href="|filename|/political_theory/Liquid democracy and classical theories I.md"&gt;delegated voting and classical&amp;nbsp;theories&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;Rousseau&lt;/h2&gt;
+&lt;p&gt;Contrary to Locke, who purposes a indirect government in order to extend it to a sufficiently big area, Rousseau held that this was actually a reason, why states should not extend beyond local communities. He assumed that this would lead to less corrupted human beings, who would easily find a consensus. At first glance, it seems ridiculous to say that the internet and other communication technologies would lead humankind to a more natural and more empathic state, one only needs to look at the average discussion on the Web to at least doubt that. Then again, Rousseau failed to provide a proof for his claim in the first place, so what the&amp;#8221;natural human being&amp;#8221; would do is still very much up to&amp;nbsp;discussion. &lt;/p&gt;
+&lt;p&gt;We can however analyse how delegated voting would influence the communication structure that would lead to a political decision. For this, one needs to look at the ways, the public can communicate with their leaders today: the media could pick up the story to bring it to the attention of the politicians, but the incentive to do do requires the story to be interesting and concrete. One could also contact the politician directly, but due to the personal distance, one might decide not to do so, if the issue is not very&amp;nbsp;pressing. &lt;/p&gt;
+&lt;p&gt;This direct way of communication would be influenced by the voting system, because one would typically choose delegates that one trusts. It is of course easier to extend trust to people one reckons to know, so many delegates will be from the personal environment of the voter. This at least comes closer than a national state with a parliament to Rousseau&amp;#8217;s ideal&amp;nbsp;order. &lt;/p&gt;
+&lt;p&gt;However, the transitivity of the delegation might remove the person, who actually makes the decision, even further from the voter. It might well be the case that the voter has no personal connection to the delegate and might not even have heard of&amp;nbsp;them. &lt;/p&gt;
+&lt;p&gt;In The Social Contract, Rousseau argues that no law is legit unless it is the people, who decided on it. For this, delegate voting offers a more realistic implementation than plainly voting every issue: through delegates, one does not need to invest information cost for voting, if one does not wish&amp;nbsp;to. &lt;/p&gt;
+&lt;p&gt;In conclusion I would say that, while not as clearly as Locke, Rousseau would be in favour of a delegated voting&amp;nbsp;system. &lt;/p&gt;
+&lt;p&gt;In the next part &lt;strong&gt;Tocqueville&lt;/strong&gt; will get his say - who argued that there is a
+something as too much democracy and surely wouldn&amp;#8217;t be a huge fan of delegated&amp;nbsp;voting.&lt;/p&gt;</summary></entry><entry><title>Sinatra Story</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html" rel="alternate"></link><updated>2012-10-09T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-09:2012/Oct/sinatra-story.html</id><summary type="html">&lt;h2&gt;The Sinatra Web Framework for&amp;nbsp;Beginners&lt;/h2&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/installing-ruby-and-sinatra.html"&gt;Installation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatrastory.html"&gt;Getting&amp;nbsp;Started&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/the-story-of-how-i-built-a-model.html"&gt;Creating a&amp;nbsp;Model&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/putting-modifying-and-the-rest.html"&gt;Updating and&amp;nbsp;Deleting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/user-sessions-and-layouts.html"&gt;Adding&amp;nbsp;Users&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/testing.html"&gt;Testing&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/modularity.html"&gt;Modularity&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/handling-files.html"&gt;File&amp;nbsp;Handling&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary></entry><entry><title>Handling Files</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/handling-files.html" rel="alternate"></link><updated>2012-10-08T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-08:2012/Oct/handling-files.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
+&lt;li&gt;&lt;a href="|filename|/programming/01_installation.md"&gt;Installation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="|filename|/programming/02_start.md"&gt;Getting&amp;nbsp;Started&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="|filename|/programming/03_model.md"&gt;Creating a&amp;nbsp;Model&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="|filename|/programming/04_rest.md"&gt;Updating and&amp;nbsp;Deleting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="|filename|/programming/05_sessions.md"&gt;Adding&amp;nbsp;Users&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="|filename|/programming/06_testing.md"&gt;Testing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="|filename|/programming/07_modularity.md"&gt;Modularity&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="|filename|/programming/08_files.md"&gt;File&amp;nbsp;Handling&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</summary></entry><entry><title>Handling Files</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/handling-files.html" rel="alternate"></link><updated>2012-10-08T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-08:2012/Oct/handling-files.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="|filename|/programming/sinatra_story.md"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;This is not necessarily Sinatra or Ruby or &lt;span class="caps"&gt;HAML&lt;/span&gt; related, but the question of
 how to handle file upload pops up sooner or&amp;nbsp;later.&lt;/p&gt;
 &lt;p&gt;So our texts might profit from illustrations, that set the mood and act as
@@ -142,7 +208,7 @@ matter, people wont usually see this), create these&amp;nbsp;folders.&lt;/p&gt;
   &lt;code&gt;:filename&lt;/code&gt; and a temp file in &lt;code&gt;:tempfile&lt;/code&gt;. You can copy the file by the
   path or use the data&amp;nbsp;directly.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;send_file&lt;/code&gt; sends back a (binary)&amp;nbsp;file.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Modularity</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/modularity.html" rel="alternate"></link><updated>2012-10-07T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-07:2012/Oct/modularity.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Modularity</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/modularity.html" rel="alternate"></link><updated>2012-10-07T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-07:2012/Oct/modularity.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="|filename|/programming/sinatra_story.md"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Look at &lt;a href="https://github.com/zombiecalypse/SinatraStory/tree/master/iteration05"&gt;the code of the last iteration&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Up to this point, we just threw new classes, new models, new tests, and new
 routes into a few files. This works for small projects, but in a team it is
@@ -341,7 +407,7 @@ Finally, you run that&amp;nbsp;class.&lt;/p&gt;
 &lt;p&gt;Try it, fix the errors, repeat, but this should allow you to make modular
 Sinatra applications. You should also consider to move views for different
 controllers into different folders, you can do that with &lt;code&gt;:'path/to/view'&lt;/code&gt; in
-the controller. Have&amp;nbsp;fun!&lt;/p&gt;</summary></entry><entry><title>Testing</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/testing.html" rel="alternate"></link><updated>2012-10-06T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-06:2012/Oct/testing.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
+the controller. Have&amp;nbsp;fun!&lt;/p&gt;</summary></entry><entry><title>Testing</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/testing.html" rel="alternate"></link><updated>2012-10-06T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-06:2012/Oct/testing.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="|filename|/programming/sinatra_story.md"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Up to this point, I always felt kinda bad, because I always had to start up the
 server and go through all the pages in order to catch errors (there always are).
 The solution to that is of course to automate that. Since I don&amp;#8217;t have a
@@ -508,7 +574,7 @@ Sinatra&amp;nbsp;app.&lt;/p&gt;
 &lt;li&gt;You can be very concise in ruby. Basically, the last line says &amp;#8220;&amp;#8216;The Cat&amp;#8217;
     should be among the titles of&amp;nbsp;texts&amp;#8221;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;With these building blocks, you probably can figure out 90% of your testing&amp;nbsp;needs.&lt;/p&gt;</summary></entry><entry><title>User Sessions and Layouts</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/user-sessions-and-layouts.html" rel="alternate"></link><updated>2012-10-05T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-05:2012/Oct/user-sessions-and-layouts.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;With these building blocks, you probably can figure out 90% of your testing&amp;nbsp;needs.&lt;/p&gt;</summary></entry><entry><title>User Sessions and Layouts</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/user-sessions-and-layouts.html" rel="alternate"></link><updated>2012-10-05T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-05:2012/Oct/user-sessions-and-layouts.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="|filename|/programming/sinatra_story.md"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The SinatraStory project now has a single model class, that is very simple and
 allows everybody that can connect to the server to create and delete
 everything. It seemed like a good idea at the time, but now it seems like an
@@ -810,7 +876,7 @@ Try&amp;nbsp;it!&lt;/p&gt;
     function with&amp;nbsp;salt.&lt;/li&gt;
 &lt;li&gt;How to make relations between model&amp;nbsp;classes.&lt;/li&gt;
 &lt;li&gt;Ensure that restricted operations are executed only with the valid&amp;nbsp;user.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Putting, Modifying and the REST</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/putting-modifying-and-the-rest.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/putting-modifying-and-the-rest.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Putting, Modifying and the REST</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/putting-modifying-and-the-rest.html" rel="alternate"></link><updated>2012-10-04T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-04:2012/Oct/putting-modifying-and-the-rest.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="|filename|/programming/sinatra_story.md"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Until now, the texts had to be hard coded into the fixture. That of course is
 just ridiculous for a webapp. The whole point of an application like this is
 that it is interactive, so that I can publish my own texts, modify my old ones
@@ -957,7 +1023,7 @@ spider might delete all your&amp;nbsp;posts.&lt;/p&gt;
 &lt;li&gt;How to use&amp;nbsp;partials.&lt;/li&gt;
 &lt;li&gt;How to use the &lt;code&gt;PUT&lt;/code&gt; and &lt;code&gt;DELETE&lt;/code&gt; methods, even though browsers don&amp;#8217;t
     support&amp;nbsp;it.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>The Story of how I built a Model</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/the-story-of-how-i-built-a-model.html" rel="alternate"></link><updated>2012-10-03T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-03:2012/Oct/the-story-of-how-i-built-a-model.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
+&lt;/ul&gt;</summary></entry><entry><title>The Story of how I built a Model</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/the-story-of-how-i-built-a-model.html" rel="alternate"></link><updated>2012-10-03T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-03:2012/Oct/the-story-of-how-i-built-a-model.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="|filename|/programming/sinatra_story.md"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;So in this text, I will actually build a very simple Webapp including data
 that is stored on the server. I will not use a database, so as not to
 complicate&amp;nbsp;things. &lt;/p&gt;
@@ -1181,7 +1247,7 @@ in-memory database. The rest should be a breeze,&amp;nbsp;right?&lt;/p&gt;
 &lt;p&gt;Next time, I&amp;#8217;ll show you, how to make the application understand request like
 &amp;#8220;add this text&amp;#8221; and &amp;#8220;this text sucks, change it&amp;#8221; and also &amp;#8220;this text sucks so
 much, forget it ever existed&amp;#8221;. You will see, that the designers of the &lt;span class="caps"&gt;HTTP&lt;/span&gt;
-protocol had something like that in&amp;nbsp;mind.&lt;/p&gt;</summary></entry><entry><title>SinatraStory</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatrastory.html" rel="alternate"></link><updated>2012-10-02T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-02:2012/Oct/sinatrastory.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
+protocol had something like that in&amp;nbsp;mind.&lt;/p&gt;</summary></entry><entry><title>SinatraStory</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatrastory.html" rel="alternate"></link><updated>2012-10-02T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-02:2012/Oct/sinatrastory.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="|filename|/programming/sinatra_story.md"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Hi there! In this tutorial, I&amp;#8217;ll show you how you can build web apps in the
 ruby &lt;a href="http://www.sinatrarb.com/"&gt;Sinatra&lt;/a&gt; framework. As web frameworks go,
 Sinatra is a very simplistic one, as opposed to for example &lt;a href="http://rubyonrails.org/"&gt;Rails&lt;/a&gt;
@@ -1311,8 +1377,8 @@ straight forward what is&amp;nbsp;happening.&lt;/p&gt;
 &lt;p&gt;Now, when you run it and go to the &lt;a href="http://localhost:4567"&gt;localhost:4567&lt;/a&gt;, you get a
 form, and if you enter &amp;#8220;Tim&amp;#8221; into the form field, the greeting will be &amp;#8220;Hello
 Tim&amp;#8221; instead of &amp;#8220;Hello&amp;nbsp;World&amp;#8221;.&lt;/p&gt;
-&lt;p&gt;That is enough for the first iteration, the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/the-story-of-how-i-built-a-model.html"&gt;next time&lt;/a&gt;, I&amp;#8217;ll show you, how you
-can use a model too. Hint: It is just plain&amp;nbsp;ruby.&lt;/p&gt;</summary></entry><entry><title>Installing Ruby and Sinatra</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/installing-ruby-and-sinatra.html" rel="alternate"></link><updated>2012-10-01T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-01:2012/Oct/installing-ruby-and-sinatra.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="http://zombiecalypse.github.com/Blog/2012/Oct/sinatra-story.html"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;That is enough for the first iteration, the &lt;a href="|filename|/programming/03_model.md"&gt;next time&lt;/a&gt;, I&amp;#8217;ll show you, how you
+can use a model too. Hint: It is just plain&amp;nbsp;ruby.&lt;/p&gt;</summary></entry><entry><title>Installing Ruby and Sinatra</title><link href="http://zombiecalypse.github.com/Blog/2012/Oct/installing-ruby-and-sinatra.html" rel="alternate"></link><updated>2012-10-01T00:00:00+02:00</updated><author><name>Zombiecalypse</name></author><id>tag:zombiecalypse.github.com/Blog,2012-10-01:2012/Oct/installing-ruby-and-sinatra.html</id><summary type="html">&lt;p&gt;&lt;em&gt;This article is part of the &lt;a href="|filename|/programming/sinatra_story.md"&gt;Sinatra Story&lt;/a&gt;&amp;nbsp;series.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Hi there, so before we can get started with the Sinatra framework, we need to
 get it to run in the first place, so here is how you get ruby and&amp;nbsp;Sinatra.&lt;/p&gt;
 &lt;h2&gt;Getting&amp;nbsp;Ruby&lt;/h2&gt;
