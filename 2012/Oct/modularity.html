@@ -119,7 +119,7 @@ classes via <code>Models::User</code>, which is very cumbersome, so we <code>inc
 <span class="c1"># only used by server test:</span>
   <span class="nb">require</span> <span class="s1">&#39;rack/test&#39;</span>
 
-  <span class="kp">include</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Test</span><span class="o">::</span><span class="no">Methods</span>
+  <span class="kp">include</span> <span class="ss">Rack</span><span class="p">:</span><span class="ss">:Test</span><span class="o">::</span><span class="no">Methods</span>
 
 <span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
@@ -154,7 +154,7 @@ classes via <code>Models::User</code>, which is very cumbersome, so we <code>inc
 
 <span class="nb">require</span> <span class="s1">&#39;rack/test&#39;</span>
 
-<span class="kp">include</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Test</span><span class="o">::</span><span class="no">Methods</span>
+<span class="kp">include</span> <span class="ss">Rack</span><span class="p">:</span><span class="ss">:Test</span><span class="o">::</span><span class="no">Methods</span>
 <span class="kp">include</span> <span class="no">Controllers</span>
 
 <span class="n">describe</span> <span class="s2">&quot;Server&quot;</span> <span class="k">do</span>
@@ -184,17 +184,18 @@ in the root directory and include it in every&nbsp;file:</p>
 <p>Fortunately the <code>get</code>, <code>post</code>, and <code>delete</code> definitions are relatively easy to
 take appart into the different classes, so we can&nbsp;define</p>
 <div class="codehilite"><pre><span class="k">module</span> <span class="nn">Controllers</span>
-  <span class="k">class</span> <span class="nc">Authentication</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
+  <span class="k">class</span> <span class="nc">Authentication</span> <span class="o">&lt;</span> <span class="ss">Sinatra</span><span class="p">:</span><span class="ss">:Base</span>
     <span class="k">module</span> <span class="nn">Helpers</span>
       <span class="k">def</span> <span class="nf">user</span>
         <span class="vi">@user</span>
       <span class="k">end</span>
     <span class="k">end</span>
 
-    <span class="n">helpers</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">ContentFor</span>
+    <span class="n">helpers</span> <span class="ss">Sinatra</span><span class="p">:</span><span class="ss">:ContentFor</span>
     <span class="n">helpers</span> <span class="no">Helpers</span>
     <span class="n">set</span> <span class="ss">:views</span><span class="p">,</span> <span class="no">Views</span>
     <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+
 
   <span class="k">end</span>
 <span class="k">end</span>
@@ -216,9 +217,9 @@ namely the <code>user</code>. Be sure to include the <code>authentication.rb</co
 the <code>Authentication</code> helpers.</p>
 <div class="codehilite"><pre><span class="c1"># text_controller.rb</span>
 
-<span class="k">class</span> <span class="nc">TextController</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
-  <span class="n">helpers</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">ContentFor</span>
-  <span class="n">helpers</span> <span class="no">Authentication</span><span class="o">::</span><span class="no">Helpers</span>
+<span class="k">class</span> <span class="nc">TextController</span> <span class="o">&lt;</span> <span class="ss">Sinatra</span><span class="p">:</span><span class="ss">:Base</span>
+  <span class="n">helpers</span> <span class="ss">Sinatra</span><span class="p">:</span><span class="ss">:ContentFor</span>
+  <span class="n">helpers</span> <span class="ss">Authentication</span><span class="p">:</span><span class="ss">:Helpers</span>
   <span class="n">set</span> <span class="ss">:views</span><span class="p">,</span> <span class="no">Views</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 <span class="k">end</span>
@@ -229,11 +230,11 @@ the <code>Authentication</code> helpers.</p>
 <p>In the <code>main.rb</code> file at the root of your directory, you need to include all
 controllers and define a main application which uses the other classes.
 Finally, you run that&nbsp;class.</p>
-<div class="codehilite"><pre><span class="k">class</span> <span class="nc">Main</span> <span class="o">&lt;</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Base</span>
+<div class="codehilite"><pre><span class="k">class</span> <span class="nc">Main</span> <span class="o">&lt;</span> <span class="ss">Sinatra</span><span class="p">:</span><span class="ss">:Base</span>
   <span class="n">enable</span> <span class="ss">:sessions</span>
   <span class="n">set</span> <span class="ss">:views</span><span class="p">,</span> <span class="no">Views</span>
-  <span class="n">use</span> <span class="no">Controllers</span><span class="o">::</span><span class="no">Authentication</span>
-  <span class="n">use</span> <span class="no">Controllers</span><span class="o">::</span><span class="no">TextController</span>
+  <span class="n">use</span> <span class="ss">Controllers</span><span class="p">:</span><span class="ss">:Authentication</span>
+  <span class="n">use</span> <span class="ss">Controllers</span><span class="p">:</span><span class="ss">:TextController</span>
 
   <span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">redirect</span> <span class="n">to</span><span class="p">(</span><span class="s2">&quot;/text&quot;</span><span class="p">)</span> <span class="p">}</span>
 <span class="k">end</span>

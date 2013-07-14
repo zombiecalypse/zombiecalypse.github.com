@@ -62,7 +62,7 @@ method.</p>
 <span class="nb">require</span> <span class="n">relative</span><span class="p">(</span><span class="s1">&#39;controller.rb&#39;</span><span class="p">)</span>
 
 <span class="nb">require</span> <span class="s1">&#39;rack/test&#39;</span>
-<span class="kp">include</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Test</span><span class="o">::</span><span class="no">Methods</span>
+<span class="kp">include</span> <span class="ss">Rack</span><span class="p">:</span><span class="ss">:Test</span><span class="o">::</span><span class="no">Methods</span>
 </pre></div>
 
 
@@ -176,7 +176,7 @@ moment, we don&#8217;t have a class for that, but we can provide the standard
 Sinatra&nbsp;app.</p>
 <div class="codehilite"><pre><span class="n">describe</span> <span class="s2">&quot;Server&quot;</span> <span class="k">do</span>
   <span class="k">def</span> <span class="nf">app</span>
-    <span class="no">Sinatra</span><span class="o">::</span><span class="no">Application</span>
+    <span class="ss">Sinatra</span><span class="p">:</span><span class="ss">:Application</span>
   <span class="k">end</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 <span class="k">end</span>
