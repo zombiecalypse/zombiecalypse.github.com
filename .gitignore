@@ -1,0 +1,9 @@
+.*
+*~
+*~
+!.gitignore
+.netrwhist
+*.s[a-w][a-z]
+Session.vim
+_site/
+*.un~
