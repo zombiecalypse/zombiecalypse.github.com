@@ -1,5 +1,5 @@
 ---
-title: "Constrains for creative writing"
+title: "Constraints for creative writing"
 layout: post
 categories: stuff
 ---
