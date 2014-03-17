@@ -1,0 +1,25 @@
+---
+title: "Regex parsing using automata"
+layout: post
+categories: programming
+---
+
+Having a reliably fast regular expression (regex) engine can be an incredibly
+valuable asset. Whenever we get a huge amount of text, it can help us to
+interface with it -- and walls of text are easy to come by: Source code for big
+projects, articles from news sources, strings of dna are the first that spring
+to my mind, but there are certainly more. If our interface to them is not only
+usuallyfast, but reliably fast, we can for example let others use it, which
+could easily be exploited in backtracking regex engines. To see that, let's look
+what a backtracking regex engine could look like:
+
+```python
+def match_star(inner, after, string):
+  matched, rest = match(inner, string)
+  if matched:
+    return match_star(inner, after, rest)
+  else:
+    return match(after, string)
+```
+
+

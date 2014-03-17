@@ -1,3 +1,33 @@
 name: Zombiecalypse the Blog
+title : Zombiecalypse the Blog
 markdown: redcarpet
 pygments: true
+author :
+  name : Zombiecalypse
+  email : maergil@gmail.com 
+  github : zombiecalypse
+  twitter : zombiecalypse
+production_url : http://zombiecalypse.github.io
+
+permalink: /:categories/:year/:month/:day/:title.html
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+
+JB :
+  version : 0.3.0
+  BASE_PATH : false
+  ASSET_PATH : false
+  archive_path: /archive.html
+  categories_path : /categories.html
+  tags_path : /tags.html
+  atom_path : /atom.xml
+  rss_path : /rss.xml
+  comments :
+    provider : disqus
+    disqus :
+      short_name : zombiecalypseblog
+  analytics :
+    provider : google 
+    google : 
+        tracking_id : 'UA-49082818-1'
+  sharing :
+    provider : false
