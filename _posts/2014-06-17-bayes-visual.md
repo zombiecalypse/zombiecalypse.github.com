@@ -83,11 +83,11 @@ and how likely it is wrong (blue).
     <div style="display:table-cell; padding: 1em;">If the theory is true, the observation is</div>
     <select name="A" style="display:table-cell">
       <option value="Certain">Certain</option>
-      <option value="AlmostCertain">Almost Certain</option>
+      <option value="AlmostCertain">Almost certain</option>
       <option value="Probable">Probable</option>
       <option selected="" value="Even">As likely as not</option>
-      <option value="ProbablyNot">Probably not</option>
-      <option value="AlmostCertainlyNot">Almost Certainly Not</option>
+      <option value="ProbablyNot">Improbable</option>
+      <option value="AlmostCertainlyNot">Almost certainly not happening</option>
       <option value="Impossible">Impossible</option>
     </select>
   </label>
@@ -98,8 +98,8 @@ and how likely it is wrong (blue).
       <option value="AlmostCertain">Almost Certain</option>
       <option value="Probable">Probable</option>
       <option selected="" value="Even">As likely as not</option>
-      <option value="ProbablyNot">Probably not</option>
-      <option value="AlmostCertainlyNot">Almost certainly not</option>
+      <option value="ProbablyNot">Improbable</option>
+      <option value="AlmostCertainlyNot">Almost certainly not happening</option>
       <option value="Impossible">Impossible</option>
     </select>
   </label>
